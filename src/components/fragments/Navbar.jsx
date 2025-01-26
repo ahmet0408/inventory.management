@@ -4,7 +4,7 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-xl align-items-center">
         <div
           className="offcanvas offcanvas-start w-260"
-          tabindex="-1"
+          tabIndex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
         >
@@ -19,7 +19,7 @@ const Navbar = () => {
                 />
               </div>
               <div className="">
-                <h4 className="logo-text">Maxton</h4>
+                <h4 className="logo-text">Inwertar</h4>
               </div>
             </div>
             <a
@@ -42,7 +42,7 @@ const Navbar = () => {
                     <i className="material-icons-outlined">home</i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
-                    Dashboard
+                    Company
                   </div>
                   <div className="ms-auto dropy-icon">
                     <i className="material-icons-outlined">expand_more</i>

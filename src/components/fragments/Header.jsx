@@ -5,9 +5,9 @@ const Header = () => {
         <div className="logo-header d-none d-xl-flex align-items-center gap-2">
           <div className="logo-icon">
             <img
-              src="assets/images/logo-icon.png"
+              src="assets/images/logo.ico"
               className="logo-img"
-              width="45"
+              width="65"
               alt=""
             />
           </div>
