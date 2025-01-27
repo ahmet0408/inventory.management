@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Breadcrumb from "./fragments/Breadcrumb";
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -67,6 +68,7 @@ const EmployeeList = () => {
   }, [employees]);
   return (
     <>
+    <Breadcrumb items={['Administrator','Işgär','Işgärler']} />
       <div className="row g-3">
         <div className="col-auto">
           <div className="position-relative">

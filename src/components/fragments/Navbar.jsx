@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <div className="primary-menu">
@@ -11,15 +13,17 @@ const Navbar = () => {
           <div className="offcanvas-header border-bottom h-70">
             <div className="d-flex align-items-center gap-2">
               <div className="">
+              <Link to={"/"}>
                 <img
-                  src="assets/images/logo-icon.png"
+                  src="assets/images/logo.ico"
                   className="logo-icon"
                   width="45"
                   alt="logo icon"
                 />
+                </Link>
               </div>
               <div className="">
-                <h4 className="logo-text">Inwertar</h4>
+                <h4 className="logo-text">Inwentar</h4>
               </div>
             </div>
             <a
@@ -498,353 +502,7 @@ const Navbar = () => {
                     </ul>
                   </li>
                 </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle dropdown-toggle-nocaret"
-                  href="javascript:;"
-                  data-bs-toggle="dropdown"
-                >
-                  <div className="parent-icon">
-                    <i className="material-icons-outlined">medical_services</i>
-                  </div>
-                  <div className="menu-title d-flex align-items-center">
-                    UI Elements
-                  </div>
-                  <div className="ms-auto dropy-icon">
-                    <i className="material-icons-outlined">expand_more</i>
-                  </div>
-                </a>
-                <ul className="dropdown-menu">
-                  <li className="nav-item dropend">
-                    <a
-                      className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
-                      href="javascript:;"
-                    >
-                      <i className="material-icons-outlined">widgets</i>Widgets
-                    </a>
-                    <ul className="dropdown-menu submenu">
-                      <li>
-                        <a className="dropdown-item" href="widgets-data.html">
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Data
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="widgets-static.html">
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Static
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="nav-item dropend">
-                    <a
-                      className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
-                      href="javascript:;"
-                    >
-                      <i className="material-icons-outlined">shopping_bag</i>
-                      eCommerce
-                    </a>
-                    <ul className="dropdown-menu submenu">
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="ecommerce-products.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Products
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="ecommerce-add-product.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Add Product
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="ecommerce-customers.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Customer
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="ecommerce-customer-details.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Customer Details
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="ecommerce-orders.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Orders
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="ecommerce-order-details.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Order Details
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="nav-item dropend">
-                    <a
-                      className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
-                      href="javascript:;"
-                    >
-                      <i className="material-icons-outlined">free_breakfast</i>
-                      Components
-                    </a>
-                    <ul className="dropdown-menu scroll-menu">
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-alerts.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Alerts
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-accordions.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Accordions
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-badges.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Badges
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-buttons.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Buttons
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="cards.html">
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Cards
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-carousels.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Carousels
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-media-object.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Media Objects
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-modals.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Modals
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-navs-tabs.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Navs & Tabs
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-navbar.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Navbar
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-paginations.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Pagination
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-popovers-tooltips.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Popovers & Tooltips
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-progress-bars.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Progress
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-spinners.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Spinners
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-notifications.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Notifications
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="component-avtars-chips.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Avatrs & Chips
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li className="nav-item dropend">
-                    <a
-                      className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
-                      href="javascript:;"
-                    >
-                      <i className="material-icons-outlined">cases</i>Icons
-                    </a>
-                    <ul className="dropdown-menu submenu">
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="icons-line-icons.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Line Icons
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="icons-boxicons.html">
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Boxicons
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="icons-feather-icons.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Feather Icons
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
+              </li>              
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle dropdown-toggle-nocaret"
@@ -907,37 +565,44 @@ const Navbar = () => {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle dropdown-toggle-nocaret"
-                  href="javascript:;"
-                  data-bs-toggle="dropdown"
-                >
-                  <div className="parent-icon">
-                    <i className="material-icons-outlined">table_chart</i>
-                  </div>
-                  <div className="menu-title d-flex align-items-center">
-                    Tables
-                  </div>
-                  <div className="ms-auto dropy-icon">
-                    <i className="material-icons-outlined">expand_more</i>
-                  </div>
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="table-basic-table.html">
-                      <i className="material-icons-outlined">navigate_next</i>
-                      Basic Table
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="table-datatable.html">
-                      <i className="material-icons-outlined">navigate_next</i>
-                      Data Table
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              <li class="nav-item dropdown">
+       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+         <div class="parent-icon"><i class='material-icons-outlined'>medical_services</i>
+         </div>
+         <div class="menu-title d-flex align-items-center">Administrator</div>
+         <div class="ms-auto dropy-icon"><i class='material-icons-outlined'>expand_more</i></div>
+       </a>
+       <ul class="dropdown-menu">
+         <li class="nav-item dropend">
+          <a class="dropdown-item dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"><i class='material-icons-outlined'>widgets</i>Kompaniýa</a>
+          <ul class="dropdown-menu submenu">
+            <li><Link to="/companylist" class="dropdown-item" ><i class='material-icons-outlined'>navigate_next</i>Kompaniýalar</Link></li>
+            <li><Link to="/addcompany" class="dropdown-item"><i class='material-icons-outlined'>navigate_next</i>Kompaniýa goşmak</Link></li>
+            </ul>
+          </li>
+         <li class="nav-item dropend">
+         <a class="dropdown-item dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"><i class='material-icons-outlined'>shopping_bag</i>Bölüm</a>
+         <ul class="dropdown-menu submenu">
+           <li><Link to="/departmentlist" class="dropdown-item" ><i class='material-icons-outlined'>navigate_next</i>Bölümler</Link></li>
+           <li><Link to="/adddepartment" class="dropdown-item" ><i class='material-icons-outlined'>navigate_next</i>Bölüm goşmak</Link></li>           
+           </ul>
+         </li>
+         <li class="nav-item dropend">
+         <a class="dropdown-item dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"><i class='material-icons-outlined'>free_breakfast</i>Işgär</a>
+         <ul class="dropdown-menu submenu">
+           <li><Link to="/employeelist" class="dropdown-item"><i class='material-icons-outlined'>navigate_next</i>Işgärler</Link></li>
+           <li><Link to="/addemployee" class="dropdown-item"><i class='material-icons-outlined'>navigate_next</i>Işgär goşmak</Link></li>
+           </ul>
+         </li>
+         <li class="nav-item dropend">
+         <a class="dropdown-item dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"><i class='material-icons-outlined'>cases</i>Haryt</a>
+         <ul class="dropdown-menu submenu">
+           <li><Link to="/productlist" class="dropdown-item"><i class='material-icons-outlined'>navigate_next</i>Harytlar</Link></li>
+           <li><Link to="/addproduct" class="dropdown-item"><i class='material-icons-outlined'>navigate_next</i>Haryt goşmak</Link></li>
+           </ul>
+         </li>
+       </ul>
+       </li>
             </ul>
           </div>
         </div>

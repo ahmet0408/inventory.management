@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Breadcrumb from "./fragments/Breadcrumb";
 
 const AddCategory = () => {
   const [categoryData, setCategoryData] = useState({
@@ -54,6 +55,8 @@ const AddCategory = () => {
       .catch((error) => console.error("Error", error));
   };
   return (
+    <>
+    <Breadcrumb items={['Administrator','Kategoriýa','Kategoriýa goşmak']} />
     <div className="row">
       <div className="col-12 col-lg-8">
         <div className="card">
@@ -68,7 +71,7 @@ const AddCategory = () => {
                     : "Iňlisçe"}
                 </h5>
                 <hr className="mt-0" />
-                <div className="mb-4">
+                <div className="mb-3">
                   <label htmlFor={index} className="form-label">
                     Kategoriýanyň ady
                   </label>
@@ -161,6 +164,7 @@ const AddCategory = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

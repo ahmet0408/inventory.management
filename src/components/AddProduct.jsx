@@ -1,0 +1,6 @@
+const AddProduct = () => {
+    return (
+        <>
+        </>
+    )
+}

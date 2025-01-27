@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Breadcrumb from "./fragments/Breadcrumb";
 
 const AddDepartment = () => {
   const [translations, setTranslations] = useState({
@@ -40,24 +41,28 @@ const AddDepartment = () => {
   };
 
   return (
+    <>
+    <Breadcrumb items={['Administrator','Bölüm','Bölüm goşmak']} />    
     <div className="row">
       <div className="col-12 col-lg-8">
         <div className="card">
           <div className="card-body">
             {["tk", "ru", "en"].map((lang) => (
               <div key={lang}>
-                <h4>
+                <h5>
                   {lang === "tk"
                     ? "Türkmençe"
                     : lang === "ru"
                     ? "Rusça"
                     : "Iňlisçe"}
-                </h4>
-                <hr />
-                <div className="mb-4">
-                  <h5 className="mb-3">Bölümiň ady</h5>
+                </h5>
+                <hr className="mt-0"/>
+                <div className="mb-1">
+                <label htmlFor={"bol"+lang} className="form-label">
+                Ady
+              </label>
                   <input
-                    type="text"
+                    type="text" id={"bol"+lang}
                     className="form-control"
                     value={translations[lang].name}
                     onChange={(e) =>
@@ -65,10 +70,12 @@ const AddDepartment = () => {
                     }
                   />
                 </div>
-                <div className="mb-4">
-                  <h5 className="mb-3">Bölümiň salgysy</h5>
+                <div className="mb-3">
+                <label htmlFor={"add"+lang} className="form-label">
+                Salgysy
+              </label>
                   <input
-                    type="text"
+                    type="text" id={"add"+lang}
                     className="form-control"
                     value={translations[lang].address}
                     onChange={(e) =>
@@ -93,6 +100,7 @@ const AddDepartment = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

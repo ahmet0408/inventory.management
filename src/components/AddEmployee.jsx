@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Breadcrumb from "./fragments/Breadcrumb";
 
 const AddEmployee = () => {
   const [employeeData, setEmployeeData] = useState({
@@ -63,11 +64,13 @@ const AddEmployee = () => {
     }
   };
   return (
+    <>
+    <Breadcrumb items={['Administrator','Işgär','Işgär goşmak']} />
     <div className="row">
       <div className="col-12 col-lg-8">
         <div className="card">
           <div className="card-body">
-            <div className="mb-4">
+            <div className="mb-3">
               <label htmlFor="fullname" className="form-label">
                 Ady, Familiýasy we Atasynyň ady
               </label>
@@ -79,7 +82,7 @@ const AddEmployee = () => {
                 onChange={(e) => handleInputChange("fullName", e.target.value)}
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-3">
               <label htmlFor="job" className="form-label">
                 Wezipesi
               </label>
@@ -91,18 +94,8 @@ const AddEmployee = () => {
                 onChange={(e) => handleInputChange("job", e.target.value)}
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="picture" className="form-label">
-                Suraty
-              </label>
-              <input
-                type="file"
-                id="picture"
-                className="form-control"
-                onChange={handlePictureChange}
-              />
-            </div>
-            <div className="mb-4">
+            
+            <div className="mb-3">
               <label htmlFor="passport" className="form-label">
                 Pasport maglumaty
               </label>
@@ -115,8 +108,28 @@ const AddEmployee = () => {
                   handleInputChange("passportFile", e.target.value)
                 }
               />
+            </div>          
+          </div>
+        </div>
+      </div>
+      <div className="col-12 col-lg-4">
+        <div className="card">
+          <div className="card-body">
+            <h5>Maglumat</h5>
+            <hr className="mt-0" />
+            <div className="row g-3">              
+              <div className="col-12">
+              <label htmlFor="picture" className="form-label">
+                Suraty
+              </label>
+              <input
+                type="file"
+                id="picture"
+                className="form-control"
+                onChange={handlePictureChange}
+              />
             </div>
-            <div className="mb-4">
+            <div className="col-12">
               <label htmlFor="single-select-field" className="form-label">
                 Haýsy bölüme degişli?
               </label>
@@ -140,22 +153,24 @@ const AddEmployee = () => {
                   ))}
                 </select>
               )}
-            </div>
-            <div className="col-12">
-              <div className="d-grid">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={handleSubmit}
-                >
-                  Goş
-                </button>
+            </div>              
+              <div className="col-12">
+                <div className="d-grid">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={handleSubmit}
+                  >
+                    Goş
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

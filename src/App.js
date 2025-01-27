@@ -18,11 +18,11 @@ function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/addDepartment" element={<AddDepartment />} />
-            <Route path="/addCompany" element={<AddCompany />} />
-            <Route path="/addCategory" element={<AddCategory />} />
-            <Route path="/addEmployee" element={<AddEmployee />} />
-            <Route path="/employeeList" element={<EmployeeList />} />
+            <Route path="/adddepartment" element={<AddDepartment />} />
+            <Route path="/addcompany" element={<AddCompany />} />
+            <Route path="/addcategory" element={<AddCategory />} />
+            <Route path="/addemployee" element={<AddEmployee />} />
+            <Route path="/employeelist" element={<EmployeeList />} />
           </Routes>
         </div>
       </main>

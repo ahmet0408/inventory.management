@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Breadcrumb from "./fragments/Breadcrumb";
 
 const AddCompany = () => {
   const [companyData, setCompanyData] = useState({
@@ -43,23 +44,29 @@ const AddCompany = () => {
   };
 
   return (
+    <>
+    <Breadcrumb items={['Administrator','Kompaniýa','Kompaniýa goşmak']} />
     <div className="row">
       <div className="col-12 col-lg-8">
         <div className="card">
           <div className="card-body">
-            <div className="mb-4">
-              <h5 className="mb-3">Ady</h5>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Ady
+              </label>
               <input
-                type="text"
+                type="text" id="name"
                 className="form-control"
                 value={companyData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
               />
             </div>
-            <div className="mb-4">
-              <h5 className="mb-3">Kompaniýa barada</h5>
+            <div className="mb-3">
+              <label htmlFor="desc" className="form-label">
+                Kompaniýa barada
+              </label>
               <input
-                type="text"
+                type="text" id="desc"
                 className="form-control"
                 value={companyData.description}
                 onChange={(e) =>
@@ -68,27 +75,42 @@ const AddCompany = () => {
               />
             </div>
             <div className="mb-4">
-              <h5 className="mb-3">Kompaniýanyň Logosy</h5>
+            <label htmlFor="address" className="form-label">
+                Salgysy
+              </label>
               <input
-                type="file"
-                className="form-control"
-                onChange={handleLogoChange}
-              />
-            </div>
-            <div className="mb-4">
-              <h5 className="mb-3">Salgysy</h5>
-              <input
-                type="text"
+                type="text" id="address"
                 className="form-control"
                 value={companyData.address}
                 onChange={(e) => handleInputChange("address", e.target.value)}
               />
+            </div>                      
+          </div>
+        </div>
+      </div>
+      <div className="col-12 col-lg-4">
+        <div className="card">
+          <div className="card-body">
+            <h5>Maglumat</h5>
+            <hr className="mt-0" />
+            <div className="row g-3">              
+              <div className="col-12">
+              <label htmlFor="picture" className="form-label">
+                Kompaniýanyň Logosy
+              </label>
+              <input
+                type="file" id="picture"
+                className="form-control"
+                onChange={handleLogoChange}
+              />
             </div>
-            <div className="mb-4">
-              <h5 className="mb-3">Habarlaşmak üçin</h5>
+            <div className="col-12">
+            <label htmlFor="phone" className="form-label">
+                Habarlaşmak üçin
+              </label>
               <div className="d-flex">
                 <input
-                  type="tel"
+                  type="tel" id="phone"
                   className="form-control"
                   placeholder="Telefon"
                   value={companyData.phone}
@@ -101,23 +123,25 @@ const AddCompany = () => {
                   value={companyData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                 />
-              </div>
-            </div>
-            <div className="col-12">
-              <div className="d-grid">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={handleSubmit}
-                >
-                  Goş
-                </button>
+              </div>   
+              </div>          
+              <div className="col-12">
+                <div className="d-grid">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={handleSubmit}
+                  >
+                    Goş
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 };
 

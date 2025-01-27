@@ -1,18 +1,21 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header className="top-header">
       <nav className="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
         <div className="logo-header d-none d-xl-flex align-items-center gap-2">
           <div className="logo-icon">
+            <Link to={"/"}>
             <img
               src="assets/images/logo.ico"
               className="logo-img"
               width="65"
               alt=""
-            />
+            /></Link>
           </div>
-          <div className="logo-name">
-            <h5 className="mb-0">Inwertar</h5>
+          <div className="logo-name mt-1">
+            <h6 className="mb-0">Inwentar</h6>
           </div>
         </div>
         <div
