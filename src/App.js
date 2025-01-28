@@ -10,6 +10,9 @@ import AddEmployee from "./components/AddEmployee";
 import EmployeeList from "./components/EmployeeList";
 import DepartmentList from "./components/DepartmentList";
 import CompanyList from "./components/CompanyList";
+import CategoryList from "./components/CategoryList";
+import AddProduct from "./components/AddProduct";
+import ProductList from "./components/ProductList";
 
 function App() {
   return (
@@ -27,6 +30,9 @@ function App() {
             <Route path="/employeelist" element={<EmployeeList />} />
             <Route path="/departmentlist" element={<DepartmentList />} />
             <Route path="/companylist" element={<CompanyList />} />
+            <Route path="/categorylist" element={<CategoryList />} />
+            <Route path="/addproduct" element={<AddProduct />} />
+            <Route path="/productlist" element={<ProductList />} />
           </Routes>
         </div>
       </main>

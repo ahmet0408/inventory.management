@@ -707,6 +707,43 @@ const Navbar = () => {
                       className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
                       href="javascript:;"
                     >
+                      <i className="material-icons-outlined">pie_chart</i>
+                      Kategoriýa
+                    </a>
+                    <ul className="dropdown-menu submenu">
+                      <li className={isActive("/categorylist") ? "active" : ""}>
+                        <Link
+                          to="/categorylist"
+                          className={`dropdown-item ${
+                            isActive("/categorylist") ? "active" : ""
+                          }`}
+                        >
+                          <i className="material-icons-outlined">
+                            navigate_next
+                          </i>
+                          Kategoriýalar
+                        </Link>
+                      </li>
+                      <li className={isActive("/addcategory") ? "active" : ""}>
+                        <Link
+                          to="/addcategory"
+                          className={`dropdown-item ${
+                            isActive("/addcategory") ? "active" : ""
+                          }`}
+                        >
+                          <i className="material-icons-outlined">
+                            navigate_next
+                          </i>
+                          Kategoriýa goşmak
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="nav-item dropend">
+                    <a
+                      className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
+                      href="javascript:;"
+                    >
                       <i className="material-icons-outlined">cases</i>Haryt
                     </a>
                     <ul className="dropdown-menu submenu">

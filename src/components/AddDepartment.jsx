@@ -57,13 +57,13 @@ const AddDepartment = () => {
             <div className="card-body">
               {["tk", "ru", "en"].map((lang) => (
                 <div key={lang}>
-                  <h5>
+                  <h6>
                     {lang === "tk"
                       ? "Türkmençe"
                       : lang === "ru"
                       ? "Rusça"
                       : "Iňlisçe"}
-                  </h5>
+                  </h6>
                   <hr className="mt-0" />
                   <div className="mb-1">
                     <label htmlFor={"bol" + lang} className="form-label">
