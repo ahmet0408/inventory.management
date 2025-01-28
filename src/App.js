@@ -8,6 +8,8 @@ import AddCompany from "./components/AddCompany";
 import AddCategory from "./components/AddCategory";
 import AddEmployee from "./components/AddEmployee";
 import EmployeeList from "./components/EmployeeList";
+import DepartmentList from "./components/DepartmentList";
+import CompanyList from "./components/CompanyList";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
             <Route path="/addcategory" element={<AddCategory />} />
             <Route path="/addemployee" element={<AddEmployee />} />
             <Route path="/employeelist" element={<EmployeeList />} />
+            <Route path="/departmentlist" element={<DepartmentList />} />
+            <Route path="/companylist" element={<CompanyList />} />
           </Routes>
         </div>
       </main>

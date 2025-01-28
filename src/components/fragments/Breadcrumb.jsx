@@ -5,18 +5,17 @@ const Breadcrumb = ({ items }) => {
       <div className="ps-3">
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb mb-0 p-0">
-          <li className="breadcrumb-item">
-            </li>
-            <li className="breadcrumb-item cursor-pointer">
-              {items[1]}
-            </li>            
+            <li className="breadcrumb-item"></li>
+            <li className="breadcrumb-item cursor-pointer">{items[1]}</li>
 
             {items.slice(2).map((item, index) => (
-              <li 
-                key={index}  style={{fontSize: "15px",cursor:"pointer"}}
-                className={`${index === items.length - 2 ? 'active' : ''}`} 
-                aria-current={index === items.length - 2 ? 'page' : undefined}
-              ><i class="bi bi-arrow-right mx-1"></i>
+              <li
+                key={index}
+                style={{ fontSize: "15px", cursor: "pointer" }}
+                className={`${index === items.length - 2 ? "active" : ""}`}
+                aria-current={index === items.length - 2 ? "page" : undefined}
+              >
+                <i className="bi bi-arrow-right mx-1"></i>
                 {item}
               </li>
             ))}

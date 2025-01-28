@@ -2,25 +2,25 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./fragments/Breadcrumb";
 
-const EmployeeList = () => {
-  const [employees, setEmployees] = useState([]);
-  const [employeeImages, setEmployeeImages] = useState({});
+const CompanyList = () => {
+  const [companies, setCompanies] = useState([]);
+  const [companyImages, setCompanyImages] = useState({});
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleAddEmployee = () => {
-    navigate("/addemployee");
+  const handleAddCompany = () => {
+    navigate("/addcompany");
   };
 
-  const handleEditEmployee = (employeeId) => {
-    navigate(`/editemployee/${employeeId}`);
+  const handleEditCompany = (companyId) => {
+    navigate(`/editcompany/${companyId}`);
   };
 
-  const handleDeleteEmployee = async (employeeId) => {
-    if (window.confirm("Işgäri pozmak isleýäňizmi?")) {
+  const handleDeleteCompany = async (companyId) => {
+    if (window.confirm("Kompaniýa maglumatlary pozmak isleýäňizmi?")) {
       try {
         const response = await fetch(
-          `https://localhost:5001/api/employee/${employeeId}`,
+          `https://localhost:5001/api/company/${companyId}`,
           {
             method: "DELETE",
           }
@@ -30,44 +30,44 @@ const EmployeeList = () => {
           throw new Error("Delete operation failed");
         }
 
-        // Remove the deleted employee from the state
-        setEmployees(employees.filter((emp) => emp.id !== employeeId));
+        // Remove the deleted company from the state
+        setCompanies(companies.filter((emp) => emp.id !== companyId));
       } catch (error) {
-        console.error("Error deleting employee:", error);
-        alert("Işgäri pozmak başartmady");
+        console.error("Error deleting company:", error);
+        alert("Kompaniýa maglumatlaryny pozmak başartmady");
       }
     }
   };
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/employee")
+    fetch("https://localhost:5001/api/company")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then((data) => setEmployees(data))
+      .then((data) => setCompanies(data))
       .catch((error) => setError(error.message));
   }, []);
 
   useEffect(() => {
-    // Fetch images for each employee
+    // Fetch images for each company
     const fetchImages = async () => {
-      const imagePromises = employees.map(async (employee) => {
+      const imagePromises = companies.map(async (company) => {
         try {
           const response = await fetch(
-            `https://localhost:5001/api/image/employee/${employee.picture}`
+            `https://localhost:5001/api/image/company/${company.logo}`
           );
           if (!response.ok) throw new Error("Image fetch failed");
 
           const blob = await response.blob();
           return {
-            employeeId: employee.id,
+            companyId: company.id,
             imageUrl: URL.createObjectURL(blob),
           };
         } catch (error) {
-          console.error(`Image fetch error for ${employee.id}:`, error);
+          console.error(`Image fetch error for ${company.id}:`, error);
           return null;
         }
       });
@@ -76,26 +76,28 @@ const EmployeeList = () => {
 
       const fetchedImages = results.reduce((acc, result) => {
         if (result.status === "fulfilled" && result.value) {
-          acc[result.value.employeeId] = result.value.imageUrl;
+          acc[result.value.companyId] = result.value.imageUrl;
         }
         return acc;
       }, {});
 
-      setEmployeeImages(fetchedImages);
+      setCompanyImages(fetchedImages);
     };
 
-    if (employees.length > 0) {
+    if (companies.length > 0) {
       fetchImages();
     }
 
     // Cleanup
     return () => {
-      Object.values(employeeImages).forEach(URL.revokeObjectURL);
+      Object.values(companyImages).forEach(URL.revokeObjectURL);
     };
-  }, [employees]);
+  }, [companies]);
   return (
     <>
-      <Breadcrumb items={["Administrator", "Işgär", "Işgärler"]} />
+      <Breadcrumb
+        items={["Administrator", "Kompaniýa", "Kompaniýa maglumatlary"]}
+      />
       <div className="row g-3">
         <div className="col-auto">
           <div className="position-relative">
@@ -112,11 +114,8 @@ const EmployeeList = () => {
         <div className="col-auto flex-grow-1 overflow-auto"></div>
         <div className="col-auto">
           <div className="d-flex align-items-center gap-2 justify-content-lg-end">
-            <button
-              onClick={handleAddEmployee}
-              className="btn btn-primary px-4"
-            >
-              <i className="bi bi-plus-lg me-2"></i>Işgär goş
+            <button onClick={handleAddCompany} className="btn btn-primary px-4">
+              <i className="bi bi-plus-lg me-2"></i>Kompaniýa maglumatlary goş
             </button>
           </div>
         </div>
@@ -133,17 +132,17 @@ const EmployeeList = () => {
                       <th>
                         <input className="form-check-input" type="checkbox" />
                       </th>
-                      <th>Işgär</th>
-                      <th>Email</th>
-                      <th>Wezipesi</th>
-                      <th>Pasport maglumaty</th>
-                      <th>Bölümi</th>
+                      <th>Ady</th>
+                      <th>Kompaniýa barada</th>
+                      <th>Salgysy</th>
+                      <th>Telefon</th>
+                      <th>Mail</th>
                       <th>Operasiýalar</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {employees &&
-                      employees.map((item) => (
+                    {companies &&
+                      companies.map((item) => (
                         <tr key={item.id}>
                           <td>
                             <input
@@ -157,10 +156,10 @@ const EmployeeList = () => {
                               href="javascript:;"
                             >
                               <div className="customer-pic">
-                                {employeeImages[item.id] && (
+                                {companyImages[item.id] && (
                                   <img
-                                    src={employeeImages[item.id]}
-                                    alt={item.fullName}
+                                    src={companyImages[item.id]}
+                                    alt={item.name}
                                     className="rounded-circle"
                                     width="40"
                                     height="40"
@@ -168,29 +167,29 @@ const EmployeeList = () => {
                                 )}
                               </div>
                               <p className="mb-0 customer-name fw-bold">
-                                {item.fullName}
+                                {item.name}
                               </p>
                             </a>
                           </td>
+                          <td>{item.description}</td>
+                          <td>{item.address}</td>
+                          <td>{item.phone}</td>
                           <td>
                             <a href="javascript:;" className="font-text1">
-                              {item.fullName}.com
+                              {item.email}
                             </a>
                           </td>
-                          <td>{item.job}</td>
-                          <td>{item.passportFile}</td>
-                          <td>{item.departmentName}</td>
                           <td>
                             <div className="d-flex gap-2">
                               <button
                                 className="btn btn-sm btn-outline-primary"
-                                onClick={() => handleEditEmployee(item.id)}
+                                onClick={() => handleEditCompany(item.id)}
                               >
                                 <i className="bi bi-pencil-square"></i>
                               </button>
                               <button
                                 className="btn btn-sm btn-outline-danger"
-                                onClick={() => handleDeleteEmployee(item.id)}
+                                onClick={() => handleDeleteCompany(item.id)}
                               >
                                 <i className="bi bi-trash"></i>
                               </button>
@@ -209,4 +208,4 @@ const EmployeeList = () => {
   );
 };
 
-export default EmployeeList;
+export default CompanyList;
