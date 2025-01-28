@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Breadcrumb from "./fragments/Breadcrumb";
+import { useNavigate } from "react-router-dom";
 
 const AddCompany = () => {
   const [companyData, setCompanyData] = useState({
@@ -10,6 +11,7 @@ const AddCompany = () => {
     address: "",
     formLogo: null,
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (field, value) => {
     setCompanyData((prev) => ({
@@ -22,25 +24,28 @@ const AddCompany = () => {
     handleInputChange("formLogo", e.target.files[0]);
   };
 
-  const handleSubmit = () => {
-    const formData = new FormData();
-    Object.entries(companyData).forEach(([key, value]) => {
-      if (key === "formLogo" && value) {
-        formData.append(key, value);
-      } else if (value) {
-        formData.append(key, value);
-      }
-    });
-
-    console.log(formData);
-
-    fetch("https://localhost:5001/api/company/create", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("Department created", data))
-      .catch((error) => console.error("Error", error));
+  const handleSubmit = async () => {
+    try {
+      const formData = new FormData();
+      
+      Object.entries(companyData).forEach(([key, value]) => {
+        if (key === "formLogo" && value) {
+          formData.append(key, value);
+        } else if (value) {
+          formData.append(key, value);
+        }
+      });
+  
+      const response = await fetch("https://localhost:5001/api/company/create", {
+        method: "POST",
+        body: formData,
+      });
+  
+      const data = await response.json();
+      navigate("/companylist");  
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
 
   return (

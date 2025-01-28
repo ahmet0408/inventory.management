@@ -43,7 +43,6 @@ const AddDepartment = () => {
 
       const data = await response.json();
       navigate("/departmentlist");
-      return data;
     } catch (error) {
       console.error("Error", error);
       throw error;

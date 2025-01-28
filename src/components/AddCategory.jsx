@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Breadcrumb from "./fragments/Breadcrumb";
+import { useNavigate } from "react-router-dom";
 
 const AddCategory = () => {
   const [categoryData, setCategoryData] = useState({
@@ -14,6 +15,7 @@ const AddCategory = () => {
   });
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://localhost:5001/api/category")
@@ -44,15 +46,18 @@ const AddCategory = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    fetch("https://localhost:5001/api/category/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(categoryData),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("Category created", data))
-      .catch((error) => console.error("Error", error));
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("https://localhost:5001/api/category/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(categoryData),
+      });
+      const data = await response.json();
+      navigate("/categorylist");
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
   return (
     <>
