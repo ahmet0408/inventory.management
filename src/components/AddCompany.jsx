@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Breadcrumb from "./fragments/Breadcrumb";
 import { useNavigate } from "react-router-dom";
+import { api } from "../env";
 
 const AddCompany = () => {
   const [companyData, setCompanyData] = useState({
@@ -36,7 +37,7 @@ const AddCompany = () => {
         }
       });
   
-      const response = await fetch("https://localhost:5001/api/company/create", {
+      const response = await fetch(`${api}/company/create`, {
         method: "POST",
         body: formData,
       });

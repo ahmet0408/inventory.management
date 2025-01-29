@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./fragments/Breadcrumb";
+import { api } from "../env";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
@@ -20,7 +21,7 @@ const CompanyList = () => {
     if (window.confirm("Kompaniýa maglumatlary pozmak isleýäňizmi?")) {
       try {
         const response = await fetch(
-          `https://localhost:5001/api/company/${companyId}`,
+          `${api}/company/${companyId}`,
           {
             method: "DELETE",
           }
@@ -40,7 +41,7 @@ const CompanyList = () => {
   };
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/company")
+    fetch(`${api}/company`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -57,7 +58,7 @@ const CompanyList = () => {
       const imagePromises = companies.map(async (company) => {
         try {
           const response = await fetch(
-            `https://localhost:5001/api/image/company/${company.logo}`
+            `${api}/image/company/${company.logo}`
           );
           if (!response.ok) throw new Error("Image fetch failed");
 

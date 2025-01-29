@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Breadcrumb from "./fragments/Breadcrumb";
 import { useNavigate } from "react-router-dom";
+import { api } from "../env";
 
 const AddCategory = () => {
   const [categoryData, setCategoryData] = useState({
@@ -18,7 +19,7 @@ const AddCategory = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/category")
+    fetch(`${api}/category`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -49,7 +50,7 @@ const AddCategory = () => {
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        "https://localhost:5001/api/category/create",
+        `${api}/category/create`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

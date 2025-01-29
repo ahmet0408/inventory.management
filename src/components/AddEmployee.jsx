@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./fragments/Breadcrumb";
+import { api } from "../env";
 
 const AddEmployee = () => {
   const [employeeData, setEmployeeData] = useState({
@@ -15,7 +16,7 @@ const AddEmployee = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/department")
+    fetch(`${api}/department`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -49,7 +50,7 @@ const AddEmployee = () => {
       });
 
       const response = await fetch(
-        "https://localhost:5001/api/employee/create",
+        `${api}/employee/create`,
         {
           method: "POST",
           body: formData,

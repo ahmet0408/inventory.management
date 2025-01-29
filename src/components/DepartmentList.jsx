@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./fragments/Breadcrumb";
+import { api } from "../env";
 
 const DepartmentList = () => {
   const [departments, setDepartments] = useState([]);
@@ -19,7 +20,7 @@ const DepartmentList = () => {
     if (window.confirm("Bölümi pozmak isleýäňizmi?")) {
       try {
         const response = await fetch(
-          `https://localhost:5001/api/department/${departmentId}`,
+          `${api}/department/${departmentId}`,
           {
             method: "DELETE",
           }
@@ -39,7 +40,7 @@ const DepartmentList = () => {
   };
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/department")
+    fetch(`${api}/department`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

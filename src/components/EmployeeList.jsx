@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./fragments/Breadcrumb";
+import { api } from "../env";
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
@@ -20,7 +21,7 @@ const EmployeeList = () => {
     if (window.confirm("Işgäri pozmak isleýäňizmi?")) {
       try {
         const response = await fetch(
-          `https://localhost:5001/api/employee/${employeeId}`,
+          `${api}/employee/${employeeId}`,
           {
             method: "DELETE",
           }
@@ -40,7 +41,7 @@ const EmployeeList = () => {
   };
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/employee")
+    fetch(`${api}/employee`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -57,7 +58,7 @@ const EmployeeList = () => {
       const imagePromises = employees.map(async (employee) => {
         try {
           const response = await fetch(
-            `https://localhost:5001/api/image/employee/${employee.picture}`
+            `${api}/image/employee/${employee.picture}`
           );
           if (!response.ok) throw new Error("Image fetch failed");
 

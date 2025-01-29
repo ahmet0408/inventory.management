@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./fragments/Breadcrumb";
+import { api } from "../env";
 
 const AddProduct = () => {
   const [productData, setProductData] = useState({
@@ -27,7 +28,7 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/department")
+    fetch(`${api}/department`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -39,7 +40,7 @@ const AddProduct = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/employee")
+    fetch(`${api}/employee`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -53,7 +54,7 @@ const AddProduct = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/category")
+    fetch(`${api}/category`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -113,7 +114,7 @@ const AddProduct = () => {
       });
 
       const response = await fetch(
-        "https://localhost:5001/api/product/create",
+        `${api}/product/create`,
         {
           method: "POST",
           body: formData,
@@ -219,6 +220,7 @@ const AddProduct = () => {
                   <label htmlFor="Barcode" className="form-label">
                     Barcode
                   </label>
+                  <div className="input-group">
                   <input
                     type="text"
                     id="Barcode"
@@ -228,6 +230,9 @@ const AddProduct = () => {
                       handleGeneralChange("barcode", e.target.value)
                     }
                   />
+                  <button className="btn btn-outline-secondary" type="button">Skan</button>
+                  <button className="btn btn-outline-secondary" type="button">Döretmek</button>
+                  </div>
                 </div>
                 <div className="col-12">
                   <label htmlFor="Price" className="form-label">

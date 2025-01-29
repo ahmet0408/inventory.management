@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./fragments/Breadcrumb";
+import { api } from "../env";
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
@@ -19,7 +20,7 @@ const CategoryList = () => {
     if (window.confirm("Kategoriýany pozmak isleýäňizmi?")) {
       try {
         const response = await fetch(
-          `https://localhost:5001/api/category/${categoryId}`,
+          `${api}/category/${categoryId}`,
           {
             method: "DELETE",
           }
@@ -39,7 +40,7 @@ const CategoryList = () => {
   };
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/category")
+    fetch(`${api}/category`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

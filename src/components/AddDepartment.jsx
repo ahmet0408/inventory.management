@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Breadcrumb from "./fragments/Breadcrumb";
 import { useNavigate } from "react-router-dom";
+import { api } from "../env";
 
 const AddDepartment = () => {
   const [translations, setTranslations] = useState({
@@ -33,7 +34,7 @@ const AddDepartment = () => {
       const createDepartmentDTO = { departmentTranslates };
 
       const response = await fetch(
-        "https://localhost:5001/api/department/create",
+        `${api}/department/create`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

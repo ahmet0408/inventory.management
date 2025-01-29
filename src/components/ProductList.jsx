@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "./fragments/Breadcrumb";
+import { api } from "../env";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -20,7 +21,7 @@ const ProductList = () => {
     if (window.confirm("Harydy pozmak isleýäňizmi?")) {
       try {
         const response = await fetch(
-          `https://localhost:5001/api/product/${productId}`,
+          `${api}/product/${productId}`,
           {
             method: "DELETE",
           }
@@ -40,7 +41,7 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/product")
+    fetch(`${api}/product`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -57,7 +58,7 @@ const ProductList = () => {
       const imagePromises = products.map(async (product) => {
         try {
           const response = await fetch(
-            `https://localhost:5001/api/image/haryt/${product.image}`
+            `${api}/image/haryt/${product.image}`
           );
           if (!response.ok) throw new Error("Image fetch failed");
 
