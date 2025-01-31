@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Barcode from "react-barcode";
 import Breadcrumb from "./fragments/Breadcrumb";
 import { api } from "../env";
 
@@ -26,6 +27,12 @@ const AddProduct = () => {
   const [departments, setDepartments] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const generateBarcode = () => {
+    // Generate a random 13-digit number for the barcode
+    const randomBarcode = Array.from({ length: 13 }, () => Math.floor(Math.random() * 10)).join('');
+    handleGeneralChange("barcode", randomBarcode);
+  };
 
   useEffect(() => {
     fetch(`${api}/department`)
@@ -139,8 +146,8 @@ const AddProduct = () => {
                     {translate.languageCulture === "tk"
                       ? "Türkmençe"
                       : translate.languageCulture === "ru"
-                      ? "Rusça"
-                      : "Iňlisçe"}
+                        ? "Rusça"
+                        : "Iňlisçe"}
                   </h6>
                   <hr className="mt-0" />
                   <div className="mb-3">
@@ -221,18 +228,35 @@ const AddProduct = () => {
                     Barcode
                   </label>
                   <div className="input-group">
-                  <input
-                    type="text"
-                    id="Barcode"
-                    className="form-control"
-                    value={productData.barcode}
-                    onChange={(e) =>
-                      handleGeneralChange("barcode", e.target.value)
-                    }
-                  />
-                  <button className="btn btn-outline-secondary" type="button">Skan</button>
-                  <button className="btn btn-outline-secondary" type="button">Döretmek</button>
+                    <input
+                      type="text"
+                      id="Barcode"
+                      className="form-control"
+                      value={productData.barcode}
+                      onChange={(e) =>
+                        handleGeneralChange("barcode", e.target.value)
+                      }
+                    />
+                    <button className="btn btn-outline-secondary" type="button">Skan</button>
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      onClick={generateBarcode}
+                    >
+                      Döretmek
+                    </button>
                   </div>
+                  {productData.barcode && (
+                    <div className="mt-3 text-center">
+                      <Barcode
+                        value={productData.barcode}
+                        format="CODE39"
+                        width={1.1}
+                        height={75}
+                        displayValue={false}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="col-12">
                   <label htmlFor="Price" className="form-label">
