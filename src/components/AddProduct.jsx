@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Barcode from "react-barcode";
 import Breadcrumb from "./fragments/Breadcrumb";
 import { api } from "../env";
+import BarcodeScannerModal from "./fragments/BarcodeScannerModal";
 
 const AddProduct = () => {
   const [productData, setProductData] = useState({
@@ -27,11 +28,20 @@ const AddProduct = () => {
   const [departments, setDepartments] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const [scanType, setScanType] = useState('');
+
+  const handleScan = (scannedBarcode) => {
+    handleGeneralChange("barcode", scannedBarcode);
+    setIsScannerOpen(false);
+    setScanType('scan');
+  };
 
   const generateBarcode = () => {
     // Generate a random 13-digit number for the barcode
-    const randomBarcode = Array.from({ length: 13 }, () => Math.floor(Math.random() * 10)).join('');
+    const randomBarcode = Array.from({ length: 20 }, () => Math.floor(Math.random() * 10)).join('');
     handleGeneralChange("barcode", randomBarcode);
+    setScanType('generate');
   };
 
   useEffect(() => {
@@ -233,11 +243,18 @@ const AddProduct = () => {
                       id="Barcode"
                       className="form-control"
                       value={productData.barcode}
-                      onChange={(e) =>
-                        handleGeneralChange("barcode", e.target.value)
-                      }
+                      onChange={(e) => {
+                        handleGeneralChange("barcode", e.target.value);
+                        setScanType('manual');
+                      }}
                     />
-                    <button className="btn btn-outline-secondary" type="button">Skan</button>
+                    <button
+                      className="btn btn-outline-secondary"
+                      type="button"
+                      onClick={() => setIsScannerOpen(true)}
+                    >
+                      Skan
+                    </button>
                     <button
                       className="btn btn-outline-secondary"
                       type="button"
@@ -246,17 +263,28 @@ const AddProduct = () => {
                       Döretmek
                     </button>
                   </div>
-                  {productData.barcode && (
+                  {/* Diňe Döretmek düwmesine basanynda görkezilýär */}
+                  {productData.barcode && scanType === 'generate' && (
                     <div className="mt-3 text-center">
                       <Barcode
                         value={productData.barcode}
-                        format="CODE39"
-                        width={1.1}
-                        height={75}
-                        displayValue={false}
+                        format="CODE128"
+                        width={1.5}
+                        height={100}
+                        displayValue={true}
+                        text={productData.barcode}
+                        textPosition="bottom"
+                        textMargin={8}
+                        fontSize={16}
                       />
                     </div>
                   )}
+
+                  <BarcodeScannerModal
+                    isOpen={isScannerOpen}
+                    onClose={() => setIsScannerOpen(false)}
+                    onScan={handleScan}
+                  />
                 </div>
                 <div className="col-12">
                   <label htmlFor="Price" className="form-label">
