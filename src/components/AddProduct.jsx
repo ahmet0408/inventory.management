@@ -29,19 +29,21 @@ const AddProduct = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const [isScannerOpen, setIsScannerOpen] = useState(false);
-  const [scanType, setScanType] = useState('');
+  const [scanType, setScanType] = useState("");
 
   const handleScan = (scannedBarcode) => {
     handleGeneralChange("barcode", scannedBarcode);
     setIsScannerOpen(false);
-    setScanType('scan');
+    setScanType("scan");
   };
 
   const generateBarcode = () => {
     // Generate a random 13-digit number for the barcode
-    const randomBarcode = Array.from({ length: 20 }, () => Math.floor(Math.random() * 10)).join('');
+    const randomBarcode = Array.from({ length: 20 }, () =>
+      Math.floor(Math.random() * 10)
+    ).join("");
     handleGeneralChange("barcode", randomBarcode);
-    setScanType('generate');
+    setScanType("generate");
   };
 
   useEffect(() => {
@@ -130,13 +132,10 @@ const AddProduct = () => {
         }
       });
 
-      const response = await fetch(
-        `${api}/product/create`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(`${api}/product/create`, {
+        method: "POST",
+        body: formData,
+      });
       const data = await response.json();
       navigate("/productlist");
     } catch (error) {
@@ -156,8 +155,8 @@ const AddProduct = () => {
                     {translate.languageCulture === "tk"
                       ? "Türkmençe"
                       : translate.languageCulture === "ru"
-                        ? "Rusça"
-                        : "Iňlisçe"}
+                      ? "Rusça"
+                      : "Iňlisçe"}
                   </h6>
                   <hr className="mt-0" />
                   <div className="mb-3">
@@ -245,7 +244,7 @@ const AddProduct = () => {
                       value={productData.barcode}
                       onChange={(e) => {
                         handleGeneralChange("barcode", e.target.value);
-                        setScanType('manual');
+                        setScanType("manual");
                       }}
                     />
                     <button
@@ -264,7 +263,7 @@ const AddProduct = () => {
                     </button>
                   </div>
                   {/* Diňe Döretmek düwmesine basanynda görkezilýär */}
-                  {productData.barcode && scanType === 'generate' && (
+                  {productData.barcode && scanType === "generate" && (
                     <div className="mt-3 text-center">
                       <Barcode
                         value={productData.barcode}
