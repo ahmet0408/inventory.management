@@ -7,12 +7,13 @@ const Header = () => {
         <div className="logo-header d-none d-xl-flex align-items-center gap-2">
           <div className="logo-icon">
             <Link to={"/"}>
-            <img
-              src="assets/images/logo.ico"
-              className="logo-img"
-              width="65"
-              alt=""
-            /></Link>
+              <img
+                src="assets/images/logo.ico"
+                className="logo-img"
+                width="65"
+                alt=""
+              />
+            </Link>
           </div>
           <div className="logo-name mt-1">
             <h6 className="mb-0">Inwentar</h6>
@@ -23,7 +24,7 @@ const Header = () => {
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar"
         >
-          <a href="javascript:;">
+          <a href="#" onClick={(e) => e.preventDefault()}>
             <i className="material-icons-outlined">menu</i>
           </a>
         </div>
@@ -60,31 +61,55 @@ const Header = () => {
                 <div className="card-body search-content">
                   <p className="search-title">Recent Searches</p>
                   <div className="d-flex align-items-start flex-wrap gap-2 kewords-wrapper">
-                    <a href="javascript:;" className="kewords">
+                    <a
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="kewords"
+                    >
                       <span>Angular Template</span>
                       <i className="material-icons-outlined fs-6">search</i>
                     </a>
-                    <a href="javascript:;" className="kewords">
+                    <a
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="kewords"
+                    >
                       <span>Dashboard</span>
                       <i className="material-icons-outlined fs-6">search</i>
                     </a>
-                    <a href="javascript:;" className="kewords">
+                    <a
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="kewords"
+                    >
                       <span>Admin Template</span>
                       <i className="material-icons-outlined fs-6">search</i>
                     </a>
-                    <a href="javascript:;" className="kewords">
+                    <a
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="kewords"
+                    >
                       <span>Bootstrap 5 Admin</span>
                       <i className="material-icons-outlined fs-6">search</i>
                     </a>
-                    <a href="javascript:;" className="kewords">
+                    <a
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="kewords"
+                    >
                       <span>Html eCommerce</span>
                       <i className="material-icons-outlined fs-6">search</i>
                     </a>
-                    <a href="javascript:;" className="kewords">
+                    <a onClick={(e) => e.preventDefault()} className="kewords">
                       <span>Sass</span>
                       <i className="material-icons-outlined fs-6">search</i>
                     </a>
-                    <a href="javascript:;" className="kewords">
+                    <a
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                      className="kewords"
+                    >
                       <span>laravel 9</span>
                       <i className="material-icons-outlined fs-6">search</i>
                     </a>
@@ -184,7 +209,7 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="card-footer text-center bg-transparent">
-                  <a href="javascript:;" className="btn w-100">
+                  <a onClick={(e) => e.preventDefault()} className="btn w-100">
                     See All Search Results
                   </a>
                 </div>
@@ -194,7 +219,11 @@ const Header = () => {
         </div>
         <ul className="navbar-nav gap-1 nav-right-links align-items-center">
           <li className="nav-item d-lg-none mobile-search-btn">
-            <a className="nav-link" href="javascript:;">
+            <a
+              className="nav-link"
+              href="#"
+              onClick={(e) => e.preventDefault()}
+            >
               <i className="material-icons-outlined">search</i>
             </a>
           </li>
@@ -210,7 +239,8 @@ const Header = () => {
               <li>
                 <a
                   className="dropdown-item d-flex align-items-center py-2"
-                  href="javascript:;"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
                 >
                   <img src="assets/images/county/01.png" width="20" alt="" />
                   <span className="ms-2">English</span>
@@ -219,7 +249,8 @@ const Header = () => {
               <li>
                 <a
                   className="dropdown-item d-flex align-items-center py-2"
-                  href="javascript:;"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
                 >
                   <img src="assets/images/county/02.png" width="20" alt="" />
                   <span className="ms-2">Catalan</span>
@@ -228,7 +259,8 @@ const Header = () => {
               <li>
                 <a
                   className="dropdown-item d-flex align-items-center py-2"
-                  href="javascript:;"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
                 >
                   <img src="assets/images/county/03.png" width="20" alt="" />
                   <span className="ms-2">French</span>
@@ -237,7 +269,8 @@ const Header = () => {
               <li>
                 <a
                   className="dropdown-item d-flex align-items-center py-2"
-                  href="javascript:;"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
                 >
                   <img src="assets/images/county/04.png" width="20" alt="" />
                   <span className="ms-2">Belize</span>
@@ -246,7 +279,8 @@ const Header = () => {
               <li>
                 <a
                   className="dropdown-item d-flex align-items-center py-2"
-                  href="javascript:;"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
                 >
                   <img src="assets/images/county/05.png" width="20" alt="" />
                   <span className="ms-2">Colombia</span>
@@ -255,7 +289,8 @@ const Header = () => {
               <li>
                 <a
                   className="dropdown-item d-flex align-items-center py-2"
-                  href="javascript:;"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
                 >
                   <img src="assets/images/county/06.png" width="20" alt="" />
                   <span className="ms-2">Spanish</span>
@@ -264,7 +299,8 @@ const Header = () => {
               <li>
                 <a
                   className="dropdown-item d-flex align-items-center py-2"
-                  href="javascript:;"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
                 >
                   <img src="assets/images/county/07.png" width="20" alt="" />
                   <span className="ms-2">Georgian</span>
@@ -273,7 +309,8 @@ const Header = () => {
               <li>
                 <a
                   className="dropdown-item d-flex align-items-center py-2"
-                  href="javascript:;"
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
                 >
                   <img src="assets/images/county/08.png" width="20" alt="" />
                   <span className="ms-2">Hindi</span>
@@ -287,7 +324,8 @@ const Header = () => {
               className="nav-link dropdown-toggle dropdown-toggle-nocaret"
               data-bs-auto-close="outside"
               data-bs-toggle="dropdown"
-              href="javascript:;"
+              href="#"
+              onClick={(e) => e.preventDefault()}
             >
               <i className="material-icons-outlined">done_all</i>
             </a>
@@ -492,7 +530,8 @@ const Header = () => {
               className="nav-link dropdown-toggle dropdown-toggle-nocaret"
               data-bs-auto-close="outside"
               data-bs-toggle="dropdown"
-              href="javascript:;"
+              href="#"
+              onClick={(e) => e.preventDefault()}
             >
               <i className="material-icons-outlined">apps</i>
             </a>
@@ -685,7 +724,8 @@ const Header = () => {
               className="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
               data-bs-auto-close="outside"
               data-bs-toggle="dropdown"
-              href="javascript:;"
+              href="#"
+              onClick={(e) => e.preventDefault()}
             >
               <i className="material-icons-outlined">notifications</i>
               <span className="badge-notify">5</span>
@@ -706,7 +746,8 @@ const Header = () => {
                     <div>
                       <a
                         className="dropdown-item d-flex align-items-center gap-2 py-2"
-                        href="javascript:;"
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
                       >
                         <i className="material-icons-outlined fs-6">
                           inventory_2
@@ -717,7 +758,8 @@ const Header = () => {
                     <div>
                       <a
                         className="dropdown-item d-flex align-items-center gap-2 py-2"
-                        href="javascript:;"
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
                       >
                         <i className="material-icons-outlined fs-6">done_all</i>
                         Mark all as read
@@ -726,7 +768,8 @@ const Header = () => {
                     <div>
                       <a
                         className="dropdown-item d-flex align-items-center gap-2 py-2"
-                        href="javascript:;"
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
                       >
                         <i className="material-icons-outlined fs-6">mic_off</i>
                         Disable Notifications
@@ -735,7 +778,8 @@ const Header = () => {
                     <div>
                       <a
                         className="dropdown-item d-flex align-items-center gap-2 py-2"
-                        href="javascript:;"
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
                       >
                         <i className="material-icons-outlined fs-6">grade</i>
                         What's new ?
@@ -747,7 +791,8 @@ const Header = () => {
                     <div>
                       <a
                         className="dropdown-item d-flex align-items-center gap-2 py-2"
-                        href="javascript:;"
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
                       >
                         <i className="material-icons-outlined fs-6">
                           leaderboard
@@ -762,7 +807,8 @@ const Header = () => {
                 <div>
                   <a
                     className="dropdown-item border-bottom py-2"
-                    href="javascript:;"
+                    href="#"
+                    onClick={(e) => e.preventDefault()}
                   >
                     <div className="d-flex align-items-center gap-3">
                       <div className="">
@@ -790,7 +836,8 @@ const Header = () => {
                 <div>
                   <a
                     className="dropdown-item border-bottom py-2"
-                    href="javascript:;"
+                    href="#"
+                    onClick={(e) => e.preventDefault()}
                   >
                     <div className="d-flex align-items-center gap-3">
                       <div className="user-wrapper bg-primary text-primary bg-opacity-10">
@@ -812,7 +859,8 @@ const Header = () => {
                 <div>
                   <a
                     className="dropdown-item border-bottom py-2"
-                    href="javascript:;"
+                    href="#"
+                    onClick={(e) => e.preventDefault()}
                   >
                     <div className="d-flex align-items-center gap-3">
                       <div className="">
@@ -840,7 +888,8 @@ const Header = () => {
                 <div>
                   <a
                     className="dropdown-item border-bottom py-2"
-                    href="javascript:;"
+                    href="#"
+                    onClick={(e) => e.preventDefault()}
                   >
                     <div className="d-flex align-items-center gap-3">
                       <div className="">
@@ -868,7 +917,8 @@ const Header = () => {
                 <div>
                   <a
                     className="dropdown-item border-bottom py-2"
-                    href="javascript:;"
+                    href="#"
+                    onClick={(e) => e.preventDefault()}
                   >
                     <div className="d-flex align-items-center gap-3">
                       <div className="">
@@ -894,7 +944,11 @@ const Header = () => {
                   </a>
                 </div>
                 <div>
-                  <a className="dropdown-item py-2" href="javascript:;">
+                  <a
+                    className="dropdown-item py-2"
+                    href="#"
+                    onClick={(e) => e.preventDefault()}
+                  >
                     <div className="d-flex align-items-center gap-3">
                       <div className="user-wrapper bg-danger text-danger bg-opacity-10">
                         <span>PK</span>
@@ -940,7 +994,11 @@ const Header = () => {
               />
             </a>
             <div className="dropdown-menu dropdown-user dropdown-menu-end shadow">
-              <a className="dropdown-item  gap-2 py-2" href="javascript:;">
+              <a
+                className="dropdown-item  gap-2 py-2"
+                href="#"
+                onClick={(e) => e.preventDefault()}
+              >
                 <div className="text-center">
                   <img
                     src="assets/images/avatars/01.png"
@@ -955,32 +1013,37 @@ const Header = () => {
               <hr className="dropdown-divider" />
               <a
                 className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="javascript:;"
+                href="#"
+                onClick={(e) => e.preventDefault()}
               >
                 <i className="material-icons-outlined">person_outline</i>Profile
               </a>
               <a
                 className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="javascript:;"
+                href="#"
+                onClick={(e) => e.preventDefault()}
               >
                 <i className="material-icons-outlined">local_bar</i>Setting
               </a>
               <a
                 className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="javascript:;"
+                href="#"
+                onClick={(e) => e.preventDefault()}
               >
                 <i className="material-icons-outlined">dashboard</i>Dashboard
               </a>
               <a
                 className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="javascript:;"
+                href="#"
+                onClick={(e) => e.preventDefault()}
               >
                 <i className="material-icons-outlined">account_balance</i>
                 Earning
               </a>
               <a
                 className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="javascript:;"
+                href="#"
+                onClick={(e) => e.preventDefault()}
               >
                 <i className="material-icons-outlined">cloud_download</i>
                 Downloads
@@ -988,7 +1051,8 @@ const Header = () => {
               <hr className="dropdown-divider" />
               <a
                 className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="javascript:;"
+                href="#"
+                onClick={(e) => e.preventDefault()}
               >
                 <i className="material-icons-outlined">power_settings_new</i>
                 Logout

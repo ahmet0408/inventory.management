@@ -41,36 +41,21 @@ const Navbar = () => {
           </div>
           <div className="offcanvas-body p-0">
             <ul className="navbar-nav align-items-center flex-grow-1">
-              <li className="nav-item dropdown">
-                <a
+              <li className="nav-item dropdown" style={{ marginRight: "10px" }}>
+                <Link
+                  to={"/"}
                   className="nav-link dropdown-toggle dropdown-toggle-nocaret"
-                  href="javascript:;"
-                  data-bs-toggle="dropdown"
                 >
                   <div className="parent-icon">
                     <i className="material-icons-outlined">home</i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
-                    Company
+                    Baş sahypa
                   </div>
-                  <div className="ms-auto dropy-icon">
-                    <i className="material-icons-outlined">expand_more</i>
+                  <div className="ms-auto dropy-icon ">
+                    <i className="material-icons-outlined">1</i>
                   </div>
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="index.html">
-                      <i className="material-icons-outlined">insights</i>
-                      Analysis
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="index2.html">
-                      <i className="material-icons-outlined">shopping_cart</i>
-                      eCommerce
-                    </a>
-                  </li>
-                </ul>
+                </Link>
               </li>
               <li className="nav-item dropdown">
                 <a
@@ -82,7 +67,7 @@ const Navbar = () => {
                     <i className="material-icons-outlined">apps</i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
-                    Apps & Pages
+                    Harytlar
                   </div>
                   <div className="ms-auto dropy-icon">
                     <i className="material-icons-outlined">expand_more</i>
@@ -91,23 +76,19 @@ const Navbar = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <a className="dropdown-item" href="app-emailbox.html">
-                      <i className="material-icons-outlined">email</i>Email
+                      <i className="material-icons-outlined">email</i>Harytlar
                     </a>
                   </li>
                   <li>
                     <a className="dropdown-item" href="app-chat-box.html">
-                      <i className="material-icons-outlined">chat</i>Chat Box
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="app-file-manager.html">
-                      <i className="material-icons-outlined">folder</i>File
-                      Manager
+                      <i className="material-icons-outlined">chat</i>Arenda
+                      berlenler
                     </a>
                   </li>
                   <li>
                     <a className="dropdown-item" href="app-to-do.html">
-                      <i className="material-icons-outlined">task</i>Todo
+                      <i className="material-icons-outlined">task</i>Sargyt
+                      edilenler
                     </a>
                   </li>
                   <li>
@@ -228,105 +209,7 @@ const Navbar = () => {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle dropdown-toggle-nocaret"
-                  href="javascript:;"
-                  data-bs-toggle="dropdown"
-                >
-                  <div className="parent-icon">
-                    <i className="material-icons-outlined">note_alt</i>
-                  </div>
-                  <div className="menu-title d-flex align-items-center">
-                    Forms
-                  </div>
-                  <div className="ms-auto dropy-icon">
-                    <i className="material-icons-outlined">expand_more</i>
-                  </div>
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    {" "}
-                    <a className="dropdown-item" href="form-elements.html">
-                      <i className="material-icons-outlined">source</i>Form
-                      Elements
-                    </a>
-                  </li>
-                  <li>
-                    {" "}
-                    <a className="dropdown-item" href="form-input-group.html">
-                      <i className="material-icons-outlined">work_outline</i>
-                      Input Groups
-                    </a>
-                  </li>
-                  <li>
-                    {" "}
-                    <a
-                      className="dropdown-item"
-                      href="form-radios-and-checkboxes.html"
-                    >
-                      <i className="material-icons-outlined">timeline</i>Radios
-                      & Checkboxes
-                    </a>
-                  </li>
-                  <li>
-                    {" "}
-                    <a className="dropdown-item" href="form-layouts.html">
-                      <i className="material-icons-outlined">label</i>Forms
-                      Layouts
-                    </a>
-                  </li>
-                  <li>
-                    {" "}
-                    <a className="dropdown-item" href="form-validations.html">
-                      <i className="material-icons-outlined">
-                        tips_and_updates
-                      </i>
-                      Form Validation
-                    </a>
-                  </li>
-                  <li>
-                    {" "}
-                    <a className="dropdown-item" href="form-wizard.html">
-                      <i className="material-icons-outlined">dns</i>Form Wizard
-                    </a>
-                  </li>
-                  <li>
-                    {" "}
-                    <a className="dropdown-item" href="form-file-upload.html">
-                      <i className="material-icons-outlined">hourglass_empty</i>
-                      File Upload
-                    </a>
-                  </li>
-                  <li>
-                    {" "}
-                    <a
-                      className="dropdown-item"
-                      href="form-date-time-pickes.html"
-                    >
-                      <i className="material-icons-outlined">backup</i>Date
-                      Pickers
-                    </a>
-                  </li>
-                  <li>
-                    {" "}
-                    <a className="dropdown-item" href="form-select2.html">
-                      <i className="material-icons-outlined">
-                        integration_instructions
-                      </i>
-                      Select2
-                    </a>
-                  </li>
-                  <li>
-                    {" "}
-                    <a className="dropdown-item" href="form-repeater.html">
-                      <i className="material-icons-outlined">mark_as_unread</i>
-                      Form Repeater
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
+              {/* <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle dropdown-toggle-nocaret"
                   href="javascript:;"
@@ -507,69 +390,7 @@ const Navbar = () => {
                     </ul>
                   </li>
                 </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle dropdown-toggle-nocaret"
-                  href="javascript:;"
-                  data-bs-toggle="dropdown"
-                >
-                  <div className="parent-icon">
-                    <i className="material-icons-outlined">pie_chart</i>
-                  </div>
-                  <div className="menu-title d-flex align-items-center">
-                    Charts
-                  </div>
-                  <div className="ms-auto dropy-icon">
-                    <i className="material-icons-outlined">expand_more</i>
-                  </div>
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="charts-apex-chart.html">
-                      <i className="material-icons-outlined">leaderboard</i>Apex
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="charts-chartjs.html">
-                      <i className="material-icons-outlined">analytics</i>
-                      Chartjs
-                    </a>
-                  </li>
-                  <li className="nav-item dropend">
-                    <a
-                      className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
-                      href="javascript:;"
-                    >
-                      <i className="material-icons-outlined">pie_chart</i>Maps
-                    </a>
-                    <ul className="dropdown-menu submenu">
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="map-google-maps.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Google Maps
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item"
-                          href="map-vector-maps.html"
-                        >
-                          <i className="material-icons-outlined">
-                            navigate_next
-                          </i>
-                          Vector Maps
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
+              </li> */}
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle dropdown-toggle-nocaret"
