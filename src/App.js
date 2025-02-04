@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Main from "./components/Main";
 import AddDepartment from "./components/AddDepartment";
 import AddCompany from "./components/AddCompany";
@@ -17,10 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Login route without Layout */}
         <Route path="/login" element={<Login />} />
-
-        {/* All other routes with Layout */}
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
           <Route path="/adddepartment" element={<AddDepartment />} />
@@ -34,6 +31,7 @@ function App() {
           <Route path="/addproduct" element={<AddProduct />} />
           <Route path="/productlist" element={<ProductList />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,12 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const {token} = useAuth();
 
   const togglePassword = (e) => {
     e.preventDefault();
     setShowPassword(!showPassword);
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token, navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const result = await login(username, password);
+      if (result.isAuthenticated) {
+        navigate("/");
+      } else {
+        setError(result.message || "Login ýalňyş");
+      }
+    } catch (err) {
+      setError("Serwer bilen baglanyşykda ýalňyşlyk ýüze çykdy");
+    }
+  };
+
+
 
   return (
     <div className="mx-3 mx-lg-0">
@@ -26,16 +57,25 @@ const Login = () => {
               </p>
 
               <div className="form-body mt-4">
-                <form className="row g-3">
+                <form className="row g-3" onSubmit={handleSubmit}>
+                  {error && (  // error bar bolsa görkezýäris
+                    <div className="col-12">
+                      <div className="alert alert-danger" role="alert">
+                        {error}
+                      </div>
+                    </div>
+                  )}
                   <div className="col-12">
                     <label htmlFor="inputEmailAddress" className="form-label">
                       Ulanyjy adyňyz
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       className="form-control"
-                      id="inputEmailAddress"
+                      id="inputUsername"
                       placeholder="Ulanyjy adyňyz"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
                   <div className="col-12">
@@ -47,17 +87,17 @@ const Login = () => {
                         type={showPassword ? "text" : "password"}
                         className="form-control border-end-0"
                         id="inputChoosePassword"
-                        defaultValue="12345678"
                         placeholder="Açar sözüňiz"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                       <button
                         className="input-group-text bg-transparent"
                         onClick={togglePassword}
                       >
                         <i
-                          className={`bi ${
-                            showPassword ? "bi-eye-fill" : "bi-eye-slash-fill"
-                          }`}
+                          className={`bi ${showPassword ? "bi-eye-fill" : "bi-eye-slash-fill"
+                            }`}
                         ></i>
                       </button>
                     </div>
