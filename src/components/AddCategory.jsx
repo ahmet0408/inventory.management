@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Breadcrumb from "./fragments/Breadcrumb";
 import { useNavigate } from "react-router-dom";
 import { api } from "../env";
+import useValidateToken from "./utility/validate";
 
 const AddCategory = () => {
   const [categoryData, setCategoryData] = useState({
@@ -17,6 +18,11 @@ const AddCategory = () => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { isLoading, isValid } = useValidateToken();
+
+  useEffect(() => {
+    console.log(isValid);
+  }, []);
 
   useEffect(() => {
     fetch(`${api}/category`)
@@ -49,14 +55,11 @@ const AddCategory = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(
-        `${api}/category/create`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(categoryData),
-        }
-      );
+      const response = await fetch(`${api}/category/create`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(categoryData),
+      });
       const data = await response.json();
       navigate("/categorylist");
     } catch (error) {
@@ -139,7 +142,9 @@ const AddCategory = () => {
                     >
                       <option value="0">Hiç birine degişli däl!</option>
                       {categories.map((category) => (
-                        <option value={category.id}>{category.name}</option>
+                        <option key={category.id} value={category.id}>
+                          {category.name}
+                        </option>
                       ))}
                     </select>
                   )}

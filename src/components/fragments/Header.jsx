@@ -1,6 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import useValidateToken from "../utility/validate";
+import { useEffect } from "react";
 
 const Header = () => {
+  const { logout } = useAuth();
+
   return (
     <header className="top-header">
       <nav className="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
@@ -1049,14 +1054,13 @@ const Header = () => {
                 Downloads
               </a>
               <hr className="dropdown-divider" />
-              <a
+              <Link
                 className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="#"
-                onClick={(e) => e.preventDefault()}
+                onClick={logout}
               >
                 <i className="material-icons-outlined">power_settings_new</i>
                 Logout
-              </a>
+              </Link>
             </div>
           </li>
         </ul>

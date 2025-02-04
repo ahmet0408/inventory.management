@@ -448,7 +448,8 @@ const Navbar = () => {
                   <li className="nav-item dropend">
                     <a
                       className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
-                      href="javascript:;"
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
                     >
                       <i className="material-icons-outlined">shopping_bag</i>
                       Bölüm
@@ -489,7 +490,8 @@ const Navbar = () => {
                   <li className="nav-item dropend">
                     <a
                       className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
-                      href="javascript:;"
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
                     >
                       <i className="material-icons-outlined">free_breakfast</i>
                       Işgär
@@ -526,7 +528,8 @@ const Navbar = () => {
                   <li className="nav-item dropend">
                     <a
                       className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
-                      href="javascript:;"
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
                     >
                       <i className="material-icons-outlined">pie_chart</i>
                       Kategoriýa
@@ -563,7 +566,8 @@ const Navbar = () => {
                   <li className="nav-item dropend">
                     <a
                       className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
-                      href="javascript:;"
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
                     >
                       <i className="material-icons-outlined">cases</i>Haryt
                     </a>
