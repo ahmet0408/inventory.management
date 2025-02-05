@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Breadcrumb from "./fragments/Breadcrumb";
 import { useNavigate } from "react-router-dom";
 import { api } from "../env";
-import useValidateToken from "./utility/validate";
 
 const AddCategory = () => {
   const [categoryData, setCategoryData] = useState({
@@ -18,11 +17,6 @@ const AddCategory = () => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const { isLoading, isValid } = useValidateToken();
-
-  useEffect(() => {
-    console.log(isValid);
-  }, []);
 
   useEffect(() => {
     fetch(`${api}/category`)

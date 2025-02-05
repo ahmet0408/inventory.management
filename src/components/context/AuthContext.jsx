@@ -5,7 +5,7 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(localStorage.getItem("user"));
 
   const login = async (username, password) => {
     try {
@@ -16,23 +16,19 @@ export const AuthProvider = ({ children }) => {
         },
         body: JSON.stringify({ email: username, password }),
         credentials: "include",
-      });
+      });      
 
       const data = await response.json();
-
       if (data.isAuthenticated) {
         localStorage.setItem("token", data.token);
         setToken(data.token);
-        setUser({
-          username: data.userName,
-          email: data.email,
-          roles: data.roles,
-        });
+        localStorage.setItem("user", data.userName);
+        setUser(data.userName);
       }
 
       return data;
     } catch (error) {
-      console.error("Login error:", error);
+      throw error;
     }
   };
 
@@ -49,6 +45,7 @@ export const AuthProvider = ({ children }) => {
       console.error("Logout error:", error);
     } finally {
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
       setToken(null);
       setUser(null);
     }

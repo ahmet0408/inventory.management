@@ -30,7 +30,7 @@ const Login = () => {
       if (result.isAuthenticated) {
         navigate("/");
       } else {
-        setError(result.message || "Login ýalňyş");
+        setError(result.message || "Ulanyjy ady ýa-da açar sözüňiz ýalňyş!");
       }
     } catch (err) {
       setError("Serwer bilen baglanyşykda ýalňyşlyk ýüze çykdy");
@@ -40,7 +40,7 @@ const Login = () => {
 
 
   return (
-    <div className="mx-3 mx-lg-0">
+    <div className="mx-3 mx-lg-0 min-vh-100 d-flex align-items-center">
       <div className="card my-5 col-xl-9 col-xxl-8 mx-auto rounded-4 overflow-hidden">
         <div className="row g-4">
           <div className="col-lg-6 d-flex p-4">

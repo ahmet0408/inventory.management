@@ -1,2 +1,2 @@
-const api = "https://localhost:5001/api";
+const api = "http://192.168.43.221:5000/api";
 export { api };

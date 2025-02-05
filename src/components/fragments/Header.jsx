@@ -1,10 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import useValidateToken from "../utility/validate";
-import { useEffect } from "react";
 
 const Header = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   return (
     <header className="top-header">
@@ -166,7 +164,7 @@ const Header = () => {
                     <div className="search-list-item d-flex align-items-center gap-3">
                       <div className="memmber-img">
                         <img
-                          src="assets/images/avatars/01.png"
+                          src="assets/images/avatars/01.jpg"
                           width="32"
                           height="32"
                           className="rounded-circle"
@@ -818,7 +816,7 @@ const Header = () => {
                     <div className="d-flex align-items-center gap-3">
                       <div className="">
                         <img
-                          src="assets/images/avatars/01.png"
+                          src="assets/images/avatars/01.jpg"
                           className="rounded-circle"
                           width="45"
                           height="45"
@@ -986,12 +984,12 @@ const Header = () => {
           </li>
           <li className="nav-item dropdown">
             <a
-              href="javascrpt:;"
+              href="#"
               className="dropdown-toggle dropdown-toggle-nocaret"
               data-bs-toggle="dropdown"
             >
               <img
-                src="assets/images/avatars/01.png"
+                src="assets/images/avatars/01.jpg"
                 className="rounded-circle p-1 border"
                 width="45"
                 height="45"
@@ -1006,13 +1004,13 @@ const Header = () => {
               >
                 <div className="text-center">
                   <img
-                    src="assets/images/avatars/01.png"
+                    src="assets/images/avatars/01.jpg"
                     className="rounded-circle p-1 shadow mb-3"
                     width="90"
                     height="90"
                     alt=""
                   />
-                  <h5 className="user-name mb-0 fw-bold">Hello, Jhon</h5>
+                  <h5 className="user-name mb-0 fw-bold">Hello, {user}</h5>
                 </div>
               </a>
               <hr className="dropdown-divider" />
@@ -1021,46 +1019,23 @@ const Header = () => {
                 href="#"
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="material-icons-outlined">person_outline</i>Profile
+                <i className="material-icons-outlined">person_outline</i>Profil
               </a>
               <a
                 className="dropdown-item d-flex align-items-center gap-2 py-2"
                 href="#"
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="material-icons-outlined">local_bar</i>Setting
-              </a>
-              <a
-                className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="#"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="material-icons-outlined">dashboard</i>Dashboard
-              </a>
-              <a
-                className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="#"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="material-icons-outlined">account_balance</i>
-                Earning
-              </a>
-              <a
-                className="dropdown-item d-flex align-items-center gap-2 py-2"
-                href="#"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="material-icons-outlined">cloud_download</i>
-                Downloads
+                <i className="material-icons-outlined">local_bar</i>Halanlarym
               </a>
               <hr className="dropdown-divider" />
-              <Link
+              <a
                 className="dropdown-item d-flex align-items-center gap-2 py-2"
                 onClick={logout}
               >
                 <i className="material-icons-outlined">power_settings_new</i>
                 Logout
-              </Link>
+              </a>
             </div>
           </li>
         </ul>

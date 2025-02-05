@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
@@ -75,9 +75,9 @@ const Navbar = () => {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="app-emailbox.html">
+                    <NavLink to="/products" className="dropdown-item">
                       <i className="material-icons-outlined">email</i>Harytlar
-                    </a>
+                    </NavLink>
                   </li>
                   <li>
                     <a className="dropdown-item" href="app-chat-box.html">
@@ -86,10 +86,10 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="app-to-do.html">
+                    <Link to="/order" className="dropdown-item">
                       <i className="material-icons-outlined">task</i>Sargyt
                       edilenler
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a className="dropdown-item" href="app-invoice.html">
