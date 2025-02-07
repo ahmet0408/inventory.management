@@ -1030,7 +1030,7 @@ const Header = () => {
               </a>
               <hr className="dropdown-divider" />
               <a
-                className="dropdown-item d-flex align-items-center gap-2 py-2"
+                className="dropdown-item d-flex align-items-center gap-2 py-2 cursor-pointer"
                 onClick={logout}
               >
                 <i className="material-icons-outlined">power_settings_new</i>
