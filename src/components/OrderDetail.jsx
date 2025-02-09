@@ -9,11 +9,31 @@ const OrderDetail = () => {
   const [productImages, setProductImages] = useState({});
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [scanType, setScanType] = useState("");
+  const [barcodeText, setBarcodeText] = useState("");
 
-  const handleScan = () => {
+  const handleScan = (scannedBarcode) => {
+    setBarcodeText(scannedBarcode);
     setIsScannerOpen(false);
-    setScanType("scan");
   };
+
+  useEffect(() => {
+    console.log(barcodeText);
+    const sendData = async () => {
+      const response = await fetch(`${api}/product/getbybarcode`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(barcodeText), // Stringi JSON görnüşinde ibermek
+      });
+
+      const responseData = await response.json();
+      console.log(responseData);
+    };
+
+    sendData();
+  }, [barcodeText]);
 
   useEffect(() => {
     const fetchImages = async () => {
