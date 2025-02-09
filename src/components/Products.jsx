@@ -1,13 +1,38 @@
 import { useEffect, useState } from "react";
 import { api } from "../env";
 import Breadcrumb from "./fragments/Breadcrumb";
-import { useCart } from "./context/CartContext";
+import { useCart } from "../context/CartContext";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [productImages, setProductImages] = useState({});
   const [error, setError] = useState(null);
   const { addItem, isItemInCart, getCartTotals } = useCart();
+
+  // Add this function to handle cart addition with notification
+  const handleAddToCart = (item) => {
+    if (isItemInCart(item.id)) {
+      // Show "already in cart" notification
+      const notification = document.createElement("div");
+      notification.className =
+        "alert alert-warning alert-dismissible fade show position-fixed top-0 end-0 m-3";
+      notification.role = "alert";
+      notification.innerHTML = `
+        <strong>Bu haryt sebetde bar!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      `;
+      document.body.appendChild(notification);
+
+      // Remove notification after 3 seconds
+      setTimeout(() => {
+        notification.remove();
+      }, 3000);
+
+      return;
+    }
+
+    addItem(item);
+  };
 
   useEffect(() => {
     fetch(`${api}/product`, {
@@ -90,7 +115,10 @@ const Products = () => {
                       <p className="card-text">{item.description}</p>
                       <h5>Baha : {item.price} TMT</h5>
                       <div className="mt-4 d-flex align-items-center justify-content-between">
-                        <button className="btn btn-grd btn-grd-info border-0 d-flex gap-2 px-3">
+                        <button
+                          onClick={() => handleAddToCart(item)}
+                          className="btn btn-grd btn-grd-info border-0 d-flex gap-2 px-3"
+                        >
                           <i className="material-icons-outlined">
                             shopping_basket
                           </i>

@@ -1,13 +1,17 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 // Create Shopping Cart Context
 const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
-  // Get initial cart from localStorage if it exists
+  // Initialize state from localStorage
   const [items, setItems] = useState(() => {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
+    try {
+      const savedCart = localStorage.getItem("cart");
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch {
+      return [];
+    }
   });
 
   // Save cart to localStorage whenever it changes
@@ -16,22 +20,35 @@ export const CartProvider = ({ children }) => {
     setItems(cart);
   };
 
-  // Add item to cart
+  // Modify addItem to show success notification
   const addItem = (itemToAdd) => {
-    const existingItem = items.find((item) => item.id === itemToAdd.id);
-
-    if (existingItem) {
-      // If item exists, increase quantity
-      const updatedItems = items.map((item) =>
-        item.id === itemToAdd.id
-          ? { ...item, quantity: item.quantity + (itemToAdd.quantity || 1) }
-          : item
+    setItems((currentItems) => {
+      const existingItem = currentItems.find(
+        (item) => item.id === itemToAdd.id
       );
-      saveCart(updatedItems);
-    } else {
-      // If item doesn't exist, add new item
-      saveCart([...items, { ...itemToAdd, quantity: itemToAdd.quantity || 1 }]);
-    }
+
+      if (existingItem) {
+        return currentItems;
+      } else {
+        // Show success notification
+        const notification = document.createElement("div");
+        notification.className =
+          "alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3";
+        notification.role = "alert";
+        notification.innerHTML = `
+        <strong>Haryt sebede goşuldy!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      `;
+        document.body.appendChild(notification);
+
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+
+        return [...currentItems, { ...itemToAdd, quantity: 1 }];
+      }
+    });
   };
 
   // Remove item from cart
@@ -73,10 +90,15 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // Check if item exists in cart
+  // Update the isItemInCart function to be more robust
   const isItemInCart = (itemId) => {
     return items.some((item) => item.id === itemId);
   };
+
+  // Sync localStorage whenever items change
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(items));
+  }, [items]);
 
   const value = {
     items,

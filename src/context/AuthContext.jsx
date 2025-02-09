@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from "react";
-import { api } from "../../env";
+import { api } from "../env";
 
 const AuthContext = createContext(null);
 
@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
         },
         body: JSON.stringify({ email: username, password }),
         credentials: "include",
-      });      
+      });
 
       const data = await response.json();
       if (data.isAuthenticated) {

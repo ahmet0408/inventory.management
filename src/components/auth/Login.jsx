@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,7 +9,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
-  const {token} = useAuth();
+  const { token } = useAuth();
 
   const togglePassword = (e) => {
     e.preventDefault();
@@ -37,8 +37,6 @@ const Login = () => {
     }
   };
 
-
-
   return (
     <div className="mx-3 mx-lg-0 min-vh-100 d-flex align-items-center">
       <div className="card my-5 col-xl-9 col-xxl-8 mx-auto rounded-4 overflow-hidden">
@@ -58,7 +56,7 @@ const Login = () => {
 
               <div className="form-body mt-4">
                 <form className="row g-3" onSubmit={handleSubmit}>
-                  {error && (  // error bar bolsa görkezýäris
+                  {error && ( // error bar bolsa görkezýäris
                     <div className="col-12">
                       <div className="alert alert-danger" role="alert">
                         {error}
@@ -96,8 +94,9 @@ const Login = () => {
                         onClick={togglePassword}
                       >
                         <i
-                          className={`bi ${showPassword ? "bi-eye-fill" : "bi-eye-slash-fill"
-                            }`}
+                          className={`bi ${
+                            showPassword ? "bi-eye-fill" : "bi-eye-slash-fill"
+                          }`}
                         ></i>
                       </button>
                     </div>
