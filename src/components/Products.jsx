@@ -90,10 +90,7 @@ const Products = () => {
                       <p className="card-text">{item.description}</p>
                       <h5>Baha : {item.price} TMT</h5>
                       <div className="mt-4 d-flex align-items-center justify-content-between">
-                        <button
-                          onClick={addItem}
-                          className="btn btn-grd btn-grd-info border-0 d-flex gap-2 px-3"
-                        >
+                        <button className="btn btn-grd btn-grd-info border-0 d-flex gap-2 px-3">
                           <i className="material-icons-outlined">
                             shopping_basket
                           </i>

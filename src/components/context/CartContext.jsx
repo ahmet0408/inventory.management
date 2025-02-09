@@ -3,15 +3,6 @@ import { createContext, useState, useContext } from "react";
 // Create Shopping Cart Context
 const CartContext = createContext(null);
 
-// Cart Item type:
-// {
-//   id: string,
-//   name: string,
-//   price: number,
-//   quantity: number,
-//   image?: string
-// }
-
 export const CartProvider = ({ children }) => {
   // Get initial cart from localStorage if it exists
   const [items, setItems] = useState(() => {

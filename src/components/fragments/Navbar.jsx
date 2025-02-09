@@ -531,6 +531,44 @@ const Navbar = () => {
                       href="#"
                       onClick={(e) => e.preventDefault()}
                     >
+                      <i className="material-icons-outlined">mail</i>
+                      Müşderi
+                    </a>
+                    <ul className="dropdown-menu submenu">
+                      <li className={isActive("/customerlist") ? "active" : ""}>
+                        <Link
+                          to="/customerlist"
+                          className={`dropdown-item ${
+                            isActive("/customerlist") ? "active" : ""
+                          }`}
+                        >
+                          <i className="material-icons-outlined">
+                            navigate_next
+                          </i>
+                          Müşderiler
+                        </Link>
+                      </li>
+                      <li className={isActive("/addcustomer") ? "active" : ""}>
+                        <Link
+                          to="/addcustomer"
+                          className={`dropdown-item ${
+                            isActive("/addcustomer") ? "active" : ""
+                          }`}
+                        >
+                          <i className="material-icons-outlined">
+                            navigate_next
+                          </i>
+                          Müşderi goşmak
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
+                  <li className="nav-item dropend">
+                    <a
+                      className="dropdown-item dropdown-toggle dropdown-toggle-nocaret"
+                      href="#"
+                      onClick={(e) => e.preventDefault()}
+                    >
                       <i className="material-icons-outlined">pie_chart</i>
                       Kategoriýa
                     </a>
