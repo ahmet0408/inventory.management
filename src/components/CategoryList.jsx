@@ -19,12 +19,10 @@ const CategoryList = () => {
   const handleDeleteCategory = async (categoryId) => {
     if (window.confirm("Kategoriýany pozmak isleýäňizmi?")) {
       try {
-        const response = await fetch(
-          `${api}/category/${categoryId}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(`${api}/category/${categoryId}`, {
+          method: "DELETE",
+          credentials: "include",
+        });
 
         if (!response.ok) {
           throw new Error("Delete operation failed");
@@ -40,7 +38,9 @@ const CategoryList = () => {
   };
 
   useEffect(() => {
-    fetch(`${api}/category`)
+    fetch(`${api}/category`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

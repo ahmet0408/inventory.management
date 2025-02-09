@@ -20,12 +20,10 @@ const EmployeeList = () => {
   const handleDeleteEmployee = async (employeeId) => {
     if (window.confirm("Işgäri pozmak isleýäňizmi?")) {
       try {
-        const response = await fetch(
-          `${api}/employee/${employeeId}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(`${api}/employee/${employeeId}`, {
+          method: "DELETE",
+          credentials: "include",
+        });
 
         if (!response.ok) {
           throw new Error("Delete operation failed");
@@ -41,7 +39,9 @@ const EmployeeList = () => {
   };
 
   useEffect(() => {
-    fetch(`${api}/employee`)
+    fetch(`${api}/employee`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -58,7 +58,10 @@ const EmployeeList = () => {
       const imagePromises = employees.map(async (employee) => {
         try {
           const response = await fetch(
-            `${api}/image/employee/${employee.picture}`
+            `${api}/image/employee/${employee.picture}`,
+            {
+              credentials: "include",
+            }
           );
           if (!response.ok) throw new Error("Image fetch failed");
 

@@ -47,7 +47,9 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    fetch(`${api}/department`)
+    fetch(`${api}/department`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -59,7 +61,9 @@ const AddProduct = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`${api}/employee`)
+    fetch(`${api}/employee`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -73,7 +77,9 @@ const AddProduct = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`${api}/category`)
+    fetch(`${api}/category`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -135,6 +141,7 @@ const AddProduct = () => {
       const response = await fetch(`${api}/product/create`, {
         method: "POST",
         body: formData,
+        credentials: "include",
       });
       const data = await response.json();
       navigate("/productlist");

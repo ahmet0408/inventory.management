@@ -19,12 +19,10 @@ const DepartmentList = () => {
   const handleDeleteDepartment = async (departmentId) => {
     if (window.confirm("Bölümi pozmak isleýäňizmi?")) {
       try {
-        const response = await fetch(
-          `${api}/department/${departmentId}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(`${api}/department/${departmentId}`, {
+          method: "DELETE",
+          credentials: "include",
+        });
 
         if (!response.ok) {
           throw new Error("Delete operation failed");
@@ -40,7 +38,9 @@ const DepartmentList = () => {
   };
 
   useEffect(() => {
-    fetch(`${api}/department`)
+    fetch(`${api}/department`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

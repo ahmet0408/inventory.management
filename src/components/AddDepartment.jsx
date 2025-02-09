@@ -33,14 +33,12 @@ const AddDepartment = () => {
 
       const createDepartmentDTO = { departmentTranslates };
 
-      const response = await fetch(
-        `${api}/department/create`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(createDepartmentDTO),
-        }
-      );
+      const response = await fetch(`${api}/department/create`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(createDepartmentDTO),
+        credentials: "include",
+      });
 
       const data = await response.json();
       navigate("/departmentlist");

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-
+import { useCart } from "../context/CartContext";
 const Header = () => {
   const { logout, user } = useAuth();
-
+  const { getCartTotals } = useCart();
   return (
     <header className="top-header">
       <nav className="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
@@ -973,14 +973,10 @@ const Header = () => {
             </div>
           </li>
           <li className="nav-item d-md-flex d-none">
-            <a
-              className="nav-link position-relative"
-              data-bs-toggle="offcanvas"
-              href="#offcanvasCart"
-            >
+            <Link to="/orderdetail" className="nav-link position-relative">
               <i className="material-icons-outlined">shopping_cart</i>
-              <span className="badge-notify">8</span>
-            </a>
+              <span className="badge-notify">{getCartTotals().itemCount}</span>
+            </Link>
           </li>
           <li className="nav-item dropdown">
             <a

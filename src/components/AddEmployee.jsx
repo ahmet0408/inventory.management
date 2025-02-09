@@ -16,7 +16,9 @@ const AddEmployee = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${api}/department`)
+    fetch(`${api}/department`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -49,13 +51,11 @@ const AddEmployee = () => {
         }
       });
 
-      const response = await fetch(
-        `${api}/employee/create`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(`${api}/employee/create`, {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
       const data = await response.json();
       navigate("/employeeList");
     } catch (error) {

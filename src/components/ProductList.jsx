@@ -46,7 +46,7 @@ const ProductList = () => {
   // Fetch products
   useEffect(() => {
     if (!isOffline) {
-      fetch(`${api}/product`)
+      fetch(`${api}/product`, { credentials: "include" })
         .then((response) => {
           if (!response.ok) throw new Error("Network response was not ok");
           return response.json();
@@ -63,7 +63,9 @@ const ProductList = () => {
         if (!product.image) return null;
 
         try {
-          const response = await fetch(`${api}/image/haryt/${product.image}`);
+          const response = await fetch(`${api}/image/haryt/${product.image}`, {
+            credentials: "include",
+          });
           if (!response.ok) throw new Error("Image fetch failed");
 
           const blob = await response.blob();

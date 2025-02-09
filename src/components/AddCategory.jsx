@@ -19,7 +19,9 @@ const AddCategory = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${api}/category`)
+    fetch(`${api}/category`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -53,6 +55,7 @@ const AddCategory = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(categoryData),
+        credentials: "include",
       });
       const data = await response.json();
       navigate("/categorylist");

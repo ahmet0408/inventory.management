@@ -20,12 +20,10 @@ const CompanyList = () => {
   const handleDeleteCompany = async (companyId) => {
     if (window.confirm("Kompaniýa maglumatlary pozmak isleýäňizmi?")) {
       try {
-        const response = await fetch(
-          `${api}/company/${companyId}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(`${api}/company/${companyId}`, {
+          method: "DELETE",
+          credentials: "include",
+        });
 
         if (!response.ok) {
           throw new Error("Delete operation failed");
@@ -41,7 +39,9 @@ const CompanyList = () => {
   };
 
   useEffect(() => {
-    fetch(`${api}/company`)
+    fetch(`${api}/company`, {
+      credentials: "include",
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -57,9 +57,9 @@ const CompanyList = () => {
     const fetchImages = async () => {
       const imagePromises = companies.map(async (company) => {
         try {
-          const response = await fetch(
-            `${api}/image/company/${company.logo}`
-          );
+          const response = await fetch(`${api}/image/company/${company.logo}`, {
+            credentials: "include",
+          });
           if (!response.ok) throw new Error("Image fetch failed");
 
           const blob = await response.blob();
