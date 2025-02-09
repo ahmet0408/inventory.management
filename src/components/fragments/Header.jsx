@@ -528,7 +528,7 @@ const Header = () => {
               </div>
             </div>
           </li>
-          <li className="nav-item dropdown">
+          <li className="nav-item d-md-flex d-none">
             <a
               className="nav-link dropdown-toggle dropdown-toggle-nocaret"
               data-bs-auto-close="outside"
@@ -972,7 +972,7 @@ const Header = () => {
               </div>
             </div>
           </li>
-          <li className="nav-item d-md-flex d-none">
+          <li className="nav-item d-md-flex">
             <Link to="/orderdetail" className="nav-link position-relative">
               <i className="material-icons-outlined">shopping_cart</i>
               <span className="badge-notify">{getCartTotals().itemCount}</span>

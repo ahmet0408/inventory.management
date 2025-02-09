@@ -2,10 +2,18 @@ import Breadcrumb from "./fragments/Breadcrumb";
 import { useCart } from "../context/CartContext";
 import { api } from "../env";
 import { useEffect, useState } from "react";
+import BarcodeScannerModal from "./fragments/BarcodeScannerModal";
 
 const OrderDetail = () => {
   const { items, getCartTotals } = useCart();
   const [productImages, setProductImages] = useState({});
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const [scanType, setScanType] = useState("");
+
+  const handleScan = () => {
+    setIsScannerOpen(false);
+    setScanType("scan");
+  };
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -65,10 +73,19 @@ const OrderDetail = () => {
             <div className="overflow-auto">
               <div className="btn-group position-static">
                 <div className="btn-group position-static">
-                  <button type="button" className="btn btn-outline-primary">
+                  <button
+                    onClick={() => setIsScannerOpen(true)}
+                    type="button"
+                    className="btn btn-outline-primary"
+                  >
                     <i className="bi bi-upc-scan me-2"></i>
                     Skaner
                   </button>
+                  <BarcodeScannerModal
+                    isOpen={isScannerOpen}
+                    onClose={() => setIsScannerOpen(false)}
+                    onScan={handleScan}
+                  />
                 </div>
                 <div className="btn-group position-static">
                   <button type="button" className="btn btn-outline-primary">
@@ -147,12 +164,11 @@ const OrderDetail = () => {
                   <table className="table align-middle">
                     <thead className="table-light">
                       <tr>
-                        <th>Product Name</th>
-                        <th>Color</th>
-                        <th>Size</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Total</th>
+                        <th>Haryt ady</th>
+                        <th>Bölümi</th>
+                        <th>Degişli işgäri</th>
+                        <th>Barkody</th>
+                        <th>Bahasy</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -179,10 +195,9 @@ const OrderDetail = () => {
                                 </div>
                               </div>
                             </td>
-                            <td>Blue</td>
-                            <td>Large</td>
-                            <td>1</td>
-                            <td>{item.price} TMT</td>
+                            <td>{item.departmentName}</td>
+                            <td>{item.employeeName}</td>
+                            <td>{item.barcode}</td>
                             <td>{item.price} TMT</td>
                           </tr>
                         ))}
