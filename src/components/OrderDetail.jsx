@@ -8,6 +8,8 @@ const OrderDetail = () => {
   const { items, getCartTotals, clearCart } = useCart();
   const [productImages, setProductImages] = useState({});
   const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const [customers, setCustomers] = useState([]);
+  const [error, setError] = useState(null);
   const [scanType, setScanType] = useState("");
   const [barcodeText, setBarcodeText] = useState("");
 
@@ -34,6 +36,20 @@ const OrderDetail = () => {
 
     sendData();
   }, [barcodeText]);
+
+  useEffect(() => {
+    fetch(`${api}/customer`, {
+      credentials: "include",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {setCustomers(data);console.log(data);})
+      .catch((error) => setError(error.message));
+  }, []);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -280,6 +296,15 @@ const OrderDetail = () => {
                   <option value="card">Done</option>
                   <option value="paypal">Pending</option>
                 </select>
+                <label className="form-label">Basic single select</label>
+									<select className="form-select" id="single-select-field" data-placeholder="Choose one thing">
+										
+										<option>Reactive</option>
+										<option>Solution</option>
+										<option>Conglomeration</option>
+										<option>Algoritm</option>
+										<option>Holistic</option>
+									</select>
               </div>
             </div>
           </div>
