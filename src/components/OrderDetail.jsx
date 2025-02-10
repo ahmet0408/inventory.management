@@ -291,19 +291,18 @@ const OrderDetail = () => {
                   <option value="paypal">Pending</option>
                 </select>
                 <label className="form-label">Completed status</label>
-                <select className="form-select">
+                <select className="form-select mb-4">
                   <option value="cod">Complete</option>
                   <option value="card">Done</option>
                   <option value="paypal">Pending</option>
                 </select>
-                <label className="form-label">Basic single select</label>
-									<select className="form-select" id="single-select-field" data-placeholder="Choose one thing">
-										
-										<option>Reactive</option>
-										<option>Solution</option>
-										<option>Conglomeration</option>
-										<option>Algoritm</option>
-										<option>Holistic</option>
+                <label className="form-label">Müşderi</label>
+									<select className="form-select" id="single-select-field" data-placeholder="Müşderi saýla">			
+                  <option value=""></option>
+										{customers &&
+                      customers.map((item) => (
+                        <option value={item.id}>{item.firstName+" "+item.lastName}</option>										
+                      ))}
 									</select>
               </div>
             </div>

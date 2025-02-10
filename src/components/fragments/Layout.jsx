@@ -7,9 +7,9 @@ import { useAuth } from "../../context/AuthContext";
 const Layout = () => {
   const { token } = useAuth();
 
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (!token) {
+  //   return <Navigate to="/login" replace />;
+  // }
   return (
     <>
       <Header />

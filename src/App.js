@@ -15,6 +15,7 @@ import Layout from "./components/fragments/Layout";
 import Products from "./components/Products";
 import OrderDetail from "./components/OrderDetail";
 import Order from "./components/Order";
+import CustomerList from "./components/CustomerList";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/addcategory" element={<AddCategory />} />
           <Route path="/addemployee" element={<AddEmployee />} />
           <Route path="/employeelist" element={<EmployeeList />} />
+          <Route path="/customerlist" element={<CustomerList />} />
           <Route path="/departmentlist" element={<DepartmentList />} />
           <Route path="/companylist" element={<CompanyList />} />
           <Route path="/categorylist" element={<CategoryList />} />
