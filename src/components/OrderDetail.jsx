@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import BarcodeScannerModal from "./fragments/BarcodeScannerModal";
 
 const OrderDetail = () => {
-  const { items, getCartTotals } = useCart();
+  const { items, getCartTotals, clearCart } = useCart();
   const [productImages, setProductImages] = useState({});
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [scanType, setScanType] = useState("");
@@ -80,7 +80,7 @@ const OrderDetail = () => {
   }, [items]);
   return (
     <>
-      <Breadcrumb items={["Sargyt edilenler", "Sargyt"]} />
+      <Breadcrumb items={["Baş sahypa", "Sebet"]} />
       <div className="card">
         <div className="card-body">
           <div className="d-flex flex-lg-row flex-column align-items-start align-items-lg-center justify-content-between gap-3">
@@ -108,9 +108,8 @@ const OrderDetail = () => {
                   />
                 </div>
                 <div className="btn-group position-static">
-                  <button type="button" className="btn btn-outline-primary">
-                    <i className="bi bi-arrow-clockwise me-2"></i>Yzyna
-                    gaýtarmak
+                  <button onClick={clearCart} type="button" className="btn btn-outline-primary">
+                    <i className="bi bi-x-circle me-2"></i>Arassala
                   </button>
                   <ul className="dropdown-menu">
                     <li>
