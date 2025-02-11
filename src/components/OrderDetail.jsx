@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import BarcodeScannerModal from "./fragments/BarcodeScannerModal";
 
 const OrderDetail = () => {
-  const { items, getCartTotals, clearCart } = useCart();
+  const { items, getCartTotals, clearCart, addToCart } = useCart();
   const [productImages, setProductImages] = useState({});
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [customers, setCustomers] = useState([]);
@@ -19,23 +19,36 @@ const OrderDetail = () => {
   };
 
   useEffect(() => {
+    if (!barcodeText) return;
     console.log(barcodeText);
     const sendData = async () => {
-      const response = await fetch(`${api}/product/getbybarcode`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(barcodeText), // Stringi JSON görnüşinde ibermek
-      });
-
-      const responseData = await response.json();
-      console.log(responseData);
+      try {
+        const response = await fetch(`${api}/product/getbybarcode`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(barcodeText),
+        });
+        if (!response.ok) {
+          throw new Error("Product not found");
+        }
+        const product = await response.json();
+        if (product) {
+          // Add the scanned product to cart
+          addToCart(product);
+          // Clear the barcode text after successful addition
+          setBarcodeText("");
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        // You might want to show an error message to the user here
+      }
     };
 
     sendData();
-  }, [barcodeText]);
+  }, [barcodeText, addToCart]);
 
   useEffect(() => {
     fetch(`${api}/customer`, {
@@ -49,7 +62,6 @@ const OrderDetail = () => {
       })
       .then((data) => {
         setCustomers(data);
-        console.log(data);
       })
       .catch((error) => setError(error.message));
   }, []);
@@ -320,7 +332,7 @@ const OrderDetail = () => {
                   <option value=""></option>
                   {customers &&
                     customers.map((item) => (
-                      <option value={item.id}>
+                      <option key={item.id} value={item.id}>
                         {item.firstName + " " + item.lastName}
                       </option>
                     ))}
