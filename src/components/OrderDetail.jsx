@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import BarcodeScannerModal from "./fragments/BarcodeScannerModal";
 
 const OrderDetail = () => {
-  const { items, getCartTotals, clearCart, addToCart } = useCart();
+  const { items, getCartTotals, clearCart, addItem } = useCart();
   const [productImages, setProductImages] = useState({});
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [customers, setCustomers] = useState([]);
@@ -20,7 +20,6 @@ const OrderDetail = () => {
 
   useEffect(() => {
     if (!barcodeText) return;
-    console.log(barcodeText);
     const sendData = async () => {
       try {
         const response = await fetch(`${api}/product/getbybarcode`, {
@@ -37,7 +36,7 @@ const OrderDetail = () => {
         const product = await response.json();
         if (product) {
           // Add the scanned product to cart
-          addToCart(product);
+          addItem(product);
           // Clear the barcode text after successful addition
           setBarcodeText("");
         }
@@ -48,7 +47,7 @@ const OrderDetail = () => {
     };
 
     sendData();
-  }, [barcodeText, addToCart]);
+  }, [barcodeText, addItem]);
 
   useEffect(() => {
     fetch(`${api}/customer`, {
