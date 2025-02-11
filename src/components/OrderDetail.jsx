@@ -47,7 +47,10 @@ const OrderDetail = () => {
         }
         return response.json();
       })
-      .then((data) => {setCustomers(data);console.log(data);})
+      .then((data) => {
+        setCustomers(data);
+        console.log(data);
+      })
       .catch((error) => setError(error.message));
   }, []);
 
@@ -124,29 +127,13 @@ const OrderDetail = () => {
                   />
                 </div>
                 <div className="btn-group position-static">
-                  <button onClick={clearCart} type="button" className="btn btn-outline-primary">
+                  <button
+                    onClick={clearCart}
+                    type="button"
+                    className="btn btn-outline-primary"
+                  >
                     <i className="bi bi-x-circle me-2"></i>Arassala
                   </button>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="javascript:;">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="javascript:;">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="javascript:;">
-                        Something else here
-                      </a>
-                    </li>
-                  </ul>
                 </div>
                 <div className="btn-group position-static">
                   <button
@@ -155,7 +142,7 @@ const OrderDetail = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    More Actions
+                    More
                   </button>
                   <ul className="dropdown-menu">
                     <li>
@@ -251,59 +238,66 @@ const OrderDetail = () => {
           <div className="w-100">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title mb-4 fw-bold">Summary</h4>
+                <h4 className="card-title mb-4 fw-bold">Maglumat</h4>
                 <div>
                   <div className="d-flex justify-content-between">
-                    <p className="fw-semi-bold">Items subtotal :</p>
-                    <p className="fw-semi-bold">$891</p>
+                    <p className="fw-semi-bold">Jemi baha :</p>
+                    <p className="fw-semi-bold">
+                      {getCartTotals().subtotal} TMT
+                    </p>
                   </div>
                   <div className="d-flex justify-content-between">
-                    <p className="fw-semi-bold">Discount :</p>
-                    <p className="text-danger fw-semi-bold">-$48</p>
+                    <p className="fw-semi-bold">Arzanladyş :</p>
+                    <p className="text-danger fw-semi-bold">-48%</p>
                   </div>
                   <div className="d-flex justify-content-between">
-                    <p className="fw-semi-bold">Tax :</p>
-                    <p className="fw-semi-bold">$156.70</p>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    <p className="fw-semi-bold">Subtotal :</p>
-                    <p className="fw-semi-bold">$756</p>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    <p className="fw-semi-bold">Shipping Cost :</p>
-                    <p className="fw-semi-bold">$50</p>
+                    <p className="fw-semi-bold">Eltip bermek hyzmaty :</p>
+                    <p className="fw-semi-bold">50 TMT</p>
                   </div>
                 </div>
                 <div className="d-flex justify-content-between border-top pt-4">
-                  <h5 className="mb-0 fw-bold">Total :</h5>
-                  <h5 className="mb-0 fw-bold">$925.44</h5>
+                  <h5 className="mb-0 fw-bold">Umumy baha :</h5>
+                  <h5 className="mb-0 fw-bold">
+                    {getCartTotals().subtotal} TMT
+                  </h5>
                 </div>
               </div>
             </div>
 
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title mb-4 fw-bold">Order Status</h4>
-                <label className="form-label">Payment status</label>
+                <label className="form-label">Töleg prosesi</label>
                 <select className="form-select mb-4">
-                  <option value="cod">Processing</option>
-                  <option value="card">Done</option>
-                  <option value="paypal">Pending</option>
+                  <option value="cod">Nagt</option>
+                  <option value="card">Nagt däl</option>
                 </select>
-                <label className="form-label">Completed status</label>
+                <label className="form-label">Sargydyň ýagdaýy</label>
                 <select className="form-select mb-4">
-                  <option value="cod">Complete</option>
-                  <option value="card">Done</option>
-                  <option value="paypal">Pending</option>
+                  <option value="cod">Ugradyldy</option>
+                  <option value="card">Garaşylýar</option>
+                  <option value="paypal">Tabşyryldy</option>
                 </select>
                 <label className="form-label">Müşderi</label>
-									<select className="form-select" id="single-select-field" data-placeholder="Müşderi saýla">			
+                <select
+                  className="form-select"
+                  id="single-select-field"
+                  data-placeholder="Müşderi saýla"
+                >
                   <option value=""></option>
-										{customers &&
-                      customers.map((item) => (
-                        <option value={item.id}>{item.firstName+" "+item.lastName}</option>										
-                      ))}
-									</select>
+                  {customers &&
+                    customers.map((item) => (
+                      <option value={item.id}>
+                        {item.firstName + " " + item.lastName}
+                      </option>
+                    ))}
+                </select>
+                <button
+                  type="button"
+                  style={{ float: "right" }}
+                  className="btn btn-primary mt-4"
+                >
+                  Tassykla
+                </button>
               </div>
             </div>
           </div>
