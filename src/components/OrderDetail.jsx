@@ -181,7 +181,8 @@ const OrderDetail = () => {
                   ({getCartTotals().itemCount})
                 </span>
               </h5>
-              <div className="product-table">
+              {/* Desktop */}
+              <div className="d-none d-lg-block product-table ">
                 <div className="table-responsive white-space-nowrap">
                   <table className="table align-middle">
                     <thead className="table-light">
@@ -226,6 +227,39 @@ const OrderDetail = () => {
                     </tbody>
                   </table>
                 </div>
+              </div>
+              {/* Mobile */}
+              <div className="d-lg-none">
+                {items?.map((item) => (
+                  <div key={item.id} className="card mb-2 border">
+                    <div className="card-body p-2">
+                      <div className="d-flex gap-2">
+                        <div
+                          className="d-flex align-items-center product-box"
+                          style={{ minWidth: "60px" }}
+                        >
+                          <img
+                            src={productImages[item.id]}
+                            className="rounded-2 w-100"
+                            style={{ maxWidth: "60px" }}
+                            alt={item.name}
+                          />
+                        </div>
+                        <div className="flex-grow-1">
+                          <h6 className="mb-1">{item.name}</h6>
+                          <div className="text-muted small">
+                            <div>Bölümi: {item.departmentName}</div>
+                            <div>Işgär: {item.employeeName}</div>
+                            <div>Barkod: {item.barcode}</div>
+                            <div className="fw-bold text-dark">
+                              {item.price} TMT
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
               <div className="d-flex align-items-center justify-content-between">
                 <p className="mb-0 fw-bold">Jemi bahasy :</p>
