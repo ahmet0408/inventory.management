@@ -43,20 +43,17 @@ const Login = () => {
         <div className="row g-4">
           <div className="col-lg-6 d-flex p-4">
             <div className="card-body">
-              <img
-                src="assets/images/logo1.png"
-                className="mb-4"
-                width="145"
-                alt=""
-              />
-              <h4 className="fw-bold">Ulgama Giriş</h4>
-              <p className="mb-0">
-                Hasabyňyza girmek üçin şahsy maglumatlaryňyzy giriziň
-              </p>
-
+              <div className="d-flex justify-content-center">
+                <img
+                  src="assets/images/inventar-hor.png"
+                  className="mt-3"
+                  width="150"
+                  alt=""
+                />
+              </div>
               <div className="form-body mt-4">
                 <form className="row g-3" onSubmit={handleSubmit}>
-                  {error && ( // error bar bolsa görkezýäris
+                  {error && (
                     <div className="col-12">
                       <div className="alert alert-danger" role="alert">
                         {error}
@@ -101,42 +98,21 @@ const Login = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="form-check form-switch">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="flexSwitchCheckChecked"
-                        defaultChecked
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="flexSwitchCheckChecked"
-                      >
-                        Paroly ýatda sakla
-                      </label>
-                    </div>
-                  </div>
-                  <div className="col-md-6 text-end">
-                    <a href="auth-boxed-forgot-password.html">
-                      Paroly unutdyňyzmy?
-                    </a>
-                  </div>
-                  <div className="col-12">
+                  <div className="col-12 mt-4">
                     <div className="d-grid">
                       <button type="submit" className="btn btn-primary">
                         Ulgama gir
                       </button>
                     </div>
                   </div>
-                  <div className="col-12">
+                  {/* <div className="col-12">
                     <div className="text-start">
                       <p className="mb-0">
                         Sizde ulanyjy ýokmy?
                         <a href="auth-boxed-register.html">Ulgama ýazyl</a>
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </form>
               </div>
             </div>
