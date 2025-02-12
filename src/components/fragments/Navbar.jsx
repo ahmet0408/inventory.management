@@ -16,23 +16,22 @@ const Navbar = () => {
           aria-labelledby="offcanvasNavbarLabel"
         >
           <div className="offcanvas-header border-bottom h-70">
-            <div className="d-flex align-items-center gap-2">
-              <div className="">
+            <div className="w-75 d-flex justify-content-center align-items-center gap-2" >
                 <Link to={"/"}>
                   <img
-                    src="assets/images/logo.ico"
+                    // src="assets/images/logo.ico"
+                    src="assets/images/inventar.png"
                     className="logo-icon"
-                    width="45"
+                    width="140"
                     alt="logo icon"
                   />
                 </Link>
-              </div>
-              <div className="">
+              {/* <div className="">
                 <h4 className="logo-text">Inwentar</h4>
-              </div>
+              </div> */}
             </div>
             <a
-              href="javascript:;"
+              href="#" 
               className="primaery-menu-close"
               data-bs-dismiss="offcanvas"
             >
@@ -41,7 +40,8 @@ const Navbar = () => {
           </div>
           <div className="offcanvas-body p-0">
             <ul className="navbar-nav align-items-center flex-grow-1">
-              <li className="nav-item dropdown" style={{ marginRight: "10px" }}>
+            {/* style={{ marginRight: "10px" }} */}
+              <li className="nav-item dropdown" >
                 <Link
                   to={"/"}
                   className="nav-link dropdown-toggle dropdown-toggle-nocaret"
@@ -420,9 +420,8 @@ const Navbar = () => {
                       <li className={isActive("/companylist") ? "active" : ""}>
                         <Link
                           to="/companylist"
-                          className={`dropdown-item ${
-                            isActive("/companylist") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/companylist") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -433,9 +432,8 @@ const Navbar = () => {
                       <li className={isActive("/addcompany") ? "active" : ""}>
                         <Link
                           to="/addcompany"
-                          className={`dropdown-item ${
-                            isActive("/addcompany") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/addcompany") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -460,9 +458,8 @@ const Navbar = () => {
                       >
                         <Link
                           to="/departmentlist"
-                          className={`dropdown-item ${
-                            isActive("/departmentlist") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/departmentlist") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -475,9 +472,8 @@ const Navbar = () => {
                       >
                         <Link
                           to="/adddepartment"
-                          className={`dropdown-item ${
-                            isActive("/adddepartment") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/adddepartment") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -500,9 +496,8 @@ const Navbar = () => {
                       <li className={isActive("/employeelist") ? "active" : ""}>
                         <Link
                           to="/employeelist"
-                          className={`dropdown-item ${
-                            isActive("/employeelist") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/employeelist") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -513,9 +508,8 @@ const Navbar = () => {
                       <li className={isActive("/addemployee") ? "active" : ""}>
                         <Link
                           to="/addemployee"
-                          className={`dropdown-item ${
-                            isActive("/addemployee") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/addemployee") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -538,9 +532,8 @@ const Navbar = () => {
                       <li className={isActive("/customerlist") ? "active" : ""}>
                         <Link
                           to="/customerlist"
-                          className={`dropdown-item ${
-                            isActive("/customerlist") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/customerlist") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -551,9 +544,8 @@ const Navbar = () => {
                       <li className={isActive("/addcustomer") ? "active" : ""}>
                         <Link
                           to="/addcustomer"
-                          className={`dropdown-item ${
-                            isActive("/addcustomer") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/addcustomer") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -576,9 +568,8 @@ const Navbar = () => {
                       <li className={isActive("/categorylist") ? "active" : ""}>
                         <Link
                           to="/categorylist"
-                          className={`dropdown-item ${
-                            isActive("/categorylist") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/categorylist") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -589,9 +580,8 @@ const Navbar = () => {
                       <li className={isActive("/addcategory") ? "active" : ""}>
                         <Link
                           to="/addcategory"
-                          className={`dropdown-item ${
-                            isActive("/addcategory") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/addcategory") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -613,9 +603,8 @@ const Navbar = () => {
                       <li className={isActive("/productlist") ? "active" : ""}>
                         <Link
                           to="/productlist"
-                          className={`dropdown-item ${
-                            isActive("/productlist") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/productlist") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next
@@ -626,9 +615,8 @@ const Navbar = () => {
                       <li className={isActive("/addproduct") ? "active" : ""}>
                         <Link
                           to="/addproduct"
-                          className={`dropdown-item ${
-                            isActive("/addproduct") ? "active" : ""
-                          }`}
+                          className={`dropdown-item ${isActive("/addproduct") ? "active" : ""
+                            }`}
                         >
                           <i className="material-icons-outlined">
                             navigate_next

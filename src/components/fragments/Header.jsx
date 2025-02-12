@@ -11,16 +11,16 @@ const Header = () => {
           <div className="logo-icon">
             <Link to={"/"}>
               <img
-                src="assets/images/logo.ico"
+                src="assets/images/inventar.png"
                 className="logo-img"
-                width="65"
+                width="140"
                 alt=""
               />
             </Link>
           </div>
-          <div className="logo-name mt-1">
+          {/* <div className="logo-name mt-1">
             <h6 className="mb-0">Inwentar</h6>
-          </div>
+          </div> */}
         </div>
         <div
           className="btn-toggle d-xl-none"
