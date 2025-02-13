@@ -9,21 +9,23 @@ const Header = () => {
   const [company, setCompany] = useState([]);
   const [error, setError] = useState(null);
 
-
   // Fetch companies
   useEffect(() => {
-      fetch(`${api}/company`, { credentials: "include" })
-        .then((response) => {
-          if (!response.ok) throw new Error("Network response was not ok");
-          return response.json();
-        })
-        .then(setCompany)
-        .catch((error) => setError(error.message));
+    fetch(`${api}/company`, { credentials: "include" })
+      .then((response) => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then(setCompany)
+      .catch((error) => setError(error.message));
   }, []);
 
   return (
     <header className="top-header">
-      <nav className="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
+      <nav
+        className="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom"
+        style={{ padding: "0 1.0rem" }}
+      >
         <div
           className="logo-header d-none d-xl-flex align-items-center gap-2"
           style={{ borderRight: "none", borderLeft: "none" }}
@@ -48,9 +50,13 @@ const Header = () => {
             <i className="material-icons-outlined">menu</i>
           </a>
         </div>
-        <div className="d-flex justify-content-center align-items-center text-white py-3 rounded">{company.length > 0 && (<h5 className="fw-bold text-uppercase">{company[0].name}</h5>)}</div>
+        <div className="d-flex justify-content-center align-items-center text-white py-3 rounded">
+          {company.length > 0 && (
+            <h5 className="fw-bold text-uppercase">{company[0].name}</h5>
+          )}
+        </div>
         <ul className="navbar-nav gap-1 nav-right-links align-items-center">
-          <li className="nav-item dropdown">
+          <li className="nav-item dropdown d-none d-sm-block d-md-flex">
             <a
               className="nav-link dropdown-toggle dropdown-toggle-nocaret"
               href="#"
