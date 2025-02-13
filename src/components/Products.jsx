@@ -380,7 +380,7 @@ const Products = () => {
         <div className="col-md-9 col-lg-10">
           {/* Fixed position search bar for mobile */}
           <div className="sticky-top bg-white pt-3 pb-3 mb-3 d-md-none">
-            <div className="d-flex gap-2">
+            <div className="d-flex gap-2 px-2">
               <button
                 className="btn btn-primary btn-sm"
                 onClick={() => setIsMobileMenuOpen(true)}
