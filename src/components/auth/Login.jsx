@@ -41,12 +41,11 @@ const Login = () => {
     <div className="mx-3 mx-lg-0 min-vh-100 d-flex align-items-center">
       <div className="card my-5 col-xl-9 col-xxl-8 mx-auto rounded-4 overflow-hidden">
         <div className="row g-4">
-          <div className="col-lg-6 d-flex p-4">
-            <div className="card-body">
+          <div className="col-lg-6 d-flex p-4 d-flex align-items-center">
+            <div className="align-items-center card-body">
               <div className="d-flex justify-content-center">
                 <img
                   src="assets/images/inventar-hor.png"
-                  className="mt-3"
                   width="150"
                   alt=""
                 />

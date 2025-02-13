@@ -1,9 +1,26 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
+import { useEffect, useState } from "react";
+import { api } from "../../env";
 const Header = () => {
   const { logout, user } = useAuth();
   const { getCartTotals } = useCart();
+  const [company, setCompany] = useState([]);
+  const [error, setError] = useState(null);
+
+
+  // Fetch companies
+  useEffect(() => {
+      fetch(`${api}/company`, { credentials: "include" })
+        .then((response) => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.json();
+        })
+        .then(setCompany)
+        .catch((error) => setError(error.message));
+  }, []);
+
   return (
     <header className="top-header">
       <nav className="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
@@ -31,12 +48,12 @@ const Header = () => {
             <i className="material-icons-outlined">menu</i>
           </a>
         </div>
-        <div className="d-flex justify-content-center">Company</div>
+        <div className="d-flex justify-content-center align-items-center text-white py-3 rounded">{company.length > 0 && (<h5 className="fw-bold text-uppercase">{company[0].name}</h5>)}</div>
         <ul className="navbar-nav gap-1 nav-right-links align-items-center">
           <li className="nav-item dropdown">
             <a
               className="nav-link dropdown-toggle dropdown-toggle-nocaret"
-              href="javascript:;"
+              href="#"
               data-bs-toggle="dropdown"
             >
               <img src="assets/images/county/01.png" width="22" alt="" />
