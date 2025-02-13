@@ -216,7 +216,7 @@ const Products = () => {
   const FilterSection = () => (
     <div className="mb-4 p-3 bg-light rounded-4 shadow-sm">
       <div className="row g-3">
-        <div className="col-12 col-md-4">
+        <div className="col-12 col-md-2">
           <label className="form-label small">Tertiplemek</label>
           <select
             className="form-select form-select-sm"
@@ -227,18 +227,18 @@ const Products = () => {
             <option value="price">Bahasy boýunça</option>
           </select>
         </div>
-        <div className="col-12 col-md-4">
-          <label className="form-label small">Tertip</label>
+        <div className="col-12 col-md-2">
+          <label className="form-label small">Baha</label>
           <select
             className="form-select form-select-sm"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
           >
-            <option value="asc">Ösýän tertipde</option>
-            <option value="desc">Pesýän tertipde</option>
+            <option value="asc">Artýan</option>
+            <option value="desc">Kemelýän</option>
           </select>
         </div>
-        <div className="col-12 col-md-4">
+        <div className="col-12 col-md-3">
           <label className="form-label small">Baha aralygy</label>
           <div className="input-group input-group-sm">
             <input
@@ -259,6 +259,19 @@ const Products = () => {
                 setPriceRange((prev) => ({ ...prev, max: e.target.value }))
               }
             />
+          </div>
+        </div>
+
+        <div className="col-12 col-md-5 d-none d-sm-block">
+          <label className="form-label small">Gözleg</label>
+          <div className="input-group input-group-sm">
+            <input
+              type="search"
+              className="form-control"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <i className="bi bi-search position-absolute top-50 translate-middle-y end-0 me-2"></i>
           </div>
         </div>
       </div>
@@ -329,7 +342,7 @@ const Products = () => {
         <div className="col-md-3 col-lg-2 d-none d-md-block mb-4">
           <div className="sticky-top" style={{ top: "1rem" }}>
             <div className="card border-0 shadow-sm rounded-4">
-              <div className="card-header bg-primary text-white border-0 rounded-top-4">
+              <div className="card-header text-white border-0 rounded-top-4">
                 <h6 className="mb-0">Kategoriýalar</h6>
               </div>
               <div className="card-body p-0">
@@ -384,7 +397,7 @@ const Products = () => {
           </div>
 
           {/* Desktop header */}
-          <div className="d-none d-md-flex justify-content-between align-items-center mb-4">
+          {/* <div className="d-none d-md-flex justify-content-between align-items-center mb-4">
             <h5 className="mb-0">
               {selectedCategory
                 ? categories.find((c) => c.id === selectedCategory)?.name
@@ -400,7 +413,7 @@ const Products = () => {
               />
               <i className="bi bi-search position-absolute top-50 translate-middle-y end-0 me-2"></i>
             </div>
-          </div>
+          </div> */}
 
           <FilterSection />
 
@@ -444,7 +457,7 @@ const Products = () => {
             }}
           >
             <div className="d-flex flex-column h-100">
-              <div className="p-3 bg-primary text-white d-flex justify-content-between align-items-center">
+              <div className="p-3 text-white d-flex justify-content-between align-items-center">
                 <h6 className="mb-0">Kategoriýalar</h6>
                 <button
                   className="btn btn-link text-white p-0"

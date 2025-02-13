@@ -14,7 +14,8 @@ const Layout = () => {
       <Header />
       <Navbar />
       <main className="main-wrapper">
-        <div className="main-content">
+        {/* main-wrapper uchin main.css 396, 403 row update */}
+        <div className="main-content" style={{ padding: "0.5rem" }}>
           <Outlet />
         </div>
       </main>
