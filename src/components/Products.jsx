@@ -217,15 +217,19 @@ const Products = () => {
     <div className="mb-4 p-3 bg-light rounded-4 shadow-sm">
       <div className="row g-3">
         <div className="col-12 col-md-2">
-          <label className="form-label small">Tertiplemek</label>
-          <select
-            className="form-select form-select-sm"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-          >
-            <option value="name">Ady boýunça</option>
-            <option value="price">Bahasy boýunça</option>
-          </select>
+          <label className="form-label small">Kategoriýa</label>
+          <div className="input-group input-group-sm">
+            <input
+              type="text"
+              className="form-control"
+              value={
+                selectedCategory
+                  ? categories.find((c) => c.id === selectedCategory)?.name
+                  : "Ähli harytlar"
+              }
+              disabled
+            />
+          </div>
         </div>
         <div className="col-12 col-md-2">
           <label className="form-label small">Baha</label>
@@ -238,7 +242,7 @@ const Products = () => {
             <option value="desc">Kemelýän</option>
           </select>
         </div>
-        <div className="col-12 col-md-3">
+        <div className="col-12 col-md-3 d-none d-sm-block">
           <label className="form-label small">Baha aralygy</label>
           <div className="input-group input-group-sm">
             <input
