@@ -238,8 +238,8 @@ const Products = () => {
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
           >
-            <option value="asc">Artýan</option>
-            <option value="desc">Kemelýän</option>
+            <option value="asc">Arzandan gymmada</option>
+            <option value="desc">Gymmatdan arzana</option>
           </select>
         </div>
         <div className="col-12 col-md-3 d-none d-sm-block">
@@ -248,7 +248,7 @@ const Products = () => {
             <input
               type="number"
               className="form-control"
-              placeholder="Min"
+              placeholder=""
               value={priceRange.min}
               onChange={(e) =>
                 setPriceRange((prev) => ({ ...prev, min: e.target.value }))
@@ -257,7 +257,7 @@ const Products = () => {
             <input
               type="number"
               className="form-control"
-              placeholder="Max"
+              placeholder=""
               value={priceRange.max}
               onChange={(e) =>
                 setPriceRange((prev) => ({ ...prev, max: e.target.value }))
