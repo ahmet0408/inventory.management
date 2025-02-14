@@ -471,8 +471,8 @@ const Products = () => {
               </div>
               <div className="modal-body p-4">
                 <div className="row g-4">
-                  <div className="col-lg-5">
-                    <div className="position-relative">
+                  <div className="col-lg-4">
+                    <div className="position-relative ">
                       <div className="ratio ratio-1x1 rounded-4 bg-light overflow-hidden shadow-sm">
                         {selectedProduct.image ? (
                           <img
@@ -503,18 +503,18 @@ const Products = () => {
                     </div>
                   </div>
 
-                  <div className="col-lg-7">
+                  <div className="col-lg-8">
                     <div className="d-flex flex-column h-100">
-                      <div className="mb-4">
+                      <div className="mb-0">
                         <h3 className="fw-bold mb-2">{selectedProduct.name}</h3>
-                        <p className="text-muted mb-3">
+                        <p className="text-muted mb-2">
                           {selectedProduct.description}
                         </p>
-                        <div className="d-flex align-items-center gap-3 mb-3">
+                        {/* <div className="d-flex align-items-center gap-3 mb-2">
                           <h2 className="text-primary mb-0 fw-bold">
                             {selectedProduct.price} TMT
                           </h2>
-                        </div>
+                        </div> */}
                       </div>
 
                       <div className="card border-0 bg-light rounded-4 shadow-sm mb-4">
@@ -565,6 +565,14 @@ const Products = () => {
                                 <div className="text-muted small">Mukdary:</div>
                                 <div className="ms-2 fw-medium">
                                   {selectedProduct.amount} sany
+                                </div>
+                              </div>
+                            </div>
+                            <div className="col-sm-6">
+                              <div className="d-flex align-items-center">
+                                <div className="text-muted small">Bahasy:</div>
+                                <div className="ms-2 fw-medium">
+                                  {selectedProduct.price} TMT
                                 </div>
                               </div>
                             </div>
