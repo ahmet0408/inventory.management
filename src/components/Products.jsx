@@ -43,7 +43,8 @@ const Products = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${api}/product${selectedCategory ? `/getbycategory/${selectedCategory}` : ""
+        `${api}/product${
+          selectedCategory ? `/getbycategory/${selectedCategory}` : ""
         }`,
         {
           credentials: "include",
@@ -325,8 +326,9 @@ const Products = () => {
           return null;
         })}
         <li
-          className={`page-item ${currentPage === totalPages ? "disabled" : ""
-            }`}
+          className={`page-item ${
+            currentPage === totalPages ? "disabled" : ""
+          }`}
         >
           <button
             className="page-link"
@@ -452,7 +454,10 @@ const Products = () => {
       {selectedProduct && (
         <div className="modal fade show d-block" tabIndex="-1">
           <div className="modal-dialog modal-dialog-centered modal-xl">
-            <div className="modal-content border-0 rounded-4 shadow" style={{ zIndex: "2000" }}>
+            <div
+              className="modal-content border-0 rounded-4 shadow"
+              style={{ zIndex: "2000" }}
+            >
               <div className="modal-header border-0 bg-light rounded-top-4">
                 <h5 className="modal-title fw-bold">
                   <i className="bi bi-box-seam me-2 text-primary"></i>
@@ -502,7 +507,9 @@ const Products = () => {
                     <div className="d-flex flex-column h-100">
                       <div className="mb-4">
                         <h3 className="fw-bold mb-2">{selectedProduct.name}</h3>
-                        <p className="text-muted mb-3">{selectedProduct.description}</p>
+                        <p className="text-muted mb-3">
+                          {selectedProduct.description}
+                        </p>
                         <div className="d-flex align-items-center gap-3 mb-3">
                           <h2 className="text-primary mb-0 fw-bold">
                             {selectedProduct.price} TMT
@@ -520,31 +527,45 @@ const Products = () => {
                             <div className="col-sm-6">
                               <div className="d-flex align-items-center">
                                 <div className="text-muted small">Barkod:</div>
-                                <div className="ms-2 fw-medium">{selectedProduct.barcode}</div>
+                                <div className="ms-2 fw-medium">
+                                  {selectedProduct.barcode}
+                                </div>
                               </div>
                             </div>
                             <div className="col-sm-6">
                               <div className="d-flex align-items-center">
-                                <div className="text-muted small">Kategoriýa:</div>
-                                <div className="ms-2 fw-medium">{selectedProduct.categoryName}</div>
+                                <div className="text-muted small">
+                                  Kategoriýa:
+                                </div>
+                                <div className="ms-2 fw-medium">
+                                  {selectedProduct.categoryName}
+                                </div>
                               </div>
                             </div>
                             <div className="col-sm-6">
                               <div className="d-flex align-items-center">
                                 <div className="text-muted small">Bölüm:</div>
-                                <div className="ms-2 fw-medium">{selectedProduct.departmentName}</div>
+                                <div className="ms-2 fw-medium">
+                                  {selectedProduct.departmentName}
+                                </div>
                               </div>
                             </div>
                             <div className="col-sm-6">
                               <div className="d-flex align-items-center">
-                                <div className="text-muted small">Jogapkär işgär:</div>
-                                <div className="ms-2 fw-medium">{selectedProduct.employeeName}</div>
+                                <div className="text-muted small">
+                                  Jogapkär işgär:
+                                </div>
+                                <div className="ms-2 fw-medium">
+                                  {selectedProduct.employeeName}
+                                </div>
                               </div>
                             </div>
                             <div className="col-sm-6">
                               <div className="d-flex align-items-center">
                                 <div className="text-muted small">Mukdary:</div>
-                                <div className="ms-2 fw-medium">{selectedProduct.amount} sany</div>
+                                <div className="ms-2 fw-medium">
+                                  {selectedProduct.amount} sany
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -574,7 +595,7 @@ const Products = () => {
           </div>
           <div
             className="modal-backdrop fade show"
-          // onClick={() => setSelectedProduct(null)}
+            // onClick={() => setSelectedProduct(null)}
           ></div>
         </div>
       )}
