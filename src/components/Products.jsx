@@ -453,7 +453,7 @@ const Products = () => {
       )}
       {selectedProduct && (
         <div className="modal fade show d-block" tabIndex="-1">
-          <div className="modal-dialog modal-dialog-centered modal-xl">
+          <div className="modal-dialog modal-dialog-centered modal-lg">
             <div
               className="modal-content border-0 rounded-4 shadow"
               style={{ zIndex: "2000" }}
