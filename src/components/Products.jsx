@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../env";
 import { useCart } from "../context/CartContext";
+import NestedCategories from "./NestedCategories";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -42,8 +43,7 @@ const Products = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `${api}/product${
-          selectedCategory ? `/getbycategory/${selectedCategory}` : ""
+        `${api}/product${selectedCategory ? `/getbycategory/${selectedCategory}` : ""
         }`,
         {
           credentials: "include",
@@ -69,6 +69,7 @@ const Products = () => {
   };
 
   const handleCategorySelect = (categoryId) => {
+    console.log(categoryId);
     setSelectedCategory(categoryId);
     setCurrentPage(1); // Reset to first page when changing category
     setSearchTerm(""); // Clear search term
@@ -324,9 +325,8 @@ const Products = () => {
           return null;
         })}
         <li
-          className={`page-item ${
-            currentPage === totalPages ? "disabled" : ""
-          }`}
+          className={`page-item ${currentPage === totalPages ? "disabled" : ""
+            }`}
         >
           <button
             className="page-link"
@@ -345,34 +345,12 @@ const Products = () => {
         {/* Sidebar */}
         <div className="col-md-3 col-lg-2 d-none d-md-block mb-4">
           <div className="sticky-top" style={{ top: "1rem" }}>
-            <div className="card border-0 shadow-sm rounded-4">
-              <div className="card-header text-white border-0 rounded-top-4">
-                <h6 className="mb-0">Kategoriýalar</h6>
-              </div>
-              <div className="card-body p-0">
-                <div className="list-group list-group-flush">
-                  <button
-                    className={`list-group-item list-group-item-action ${
-                      !selectedCategory ? "active" : ""
-                    }`}
-                    onClick={() => handleCategorySelect(null)}
-                  >
-                    Ähli harytlar
-                  </button>
-                  {categories.map((category) => (
-                    <button
-                      key={category.id}
-                      className={`list-group-item list-group-item-action ${
-                        selectedCategory === category.id ? "active" : ""
-                      }`}
-                      onClick={() => handleCategorySelect(category.id)}
-                    >
-                      {category.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <NestedCategories
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategorySelect={handleCategorySelect}
+              isMobile={false}
+            />
           </div>
         </div>
 
@@ -399,25 +377,6 @@ const Products = () => {
               </div>
             </div>
           </div>
-
-          {/* Desktop header */}
-          {/* <div className="d-none d-md-flex justify-content-between align-items-center mb-4">
-            <h5 className="mb-0">
-              {selectedCategory
-                ? categories.find((c) => c.id === selectedCategory)?.name
-                : "Ähli harytlar"}
-            </h5>
-            <div className="position-relative" style={{ width: "300px" }}>
-              <input
-                type="search"
-                className="form-control"
-                placeholder="Gözleg..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <i className="bi bi-search position-absolute top-50 translate-middle-y end-0 me-2"></i>
-            </div>
-          </div> */}
 
           <FilterSection />
 
@@ -471,33 +430,15 @@ const Products = () => {
                 </button>
               </div>
               <div className="overflow-auto flex-grow-1 p-3">
-                <div className="list-group list-group-flush">
-                  <button
-                    className={`list-group-item list-group-item-action ${
-                      !selectedCategory ? "active" : ""
-                    }`}
-                    onClick={() => {
-                      handleCategorySelect(null);
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    Ähli harytlar
-                  </button>
-                  {categories.map((category) => (
-                    <button
-                      key={category.id}
-                      className={`list-group-item list-group-item-action ${
-                        selectedCategory === category.id ? "active" : ""
-                      }`}
-                      onClick={() => {
-                        handleCategorySelect(category.id);
-                        setIsMobileMenuOpen(false);
-                      }}
-                    >
-                      {category.name}
-                    </button>
-                  ))}
-                </div>
+                <NestedCategories
+                  categories={categories}
+                  selectedCategory={selectedCategory}
+                  onCategorySelect={(categoryId) => {
+                    handleCategorySelect(categoryId);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  isMobile={true}
+                />
               </div>
             </div>
           </div>
@@ -507,10 +448,10 @@ const Products = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           ></div>
         </>
-      )}
+      )}      
 
       {/* Product modal */}
-      {selectedProduct && (
+      {/* {selectedProduct && (
         <div className="modal fade show d-block" tabIndex="-1">
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content border-0 rounded-4 shadow">
@@ -576,7 +517,142 @@ const Products = () => {
             onClick={() => setSelectedProduct(null)}
           ></div>
         </div>
-      )}
+      )}       */}
+
+{selectedProduct && (
+  <div className="modal fade show d-block" tabIndex="-1">
+    <div className="modal-dialog modal-dialog-centered modal-xl">
+      <div className="modal-content border-0 rounded-4 shadow">
+        <div className="modal-header border-0 bg-light rounded-top-4">
+          <h5 className="modal-title fw-bold">
+            <i className="bi bi-box-seam me-2 text-primary"></i>
+            Haryt maglumaty
+          </h5>
+          <button
+            type="button"
+            className="btn-close"
+            onClick={() => setSelectedProduct(null)}
+          ></button>
+        </div>
+        <div className="modal-body p-4">
+          <div className="row g-4">
+            {/* Left column - Image */}
+            <div className="col-lg-5">
+              <div className="position-relative">
+                <div className="ratio ratio-1x1 rounded-4 bg-light overflow-hidden shadow-sm">
+                  {selectedProduct.image ? (
+                    <img
+                      src={
+                        productImages[selectedProduct.image] ||
+                        `${api}/image/haryt/${selectedProduct.image}`
+                      }
+                      className="object-fit-cover"
+                      alt={selectedProduct.name}
+                    />
+                  ) : (
+                    <div className="d-flex align-items-center justify-content-center">
+                      <i className="bi bi-image-fill text-secondary display-1"></i>
+                    </div>
+                  )}
+                </div>
+                {selectedProduct.amount > 0 ? (
+                  <span className="position-absolute top-0 end-0 m-3 badge bg-success px-3 py-2 rounded-pill">
+                    <i className="bi bi-check-circle me-1"></i>
+                    Stokda bar
+                  </span>
+                ) : (
+                  <span className="position-absolute top-0 end-0 m-3 badge bg-danger px-3 py-2 rounded-pill">
+                    <i className="bi bi-x-circle me-1"></i>
+                    Stokda ýok
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Right column - Product details */}
+            <div className="col-lg-7">
+              <div className="d-flex flex-column h-100">
+                {/* Basic info section */}
+                <div className="mb-4">
+                  <h3 className="fw-bold mb-2">{selectedProduct.name}</h3>
+                  <p className="text-muted mb-3">{selectedProduct.description}</p>
+                  <div className="d-flex align-items-center gap-3 mb-3">
+                    <h2 className="text-primary mb-0 fw-bold">
+                      {selectedProduct.price} TMT
+                    </h2>
+                  </div>
+                </div>
+
+                {/* Details card */}
+                <div className="card border-0 bg-light rounded-4 shadow-sm mb-4">
+                  <div className="card-body">
+                    <h6 className="fw-bold mb-3">
+                      <i className="bi bi-info-circle me-2"></i>
+                      Jikme-jik maglumat
+                    </h6>
+                    <div className="row g-3">
+                      <div className="col-sm-6">
+                        <div className="d-flex align-items-center">
+                          <div className="text-muted small">Barkod:</div>
+                          <div className="ms-2 fw-medium">{selectedProduct.barcode}</div>
+                        </div>
+                      </div>
+                      <div className="col-sm-6">
+                        <div className="d-flex align-items-center">
+                          <div className="text-muted small">Kategoriýa:</div>
+                          <div className="ms-2 fw-medium">{selectedProduct.categoryName}</div>
+                        </div>
+                      </div>
+                      <div className="col-sm-6">
+                        <div className="d-flex align-items-center">
+                          <div className="text-muted small">Bölüm:</div>
+                          <div className="ms-2 fw-medium">{selectedProduct.departmentName}</div>
+                        </div>
+                      </div>
+                      <div className="col-sm-6">
+                        <div className="d-flex align-items-center">
+                          <div className="text-muted small">Jogapkär işgär:</div>
+                          <div className="ms-2 fw-medium">{selectedProduct.employeeName}</div>
+                        </div>
+                      </div>
+                      <div className="col-sm-6">
+                        <div className="d-flex align-items-center">
+                          <div className="text-muted small">Mukdary:</div>
+                          <div className="ms-2 fw-medium">{selectedProduct.amount} sany</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action buttons */}
+                <div className="mt-auto">
+                  <div className="d-grid gap-2 d-md-flex">
+                    <button
+                      onClick={() => {
+                        addItem(selectedProduct);
+                        setSelectedProduct(null);
+                      }}
+                      className="btn btn-primary btn-lg flex-grow-1 rounded-pill"
+                      disabled={isItemInCart(selectedProduct.id)}
+                    >
+                      <i className="bi bi-cart-plus me-2"></i>
+                      Sebede goş
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="modal-backdrop fade show"
+      onClick={() => setSelectedProduct(null)}
+    ></div>
+  </div>
+)}
     </div>
   );
 };
