@@ -1,7 +1,9 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
+  const { t } = useTranslation();
 
   const isActive = (path) => {
     return location.pathname === path;
@@ -45,7 +47,7 @@ const Navbar = () => {
                     <i className="material-icons-outlined">home</i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
-                    Baş sahypa
+                   {t('navbar.home.title')}
                   </div>
                   <div className="ms-auto dropy-icon ">
                     <i className="material-icons-outlined">1</i>
@@ -61,7 +63,7 @@ const Navbar = () => {
                     <i className="material-icons-outlined">apps</i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
-                    Harytlar
+                   {t('navbar.products.title')}
                   </div>
                   <div className="ms-auto dropy-icon">
                     <i className="material-icons-outlined">1</i>
@@ -78,7 +80,7 @@ const Navbar = () => {
                     <i className="material-icons-outlined">medical_services</i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
-                    Administrator
+                    {t('navbar.admin.title')}
                   </div>
                   <div className="ms-auto dropy-icon">
                     <i className="material-icons-outlined">expand_more</i>
@@ -91,7 +93,7 @@ const Navbar = () => {
                       href="javascript:;"
                     >
                       <i className="material-icons-outlined">widgets</i>
-                      Kompaniýa
+                      {t('navbar.admin.company.title')}
                     </a>
                     <ul className="dropdown-menu submenu">
                       <li className={isActive("/companylist") ? "active" : ""}>
@@ -104,7 +106,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Kompaniýalar
+                          {t('navbar.admin.company.list')}
                         </Link>
                       </li>
                       <li className={isActive("/addcompany") ? "active" : ""}>
@@ -117,7 +119,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Kompaniýa goşmak
+                          {t('navbar.admin.company.add')}
                         </Link>
                       </li>
                     </ul>
@@ -129,7 +131,7 @@ const Navbar = () => {
                       onClick={(e) => e.preventDefault()}
                     >
                       <i className="material-icons-outlined">shopping_bag</i>
-                      Bölüm
+                      {t('navbar.admin.department.title')}
                     </a>
                     <ul className="dropdown-menu submenu">
                       <li
@@ -144,7 +146,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Bölümler
+                          {t('navbar.admin.department.list')}
                         </Link>
                       </li>
                       <li
@@ -159,7 +161,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Bölüm goşmak
+                          {t('navbar.admin.department.add')}
                         </Link>
                       </li>
                     </ul>
@@ -171,7 +173,7 @@ const Navbar = () => {
                       onClick={(e) => e.preventDefault()}
                     >
                       <i className="material-icons-outlined">free_breakfast</i>
-                      Işgär
+                      {t('navbar.admin.employee.title')}
                     </a>
                     <ul className="dropdown-menu submenu">
                       <li className={isActive("/employeelist") ? "active" : ""}>
@@ -184,7 +186,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Işgärler
+                          {t('navbar.admin.employee.list')}
                         </Link>
                       </li>
                       <li className={isActive("/addemployee") ? "active" : ""}>
@@ -197,7 +199,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Işgär goşmak
+                          {t('navbar.admin.employee.add')}
                         </Link>
                       </li>
                     </ul>
@@ -209,7 +211,7 @@ const Navbar = () => {
                       onClick={(e) => e.preventDefault()}
                     >
                       <i className="material-icons-outlined">mail</i>
-                      Müşderi
+                      {t('navbar.admin.customer.title')}
                     </a>
                     <ul className="dropdown-menu submenu">
                       <li className={isActive("/customerlist") ? "active" : ""}>
@@ -222,7 +224,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Müşderiler
+                          {t('navbar.admin.department.list')}
                         </Link>
                       </li>
                       <li className={isActive("/addcustomer") ? "active" : ""}>
@@ -235,7 +237,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Müşderi goşmak
+                          {t('navbar.admin.customer.add')}
                         </Link>
                       </li>
                     </ul>
@@ -247,7 +249,7 @@ const Navbar = () => {
                       onClick={(e) => e.preventDefault()}
                     >
                       <i className="material-icons-outlined">pie_chart</i>
-                      Kategoriýa
+                      {t('navbar.admin.category.title')}
                     </a>
                     <ul className="dropdown-menu submenu">
                       <li className={isActive("/categorylist") ? "active" : ""}>
@@ -260,7 +262,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Kategoriýalar
+                          {t('navbar.admin.category.list')}
                         </Link>
                       </li>
                       <li className={isActive("/addcategory") ? "active" : ""}>
@@ -273,7 +275,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Kategoriýa goşmak
+                          {t('navbar.admin.category.add')}
                         </Link>
                       </li>
                     </ul>
@@ -284,7 +286,7 @@ const Navbar = () => {
                       href="#"
                       onClick={(e) => e.preventDefault()}
                     >
-                      <i className="material-icons-outlined">cases</i>Haryt
+                      <i className="material-icons-outlined">cases</i>{t('navbar.admin.product.title')}
                     </a>
                     <ul className="dropdown-menu submenu">
                       <li className={isActive("/productlist") ? "active" : ""}>
@@ -297,7 +299,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Harytlar
+                          {t('navbar.admin.product.list')}
                         </Link>
                       </li>
                       <li className={isActive("/addproduct") ? "active" : ""}>
@@ -310,7 +312,7 @@ const Navbar = () => {
                           <i className="material-icons-outlined">
                             navigate_next
                           </i>
-                          Haryt goşmak
+                          {t('navbar.admin.product.add')}
                         </Link>
                       </li>
                     </ul>

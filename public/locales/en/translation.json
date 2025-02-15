@@ -18,5 +18,46 @@
   },
   "auth": {
     "logout": "Logout"
+  },
+  "navbar": {
+    "home": {
+      "title": "Home"
+    },
+    "products": {
+      "title": "Products"
+    },
+    "admin": {
+      "title": "Administrator",
+      "company": {
+        "title": "Company",
+        "list": "Companies",
+        "add": "Add Company"
+      },
+      "department": {
+        "title": "Department",
+        "list": "Departments",
+        "add": "Add Department"
+      },
+      "employee": {
+        "title": "Employee",
+        "list": "Employees",
+        "add": "Add Employee"
+      },
+      "customer": {
+        "title": "Customer",
+        "list": "Customers",
+        "add": "Add Customer"
+      },
+      "category": {
+        "title": "Category",
+        "list": "Categories",
+        "add": "Add Category"
+      },
+      "product": {
+        "title": "Product",
+        "list": "Products",
+        "add": "Add Product"
+      }
+    }
   }
 }

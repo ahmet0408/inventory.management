@@ -1,8 +1,8 @@
 const Breadcrumb = ({ items }) => {
   return (
     <div className="d-flex align-items-center flex-nowrap">
-      <nav aria-label="breadcrumb" className="ps-3 pb-2 w-100 d-sm-none">
-        <ol className="breadcrumb mb-0 p-0 flex-nowrap overflow-auto">
+      <nav aria-label="breadcrumb" className="px-2 pt-2 w-100 d-sm-none">
+        <ol className="breadcrumb mb-0 pt-0 flex-nowrap overflow-auto">
           {items.map((item, index) => (
             <li
               key={index}
@@ -17,7 +17,7 @@ const Breadcrumb = ({ items }) => {
       </nav>
       <nav
         aria-label="breadcrumb"
-        className="pb-2 pt-0 mt-0 d-none d-sm-block ms-1"
+        className="py-2 mt-0 d-none d-sm-block ms-1"
       >
         <ol className="breadcrumb mb-0 p-0">
           {items.map((item, index) => (

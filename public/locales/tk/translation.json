@@ -18,5 +18,46 @@
   },
   "auth": {
     "logout": "Çykyş"
+  },
+  "navbar": {
+    "home": {
+      "title": "Baş sahypa"
+    },
+    "products": {
+      "title": "Harytlar"
+    },
+    "admin": {
+      "title": "Administrator",
+      "company": {
+        "title": "Kompaniýa",
+        "list": "Kompaniýalar",
+        "add": "Kompaniýa goşmak"
+      },
+      "department": {
+        "title": "Bölüm",
+        "list": "Bölümler",
+        "add": "Bölüm goşmak"
+      },
+      "employee": {
+        "title": "Işgär",
+        "list": "Işgärler",
+        "add": "Işgär goşmak"
+      },
+      "customer": {
+        "title": "Müşderi",
+        "list": "Müşderiler",
+        "add": "Müşderi goşmak"
+      },
+      "category": {
+        "title": "Kategoriýa",
+        "list": "Kategoriýalar",
+        "add": "Kategoriýa goşmak"
+      },
+      "product": {
+        "title": "Haryt",
+        "list": "Harytlar",
+        "add": "Haryt goşmak"
+      }
+    }
   }
 }
