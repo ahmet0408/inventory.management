@@ -1,0 +1,22 @@
+{
+  "languages": {
+    "turkmen": "Туркменский",
+    "russian": "Русский",
+    "english": "Английский"
+  },
+  "common": {
+    "logo": "Логотип компании",
+    "languageSelector": "Выберите язык"
+  },
+  "notifications": {
+    "title": "Уведомления"
+  },
+  "profile": {
+    "avatar": "Аватар профиля",
+    "greeting": "Привет, {{name}}",
+    "label": "Профиль"
+  },
+  "auth": {
+    "logout": "Выход"
+  }
+}

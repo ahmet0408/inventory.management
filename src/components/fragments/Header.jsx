@@ -3,11 +3,14 @@ import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import { useEffect, useState } from "react";
 import { api } from "../../env";
+import { useLanguage } from "../../context/LanguageContext";
+import { useTranslation } from "react-i18next";
 const Header = () => {
   const { logout, user } = useAuth();
   const { getCartTotals } = useCart();
   const [company, setCompany] = useState([]);
   const [error, setError] = useState(null);
+  const { t } = useTranslation();
 
   // Fetch companies
   useEffect(() => {
@@ -20,6 +23,48 @@ const Header = () => {
       .catch((error) => setError(error.message));
   }, []);
 
+  const LanguageSwitcher = () => {
+    const { currentLanguage, changeLanguage } = useLanguage();
+    
+    const languages = [
+      { code: 'tk', name: 'Türkmen', flag: 'assets/images/county/01.png' },
+      { code: 'ru', name: 'Rus', flag: 'assets/images/county/03.png' },
+      { code: 'en', name: 'Iňlis', flag: 'assets/images/county/02.png' }
+    ];
+  
+    return (
+      <li className="nav-item dropdown d-none d-sm-block d-md-flex">
+        <a
+          className="nav-link dropdown-toggle dropdown-toggle-nocaret"
+          href="#"
+          data-bs-toggle="dropdown"
+        >
+          <img 
+            src={languages.find(lang => lang.code === currentLanguage)?.flag} 
+            width="22" 
+            alt="" 
+          />
+        </a>
+        <ul className="dropdown-menu dropdown-menu-end">
+          {languages.map(lang => (
+            <li key={lang.code}>
+              <a
+                className="dropdown-item d-flex align-items-center py-2"
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  changeLanguage(lang.code);
+                }}
+              >
+                <img src={lang.flag} width="20" alt="" />
+                <span className="ms-2">{lang.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </li>
+    );
+  };
   return (
     <header className="top-header">
       <nav
@@ -56,7 +101,7 @@ const Header = () => {
           )}
         </div>
         <ul className="navbar-nav gap-1 nav-right-links align-items-center">
-          <li className="nav-item dropdown d-none d-sm-block d-md-flex">
+          {/* <li className="nav-item dropdown d-none d-sm-block d-md-flex">
             <a
               className="nav-link dropdown-toggle dropdown-toggle-nocaret"
               href="#"
@@ -96,7 +141,8 @@ const Header = () => {
                 </a>
               </li>
             </ul>
-          </li>
+          </li> */}
+          <LanguageSwitcher />
 
           <li className="nav-item dropdown">
             <a
@@ -107,11 +153,11 @@ const Header = () => {
               onClick={(e) => e.preventDefault()}
             >
               <i className="material-icons-outlined">notifications</i>
-              <span className="badge-notify">5</span>
+              <span className="badge-notify">0</span>
             </a>
             <div className="dropdown-menu dropdown-notify dropdown-menu-end shadow">
               <div className="px-3 py-1 d-flex align-items-center justify-content-between border-bottom">
-                <h5 className="notiy-title mb-0">Notifications</h5>
+                <h5 className="notiy-title mb-0">{t('notifications.title')}</h5>
               </div>
               {/* <div className="notify-list">
                 <div>
@@ -163,7 +209,7 @@ const Header = () => {
                 className="rounded-circle p-1 border"
                 width="45"
                 height="45"
-                alt=""
+                alt={t('profile.avatar')}
               />
             </a>
             <div className="dropdown-menu dropdown-user dropdown-menu-end shadow">
@@ -178,9 +224,9 @@ const Header = () => {
                     className="rounded-circle p-1 shadow mb-3"
                     width="90"
                     height="90"
-                    alt=""
+                    alt={t('profile.avatar')}
                   />
-                  <h5 className="user-name mb-0 fw-bold">Hello, {user}</h5>
+                  <h5 className="user-name mb-0 fw-bold"> {t('profile.greeting', { name: user })}</h5>
                 </div>
               </a>
               <hr className="dropdown-divider" />
@@ -189,7 +235,7 @@ const Header = () => {
                 href="#"
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="material-icons-outlined">person_outline</i>Profil
+                <i className="material-icons-outlined">person_outline</i>{t('profile.label')}
               </a>
               <hr className="dropdown-divider" />
               <a
@@ -197,7 +243,7 @@ const Header = () => {
                 onClick={logout}
               >
                 <i className="material-icons-outlined">power_settings_new</i>
-                Logout
+                {t('auth.logout')}
               </a>
             </div>
           </li>

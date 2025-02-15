@@ -1,0 +1,22 @@
+{
+  "languages": {
+    "turkmen": "Türkmen",
+    "russian": "Rus",
+    "english": "Iňlis"
+  },
+  "common": {
+    "logo": "Kompaniýa Logosi",
+    "languageSelector": "Dil saýlaň"
+  },
+  "notifications": {
+    "title": "Bildirişler"
+  },
+  "profile": {
+    "avatar": "Profil Awatary",
+    "greeting": "Salam, {{name}}",
+    "label": "Profil"
+  },
+  "auth": {
+    "logout": "Çykyş"
+  }
+}
