@@ -1,13 +1,41 @@
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Navbar = () => {
   const location = useLocation();
   const { t } = useTranslation();
+  const { currentLanguage, changeLanguage } = useLanguage();
 
   const isActive = (path) => {
     return location.pathname === path;
   };
+
+  const languages = [
+    { code: "tk", name: "Türkmen", flag: "assets/images/county/01.png" },
+    { code: "ru", name: "Rus", flag: "assets/images/county/03.png" },
+    { code: "en", name: "Iňlis", flag: "assets/images/county/02.png" }
+  ];
+
+  const LanguageSwitcher = () => (
+    <div className="language-switcher border-top d-xl-none" style={{position:"absolute", bottom:"1rem",left:"3rem"}}>
+      {/* <p className="text-muted text-center mb-1">{t("navbar.language.title")}</p> */}
+      <div className="d-flex justify-content-center gap-3">
+        {languages.map((lang) => (
+          <button
+            key={lang.code}
+            className={`btn btn-outline-secondary btn-sm ${
+              currentLanguage === lang.code ? "active" : ""
+            }`}
+            onClick={() => changeLanguage(lang.code)}
+          >
+            <img src={lang.flag} width="30" alt="" className="me-1" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+  
   return (
     <div className="primary-menu">
       <nav className="navbar navbar-expand-xl align-items-center">
@@ -36,7 +64,7 @@ const Navbar = () => {
               <i className="material-icons-outlined">close</i>
             </a>
           </div>
-          <div className="offcanvas-body p-0">
+          <div className="offcanvas-body p-0" style={{position:"relative"}}> 
             <ul className="navbar-nav align-items-center flex-grow-1">
               <li className="nav-item dropdown me-1">
                 <Link
@@ -320,6 +348,7 @@ const Navbar = () => {
                 </ul>
               </li>
             </ul>
+              <LanguageSwitcher />
           </div>
         </div>
       </nav>
