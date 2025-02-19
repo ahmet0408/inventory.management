@@ -364,7 +364,10 @@ const Products = () => {
         {/* Main content */}
         <div className="col-md-9 col-lg-10">
           {/* Fixed position search bar for mobile */}
-          <div className="sticky-top bg-white pt-3 pb-3 mb-3 d-md-none">
+          <div
+            className="sticky-top bg-white pt-3 pb-3 mb-3 d-md-none"
+            style={{ zIndex: 10 }}
+          >
             <div className="d-flex gap-2 px-2">
               <button
                 className="btn btn-primary btn-sm"

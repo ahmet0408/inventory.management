@@ -248,9 +248,7 @@ const Navbar = () => {
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.admin.title")}
                       </div>
-                      <div className="ms-auto dropy-icon">
-                        <i className="material-icons-outlined">expand_more</i>
-                      </div>
+                      <i className="material-icons-outlined">expand_more</i>
                     </a>
                     <ul className="dropdown-menu">
                       {[
