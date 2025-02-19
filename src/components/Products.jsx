@@ -73,7 +73,6 @@ const Products = () => {
   };
 
   const handleCategorySelect = (categoryId) => {
-    console.log(categoryId);
     setSelectedCategory(categoryId);
     setCurrentPage(1); // Reset to first page when changing category
     setSearchTerm(""); // Clear search term

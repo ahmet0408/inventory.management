@@ -48,11 +48,29 @@ const NestedCategories = ({
     );
   };
 
+  // Calculate total submenu height recursively
+  const calculateSubmenuHeight = (categoryId) => {
+    const subCategories = categoryMap[categoryId] || [];
+    let totalHeight = subCategories.length * 40; // Base height for direct children
+
+    // Add height of expanded nested submenus
+    subCategories.forEach((subCategory) => {
+      if (expandedCategories.includes(subCategory.id)) {
+        totalHeight += calculateSubmenuHeight(subCategory.id);
+      }
+    });
+
+    return totalHeight;
+  };
+
   const renderMobileItem = (category, level = 0) => {
     const hasChildren = categoryMap[category.id]?.length > 0;
     const isExpanded = expandedCategories.includes(category.id);
     const isClickable = isCategoryClickable(category);
     const subCategories = categoryMap[category.id] || [];
+
+    // Calculate submenu height including nested levels
+    const submenuHeight = calculateSubmenuHeight(category.id);
 
     return (
       <div key={category.id} className="nav-item">
@@ -97,7 +115,7 @@ const NestedCategories = ({
           <div
             className={`submenu-wrapper ${isExpanded ? "expanded" : ""}`}
             style={{
-              maxHeight: isExpanded ? `${subCategories.length * 40}px` : "0px",
+              maxHeight: isExpanded ? `${submenuHeight}px` : "0px",
             }}
           >
             <div className="submenu">
