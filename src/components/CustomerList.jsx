@@ -61,9 +61,12 @@ const CustomerList = () => {
         if (!customer.picture) return null;
 
         try {
-          const response = await fetch(`${api}/image/customer/${customer.picture}`, {
-            credentials: "include",
-          });
+          const response = await fetch(
+            `${api}/image/customer/${customer.picture}`,
+            {
+              credentials: "include",
+            }
+          );
           if (!response.ok) throw new Error("Image fetch failed");
 
           const blob = await response.blob();
@@ -101,7 +104,8 @@ const CustomerList = () => {
 
   // Handlers
   const handleAddCustomer = () => navigate("/addcustomer");
-  const handleEditCustomer = (customerId) => navigate(`/editcustomer/${customerId}`);
+  const handleEditCustomer = (customerId) =>
+    navigate(`/editcustomer/${customerId}`);
   const handleDeleteCustomer = async (customerId) => {
     if (window.confirm("Müşderini pozmak isleýäňizmi?")) {
       try {
@@ -120,13 +124,18 @@ const CustomerList = () => {
 
   const filteredCustomers = customers.filter((customer) => {
     const fullName = `${customer.firstName} ${customer.lastName}`.toLowerCase();
-    return fullName.includes(searchTerm.toLowerCase()) ||
-           customer.phone.some(phone => phone.includes(searchTerm));
+    return (
+      fullName.includes(searchTerm.toLowerCase()) ||
+      customer.phone.some((phone) => phone.includes(searchTerm))
+    );
   });
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredCustomers.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredCustomers.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
   const totalPages = Math.ceil(filteredCustomers.length / itemsPerPage);
 
   // Mobile view
@@ -137,7 +146,10 @@ const CustomerList = () => {
           <div className="card-body">
             <div className="row g-3">
               <div className="col-auto">
-                <div className="rounded-circle" style={{ width: "80px", height: "80px", overflow: "hidden" }}>
+                <div
+                  className="rounded-circle"
+                  style={{ width: "80px", height: "80px", overflow: "hidden" }}
+                >
                   {customerImages[item.id] ? (
                     <img
                       src={customerImages[item.id]}
@@ -152,12 +164,18 @@ const CustomerList = () => {
                 </div>
               </div>
               <div className="col">
-                <h5 className="card-title mb-1">{item.firstName} {item.lastName}</h5>
-                <p className="card-text small text-muted mb-1">Salgysy: {item.address}</p>
+                <h5 className="card-title mb-1">
+                  {item.firstName} {item.lastName}
+                </h5>
+                <p className="card-text small text-muted mb-1">
+                  Salgysy: {item.address}
+                </p>
                 <p className="card-text small mb-1">
                   {item.phone.map((phoneNumber, index) => (
                     <React.Fragment key={index}>
-                      <a href={`tel:${phoneNumber.replace(/\D/g, '')}`}>{phoneNumber}</a>
+                      <a href={`tel:${phoneNumber.replace(/\D/g, "")}`}>
+                        {phoneNumber}
+                      </a>
                       {index < item.phone.length - 1 && <br />}
                     </React.Fragment>
                   ))}
@@ -165,10 +183,16 @@ const CustomerList = () => {
               </div>
             </div>
             <div className="d-flex justify-content-end gap-2 mt-3">
-              <button onClick={() => handleEditCustomer(item.id)} className="btn btn-sm btn-outline-primary">
+              <button
+                onClick={() => handleEditCustomer(item.id)}
+                className="btn btn-sm btn-outline-primary"
+              >
                 <i className="bi bi-pencil"></i>
               </button>
-              <button onClick={() => handleDeleteCustomer(item.id)} className="btn btn-sm btn-outline-danger">
+              <button
+                onClick={() => handleDeleteCustomer(item.id)}
+                className="btn btn-sm btn-outline-danger"
+              >
                 <i className="bi bi-trash"></i>
               </button>
             </div>
@@ -203,7 +227,14 @@ const CustomerList = () => {
                   </td>
                   <td>
                     <div className="d-flex align-items-center gap-3">
-                      <div style={{ width: "40px", height: "40px", overflow: "hidden" }} className="rounded-circle">
+                      <div
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          overflow: "hidden",
+                        }}
+                        className="rounded-circle"
+                      >
                         {customerImages[item.id] ? (
                           <img
                             src={customerImages[item.id]}
@@ -216,24 +247,34 @@ const CustomerList = () => {
                           </div>
                         )}
                       </div>
-                      <div className="fw-bold">{item.firstName} {item.lastName}</div>
+                      <div className="fw-bold">
+                        {item.firstName} {item.lastName}
+                      </div>
                     </div>
                   </td>
                   <td>{item.address}</td>
                   <td>
                     {item.phone.map((phoneNumber, index) => (
                       <React.Fragment key={index}>
-                        <a href={`tel:${phoneNumber.replace(/\D/g, '')}`}>{phoneNumber}</a>
+                        <a href={`tel:${phoneNumber.replace(/\D/g, "")}`}>
+                          {phoneNumber}
+                        </a>
                         {index < item.phone.length - 1 && <br />}
                       </React.Fragment>
                     ))}
                   </td>
                   <td>
                     <div className="d-flex gap-2">
-                      <button className="btn btn-sm btn-outline-primary" onClick={() => handleEditCustomer(item.id)}>
+                      <button
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={() => handleEditCustomer(item.id)}
+                      >
                         <i className="bi bi-pencil"></i>
                       </button>
-                      <button className="btn btn-sm btn-outline-danger" onClick={() => handleDeleteCustomer(item.id)}>
+                      <button
+                        className="btn btn-sm btn-outline-danger"
+                        onClick={() => handleDeleteCustomer(item.id)}
+                      >
                         <i className="bi bi-trash"></i>
                       </button>
                     </div>
@@ -270,18 +311,27 @@ const CustomerList = () => {
           </div>
           <div className="col-auto flex-grow-1">
             <div className="btn-group">
-              <button type="button" className="btn btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown">
+              <button
+                type="button"
+                className="btn btn-filter dropdown-toggle px-4"
+                data-bs-toggle="dropdown"
+              >
                 Salgylar
               </button>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="#">Action</a>
+                  <a className="dropdown-item" href="#">
+                    Action
+                  </a>
                 </li>
               </ul>
             </div>
           </div>
           <div className="col-auto">
-            <button onClick={handleAddCustomer} className="btn btn-primary px-4">
+            <button
+              onClick={handleAddCustomer}
+              className="btn btn-primary px-4"
+            >
               <i className="bi bi-plus-lg me-2"></i>Müşderi goş
             </button>
           </div>
@@ -289,7 +339,7 @@ const CustomerList = () => {
       ) : (
         <div className="container-fluid py-3">
           <div className="row g-3">
-            <div className="col-12">
+            <div className="col-12 m-0">
               <div className="input-group">
                 <span className="input-group-text">
                   <i className="bi bi-search"></i>
@@ -305,10 +355,17 @@ const CustomerList = () => {
             </div>
 
             <div className="col-12">
-              <button className="btn btn-primary w-100 mb-2" data-bs-toggle="modal" data-bs-target="#filterModal">
+              <button
+                className="btn btn-primary w-100 mb-2"
+                data-bs-toggle="modal"
+                data-bs-target="#filterModal"
+              >
                 <i className="bi bi-funnel me-2"></i>Filter
               </button>
-              <button onClick={handleAddCustomer} className="btn btn-success w-100">
+              <button
+                onClick={handleAddCustomer}
+                className="btn btn-success w-100"
+              >
                 <i className="bi bi-plus-lg me-2"></i>Müşderi goş
               </button>
             </div>
@@ -323,7 +380,11 @@ const CustomerList = () => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">Filtrleme</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
             </div>
             <div className="modal-body">
               <div className="mb-3">
@@ -331,7 +392,9 @@ const CustomerList = () => {
                 <select
                   className="form-select"
                   value={filters.address}
-                  onChange={(e) => setFilters({ ...filters, address: e.target.value })}
+                  onChange={(e) =>
+                    setFilters({ ...filters, address: e.target.value })
+                  }
                 >
                   <option value="">Ählisi</option>
                   {/* Add your addresses */}
@@ -339,7 +402,11 @@ const CustomerList = () => {
               </div>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
                 Ýap
               </button>
               <button
@@ -362,19 +429,35 @@ const CustomerList = () => {
         <nav className="mt-4">
           <ul className="pagination justify-content-center">
             <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-              <button className="page-link" onClick={() => setCurrentPage(currentPage - 1)}>
+              <button
+                className="page-link"
+                onClick={() => setCurrentPage(currentPage - 1)}
+              >
                 Yza
               </button>
             </li>
             {[...Array(totalPages)].map((_, i) => (
-              <li key={i + 1} className={`page-item ${currentPage === i + 1 ? "active" : ""}`}>
-                <button className="page-link" onClick={() => setCurrentPage(i + 1)}>
+              <li
+                key={i + 1}
+                className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
+              >
+                <button
+                  className="page-link"
+                  onClick={() => setCurrentPage(i + 1)}
+                >
                   {i + 1}
                 </button>
               </li>
             ))}
-            <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-              <button className="page-link" onClick={() => setCurrentPage(currentPage + 1)}>
+            <li
+              className={`page-item ${
+                currentPage === totalPages ? "disabled" : ""
+              }`}
+            >
+              <button
+                className="page-link"
+                onClick={() => setCurrentPage(currentPage + 1)}
+              >
                 Öňe
               </button>
             </li>

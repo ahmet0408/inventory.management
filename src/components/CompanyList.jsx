@@ -95,7 +95,8 @@ const CompanyList = () => {
   }, [companies]);
 
   const handleAddCompany = () => navigate("/addcompany");
-  const handleEditCompany = (companyId) => navigate(`/editcompany/${companyId}`);
+  const handleEditCompany = (companyId) =>
+    navigate(`/editcompany/${companyId}`);
   const handleDeleteCompany = async (companyId) => {
     if (window.confirm("Kompaniýa maglumatlary pozmak isleýäňizmi?")) {
       try {
@@ -121,7 +122,10 @@ const CompanyList = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredCompanies.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredCompanies.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
   const totalPages = Math.ceil(filteredCompanies.length / itemsPerPage);
 
   // Mobile view
@@ -220,14 +224,15 @@ const CompanyList = () => {
                             height="40"
                           />
                         ) : (
-                          <div className="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white" style={{width: "40px", height: "40px"}}>
+                          <div
+                            className="bg-secondary rounded-circle d-flex align-items-center justify-content-center text-white"
+                            style={{ width: "40px", height: "40px" }}
+                          >
                             No img
                           </div>
                         )}
                       </div>
-                      <p className="mb-0 customer-name fw-bold">
-                        {item.name}
-                      </p>
+                      <p className="mb-0 customer-name fw-bold">{item.name}</p>
                     </div>
                   </td>
                   <td>{item.description}</td>
@@ -292,7 +297,7 @@ const CompanyList = () => {
       ) : (
         <div className="container-fluid py-3">
           <div className="row g-3">
-            <div className="col-12">
+            <div className="col-12 m-0">
               <div className="input-group">
                 <span className="input-group-text">
                   <i className="bi bi-search"></i>

@@ -55,7 +55,8 @@ const CategoryList = () => {
   }, [isOffline]);
 
   const handleAddCategory = () => navigate("/addcategory");
-  const handleEditCategory = (categoryId) => navigate(`/editcategory/${categoryId}`);
+  const handleEditCategory = (categoryId) =>
+    navigate(`/editcategory/${categoryId}`);
   const handleDeleteCategory = async (categoryId) => {
     if (window.confirm("Kategoriýany pozmak isleýäňizmi?")) {
       try {
@@ -82,7 +83,10 @@ const CategoryList = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredCategories.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredCategories.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
   const totalPages = Math.ceil(filteredCategories.length / itemsPerPage);
 
   // Mobile view
@@ -200,7 +204,10 @@ const CategoryList = () => {
           </div>
           <div className="col-auto flex-grow-1"></div>
           <div className="col-auto">
-            <button onClick={handleAddCategory} className="btn btn-primary px-4">
+            <button
+              onClick={handleAddCategory}
+              className="btn btn-primary px-4"
+            >
               <i className="bi bi-plus-lg me-2"></i>Kategoriýa goş
             </button>
           </div>
@@ -208,7 +215,7 @@ const CategoryList = () => {
       ) : (
         <div className="container-fluid py-3">
           <div className="row g-3">
-            <div className="col-12">
+            <div className="col-12 m-0">
               <div className="input-group">
                 <span className="input-group-text">
                   <i className="bi bi-search"></i>
