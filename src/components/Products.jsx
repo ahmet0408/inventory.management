@@ -5,7 +5,6 @@ import NestedCategories from "./NestedCategories";
 import { useTranslation } from "react-i18next";
 import Breadcrumb from "./fragments/Breadcrumb";
 
-
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -345,9 +344,11 @@ const Products = () => {
     </nav>
   );
 
-  return (    
+  return (
     <div className="container-fluid px-4 py-3">
-    <Breadcrumb items={[t("navbar.home.title"),t("navbar.admin.product.list")]} />
+      <Breadcrumb
+        items={[t("navbar.home.title"), t("navbar.admin.product.list")]}
+      />
       <div className="row">
         {/* Sidebar */}
         <div className="col-md-3 col-lg-2 d-none d-md-block mb-4">

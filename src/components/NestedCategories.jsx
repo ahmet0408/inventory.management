@@ -64,7 +64,8 @@ const NestedCategories = ({
             selectedCategory === category.id ? "active" : ""
           }`}
           style={{
-            paddingLeft: `${level * 1.5}rem`,
+            padding: 0,
+            marginLeft: 0,
             cursor: "pointer",
           }}
           onClick={() => {

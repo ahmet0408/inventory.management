@@ -25,13 +25,13 @@ const Header = () => {
 
   const LanguageSwitcher = () => {
     const { currentLanguage, changeLanguage } = useLanguage();
-    
+
     const languages = [
-      { code: 'tk', name: 'Türkmen', flag: 'assets/images/county/01.png' },
-      { code: 'ru', name: 'Rus', flag: 'assets/images/county/03.png' },
-      { code: 'en', name: 'Iňlis', flag: 'assets/images/county/02.png' }
+      { code: "tk", name: "Türkmen", flag: "assets/images/county/01.png" },
+      { code: "ru", name: "Rus", flag: "assets/images/county/03.png" },
+      { code: "en", name: "Iňlis", flag: "assets/images/county/02.png" },
     ];
-  
+
     return (
       <li className="nav-item dropdown d-none d-sm-block d-md-flex">
         <a
@@ -39,14 +39,14 @@ const Header = () => {
           href="#"
           data-bs-toggle="dropdown"
         >
-          <img 
-            src={languages.find(lang => lang.code === currentLanguage)?.flag} 
-            width="22" 
-            alt="" 
+          <img
+            src={languages.find((lang) => lang.code === currentLanguage)?.flag}
+            width="22"
+            alt=""
           />
         </a>
         <ul className="dropdown-menu dropdown-menu-end">
-          {languages.map(lang => (
+          {languages.map((lang) => (
             <li key={lang.code}>
               <a
                 className="dropdown-item d-flex align-items-center py-2"
@@ -67,10 +67,7 @@ const Header = () => {
   };
   return (
     <header className="top-header">
-      <nav
-        className="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom"
-        style={{ padding: "0 1.0rem" }}
-      >
+      <nav className="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
         <div
           className="logo-header d-none d-xl-flex align-items-center gap-2"
           style={{ borderRight: "none", borderLeft: "none" }}
@@ -101,52 +98,11 @@ const Header = () => {
           )}
         </div>
         <ul className="navbar-nav gap-1 nav-right-links align-items-center">
-          {/* <li className="nav-item dropdown d-none d-sm-block d-md-flex">
-            <a
-              className="nav-link dropdown-toggle dropdown-toggle-nocaret"
-              href="#"
-              data-bs-toggle="dropdown"
-            >
-              <img src="assets/images/county/01.png" width="22" alt="" />
-            </a>
-            <ul className="dropdown-menu dropdown-menu-end">
-              <li>
-                <a
-                  className="dropdown-item d-flex align-items-center py-2"
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <img src="assets/images/county/01.png" width="20" alt="" />
-                  <span className="ms-2">Türkmen</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="dropdown-item d-flex align-items-center py-2"
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <img src="assets/images/county/03.png" width="20" alt="" />
-                  <span className="ms-2">Rus</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  className="dropdown-item d-flex align-items-center py-2"
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <img src="assets/images/county/02.png" width="20" alt="" />
-                  <span className="ms-2">Iňlis</span>
-                </a>
-              </li>
-            </ul>
-          </li> */}
           <LanguageSwitcher />
 
           <li className="nav-item dropdown">
             <a
-              className="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative"
+              className="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative m-0"
               data-bs-auto-close="outside"
               data-bs-toggle="dropdown"
               href="#"
@@ -157,7 +113,7 @@ const Header = () => {
             </a>
             <div className="dropdown-menu dropdown-notify dropdown-menu-end shadow">
               <div className="px-3 py-1 d-flex align-items-center justify-content-between border-bottom">
-                <h5 className="notiy-title mb-0">{t('notifications.title')}</h5>
+                <h5 className="notiy-title mb-0">{t("notifications.title")}</h5>
               </div>
               {/* <div className="notify-list">
                 <div>
@@ -193,7 +149,7 @@ const Header = () => {
             </div>
           </li>
           <li className="nav-item d-md-flex">
-            <Link to="/orderdetail" className="nav-link position-relative">
+            <Link to="/orderdetail" className="nav-link position-relative m-0">
               <i className="material-icons-outlined">shopping_cart</i>
               <span className="badge-notify">{getCartTotals().itemCount}</span>
             </Link>
@@ -209,7 +165,7 @@ const Header = () => {
                 className="rounded-circle p-1 border"
                 width="45"
                 height="45"
-                alt={t('profile.avatar')}
+                alt={t("profile.avatar")}
               />
             </a>
             <div className="dropdown-menu dropdown-user dropdown-menu-end shadow">
@@ -224,9 +180,12 @@ const Header = () => {
                     className="rounded-circle p-1 shadow mb-3"
                     width="90"
                     height="90"
-                    alt={t('profile.avatar')}
+                    alt={t("profile.avatar")}
                   />
-                  <h5 className="user-name mb-0 fw-bold"> {t('profile.greeting', { name: user })}</h5>
+                  <h5 className="user-name mb-0 fw-bold">
+                    {" "}
+                    {t("profile.greeting", { name: user })}
+                  </h5>
                 </div>
               </a>
               <hr className="dropdown-divider" />
@@ -235,7 +194,8 @@ const Header = () => {
                 href="#"
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="material-icons-outlined">person_outline</i>{t('profile.label')}
+                <i className="material-icons-outlined">person_outline</i>
+                {t("profile.label")}
               </a>
               <hr className="dropdown-divider" />
               <a
@@ -243,7 +203,7 @@ const Header = () => {
                 onClick={logout}
               >
                 <i className="material-icons-outlined">power_settings_new</i>
-                {t('auth.logout')}
+                {t("auth.logout")}
               </a>
             </div>
           </li>
