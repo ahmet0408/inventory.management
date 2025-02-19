@@ -351,7 +351,7 @@ const Products = () => {
       <div className="row">
         {/* Sidebar */}
         <div className="col-md-3 col-lg-2 d-none d-md-block mb-4">
-          <div className="sticky-top" style={{ top: "1rem" }}>
+          <div className="sticky-top" style={{ top: "1rem", zIndex: 9 }}>
             <NestedCategories
               categories={categories}
               selectedCategory={selectedCategory}
