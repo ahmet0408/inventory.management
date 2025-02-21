@@ -23,11 +23,11 @@
     "home": {
       "title": "Baş sahypa"
     },
-    "products": {
-      "title": "Harytlar"
-    },
-    "admin": {
-      "title": "Administrator",
+    "rent": {
+      "title": "Arenda"
+    },     
+    "data": {
+      "title": "Maglumatlar",
       "company": {
         "title": "Kompaniýa",
         "list": "Kompaniýalar",
@@ -47,7 +47,10 @@
         "title": "Müşderi",
         "list": "Müşderiler",
         "add": "Müşderi goşmak"
-      },
+      }
+    },
+    "products": {
+      "title": "Harytlar",
       "category": {
         "title": "Kategoriýa",
         "list": "Kategoriýalar",

@@ -4,12 +4,6 @@ const Order = () => {
     return (
         <>
         <div className="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-medium flex-wrap font-text1">
-          <a href="javascript:;"><span className="me-1">All</span><span className="text-secondary">(85472)</span></a>
-          <a href="javascript:;"><span className="me-1">Pending Payment</span><span className="text-secondary">(86)</span></a>
-          <a href="javascript:;"><span className="me-1">Incomplete</span><span className="text-secondary">(76)</span></a>
-          <a href="javascript:;"><span className="me-1">Completed</span><span className="text-secondary">(8759)</span></a>
-          <a href="javascript:;"><span className="me-1">Refunded</span><span className="text-secondary">(769)</span></a>
-          <a href="javascript:;"><span className="me-1">Failed</span><span className="text-secondary">(42)</span></a>
         </div>
 
         <div className="row g-3">

@@ -23,11 +23,11 @@
     "home": {
       "title": "Home"
     },
-    "products": {
-      "title": "Products"
-    },
-    "admin": {
-      "title": "Administrator",
+    "rent": {
+      "title": "Rent"
+    },    
+    "data": {
+      "title": "Data",
       "company": {
         "title": "Company",
         "list": "Companies",
@@ -47,7 +47,10 @@
         "title": "Customer",
         "list": "Customers",
         "add": "Add Customer"
-      },
+      }
+    },
+    "products": {
+      "title": "Products",    
       "category": {
         "title": "Category",
         "list": "Categories",
