@@ -27,9 +27,9 @@ const Header = () => {
     const { currentLanguage, changeLanguage } = useLanguage();
 
     const languages = [
-      { code: "tk", name: "Türkmen", flag: "assets/images/county/01.png" },
-      { code: "ru", name: "Rus", flag: "assets/images/county/03.png" },
-      { code: "en", name: "Iňlis", flag: "assets/images/county/02.png" },
+      { code: "tk", name: "Türkmen", flag: "assets/images/county/01.svg" },
+      { code: "ru", name: "Rus", flag: "assets/images/county/03.svg" },
+      { code: "en", name: "Iňlis", flag: "assets/images/county/02.svg" },
     ];
 
     return (

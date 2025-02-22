@@ -44,11 +44,7 @@ const Login = () => {
           <div className="col-lg-6 d-flex p-4 d-flex align-items-center">
             <div className="align-items-center card-body">
               <div className="d-flex justify-content-center">
-                <img
-                  src="assets/images/inventar-hor.png"
-                  width="150"
-                  alt=""
-                />
+                <img src="assets/images/inventar-hor.png" width="150" alt="" />
               </div>
               <div className="form-body mt-4">
                 <form className="row g-3" onSubmit={handleSubmit}>
@@ -99,7 +95,11 @@ const Login = () => {
                   </div>
                   <div className="col-12 mt-4">
                     <div className="d-grid">
-                      <button type="submit" className="btn btn-primary">
+                      <button
+                        type="submit"
+                        className="btn btn-primary"
+                        style={{ background: "#023047" }}
+                      >
                         Ulgama gir
                       </button>
                     </div>
