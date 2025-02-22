@@ -330,6 +330,7 @@ const CustomerList = () => {
           <div className="col-auto">
             <button
               onClick={handleAddCustomer}
+              style={{ background: "#023047" }}
               className="btn btn-primary px-4"
             >
               <i className="bi bi-plus-lg me-2"></i>Müşderi goş

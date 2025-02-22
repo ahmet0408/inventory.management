@@ -331,6 +331,7 @@ const EmployeeList = () => {
             <button
               onClick={handleAddEmployee}
               className="btn btn-primary px-4"
+              style={{ background: "#023047" }}
             >
               <i className="bi bi-plus-lg me-2"></i>Işgär goş
             </button>
@@ -364,6 +365,7 @@ const EmployeeList = () => {
               </button>
               <button
                 onClick={handleAddEmployee}
+                style={{ background: "#023047" }}
                 className="btn btn-success w-100"
               >
                 <i className="bi bi-plus-lg me-2"></i>Işgär goş

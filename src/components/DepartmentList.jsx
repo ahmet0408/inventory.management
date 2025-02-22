@@ -209,6 +209,7 @@ const DepartmentList = () => {
             <button
               onClick={handleAddDepartment}
               className="btn btn-primary px-4"
+              style={{ background: "#023047" }}
             >
               <i className="bi bi-plus-lg me-2"></i>Bölüm goş
             </button>
