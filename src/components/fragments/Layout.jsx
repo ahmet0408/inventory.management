@@ -14,6 +14,15 @@ const Layout = () => {
       <Header />
       <Navbar />
       <main className="main-wrapper">
+        <style>
+          {`
+      @media (min-width: 1366px) {
+        .main-wrapper {
+          margin-top: 90px;
+        }
+      }
+    `}
+        </style>
         {/* main-wrapper uchin main.css 396, 403 row update */}
         <div className="main-content">
           <Outlet />
