@@ -108,7 +108,7 @@ const Header = () => {
               href="#"
               onClick={(e) => e.preventDefault()}
             >
-              <i className="material-icons-outlined">notifications</i>
+              <i className="bi bi-bell" style={{ fontSize: "20px" }}></i>
               <span className="badge-notify">0</span>
             </a>
             <div className="dropdown-menu dropdown-notify dropdown-menu-end shadow">
@@ -150,23 +150,27 @@ const Header = () => {
           </li>
           <li className="nav-item d-md-flex">
             <Link to="/orderdetail" className="nav-link position-relative m-0">
-              <i className="material-icons-outlined">shopping_cart</i>
+              <i className="bi bi-cart3" style={{ fontSize: "20px" }}></i>
               <span className="badge-notify">{getCartTotals().itemCount}</span>
             </Link>
           </li>
           <li className="nav-item dropdown">
             <a
               href="#"
-              className="dropdown-toggle dropdown-toggle-nocaret"
+              className="nav-link m-0 dropdown-toggle dropdown-toggle-nocaret"
               data-bs-toggle="dropdown"
             >
-              <img
+              <i
+                className="bi bi-person-circle"
+                style={{ fontSize: "20px" }}
+              ></i>
+              {/* <img
                 src="assets/images/avatars/01.jpg"
                 className="rounded-circle p-1 border"
                 width="45"
                 height="45"
                 alt={t("profile.avatar")}
-              />
+              /> */}
             </a>
             <div className="dropdown-menu dropdown-user dropdown-menu-end shadow">
               <a

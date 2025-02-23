@@ -50,10 +50,12 @@ const Navbar = () => {
       ...prev,
       [menuName]: !prev[menuName],
       // Close other menus when opening a new one
-      ...(prev[menuName] ? {} : Object.keys(prev).reduce((acc, key) => {
-        if (key !== menuName) acc[key] = false;
-        return acc;
-      }, {}))
+      ...(prev[menuName]
+        ? {}
+        : Object.keys(prev).reduce((acc, key) => {
+            if (key !== menuName) acc[key] = false;
+            return acc;
+          }, {})),
     }));
   };
 
@@ -76,8 +78,9 @@ const Navbar = () => {
         {languages.map((lang) => (
           <button
             key={lang.code}
-            className={`btn btn-outline-secondary btn-sm ${currentLanguage === lang.code ? "active" : ""
-              }`}
+            className={`btn btn-outline-secondary btn-sm ${
+              currentLanguage === lang.code ? "active" : ""
+            }`}
             onClick={() => changeLanguage(lang.code)}
           >
             <img src={lang.flag} width="30" alt="" className="me-1" />
@@ -231,22 +234,24 @@ const Navbar = () => {
               <li className="nav-item me-1">
                 <Link to="/" className="nav-link">
                   <div className="parent-icon">
-                    <i className="material-icons-outlined">home</i>
+                    <i className="bi bi-house"></i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
                     {t("navbar.home.title")}
                   </div>
                 </Link>
-              </li>              
+              </li>
               <li className="nav-item dropdown me-1">
                 {/* Desktop version */}
                 {!isMobile && (
                   <>
-                    <a href="#" className="nav-link m-0" data-bs-toggle="dropdown">
+                    <a
+                      href="#"
+                      className="nav-link m-0"
+                      data-bs-toggle="dropdown"
+                    >
                       <div className="parent-icon">
-                        <i className="material-icons-outlined">
-                          medical_services
-                        </i>
+                        <i className="bi bi-clipboard-data"></i>
                       </div>
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.data.title")}
@@ -257,7 +262,7 @@ const Navbar = () => {
                       {[
                         {
                           title: "navbar.data.company.title",
-                          icon: "widgets",
+                          icon: "bi bi-buildings",
                           path: "/companylist",
                           links: [
                             {
@@ -272,7 +277,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.department.list",
-                          icon: "shopping_bag",
+                          icon: "bi bi-intersect",
                           path: "/departmentlist",
                           links: [
                             {
@@ -287,7 +292,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.employee.list",
-                          icon: "free_breakfast",
+                          icon: "bi bi-person-lines-fill",
                           path: "/employeelist",
                           links: [
                             {
@@ -302,7 +307,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.customer.list",
-                          icon: "mail",
+                          icon: "bi bi-person-vcard",
                           path: "/customerlist",
                           links: [
                             {
@@ -319,12 +324,11 @@ const Navbar = () => {
                         <li key={index}>
                           <Link
                             to={menu.path}
-                            className={`dropdown-item ${isActive(menu.path) ? "active" : ""
-                              }`}
+                            className={`dropdown-item ${
+                              isActive(menu.path) ? "active" : ""
+                            }`}
                           >
-                            <i className="material-icons-outlined">
-                              {menu.icon}
-                            </i>
+                            <i className={menu.icon}></i>
                             {t(menu.title)}
                           </Link>
                           {/* <ul className="dropdown-menu">
@@ -367,21 +371,23 @@ const Navbar = () => {
                       </div>
                       <div className="ms-auto dropy-icon">
                         <i
-                          className={`material-icons-outlined mobile-menu-icon ${openMenus.data ? "open" : ""
-                            }`}
+                          className={`material-icons-outlined mobile-menu-icon ${
+                            openMenus.data ? "open" : ""
+                          }`}
                         >
                           expand_more
                         </i>
                       </div>
                     </a>
                     <ul
-                      className={`mobile-dropdown ${openMenus.data ? "show" : ""
-                        }`}
+                      className={`mobile-dropdown ${
+                        openMenus.data ? "show" : ""
+                      }`}
                     >
                       {[
                         {
                           title: "navbar.data.company.title",
-                          icon: "widgets",
+                          icon: "bi bi-buildings",
                           path: "/companylist",
                           links: [
                             {
@@ -396,7 +402,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.department.list",
-                          icon: "shopping_bag",
+                          icon: "bi bi-intersect",
                           path: "/departmentlist",
                           links: [
                             {
@@ -411,7 +417,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.employee.list",
-                          icon: "free_breakfast",
+                          icon: "bi bi-person-lines-fill",
                           path: "/employeelist",
                           links: [
                             {
@@ -426,7 +432,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.customer.list",
-                          icon: "mail",
+                          icon: "bi bi-person-vcard",
                           path: "/customerlist",
                           links: [
                             {
@@ -443,9 +449,10 @@ const Navbar = () => {
                         <li key={index}>
                           <Link
                             to={menu.path}
-                            className={`nav-link ms-4 ${isActive(menu.path) ? "active" : ""
-                              }`}
-                          // onClick={(e) => toggleDropdown(menu.title, e)}
+                            className={`nav-link ms-4 ${
+                              isActive(menu.path) ? "active" : ""
+                            }`}
+                            // onClick={(e) => toggleDropdown(menu.title, e)}
                           >
                             <div className="parent-icon">
                               <i className="material-icons-outlined">
@@ -494,11 +501,13 @@ const Navbar = () => {
                 {/* Desktop version */}
                 {!isMobile && (
                   <>
-                    <a href="#" className="nav-link m-0" data-bs-toggle="dropdown">
+                    <a
+                      href="#"
+                      className="nav-link m-0"
+                      data-bs-toggle="dropdown"
+                    >
                       <div className="parent-icon">
-                        <i className="material-icons-outlined">
-                          medical_services
-                        </i>
+                        <i class="bi bi-card-list"></i>
                       </div>
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.products.title")}
@@ -508,8 +517,8 @@ const Navbar = () => {
                     <ul className="dropdown-menu">
                       {[
                         {
-                          title: "navbar.products.category.title",
-                          icon: "pie_chart",
+                          title: "navbar.products.category.list",
+                          icon: "bi bi-tags",
                           path: "/categorylist",
                           // links: [
                           //   {
@@ -523,8 +532,8 @@ const Navbar = () => {
                           // ],
                         },
                         {
-                          title: "navbar.products.product.title",
-                          icon: "cases",
+                          title: "navbar.products.product.list",
+                          icon: "bi bi-list",
                           path: "/productlist",
                           // links: [
                           //   {
@@ -541,12 +550,11 @@ const Navbar = () => {
                         <li key={index}>
                           <Link
                             to={menu.path}
-                            className={`dropdown-item ${isActive(menu.path) ? "active" : ""
-                              }`}
+                            className={`dropdown-item ${
+                              isActive(menu.path) ? "active" : ""
+                            }`}
                           >
-                            <i className="material-icons-outlined">
-                              {menu.icon}
-                            </i>
+                            <i className={menu.icon}></i>
                             {t(menu.title)}
                           </Link>
                           {/* <ul className="dropdown-menu">
@@ -589,16 +597,18 @@ const Navbar = () => {
                       </div>
                       <div className="ms-auto dropy-icon">
                         <i
-                          className={`material-icons-outlined mobile-menu-icon ${openMenus.products ? "open" : ""
-                            }`}
+                          className={`material-icons-outlined mobile-menu-icon ${
+                            openMenus.products ? "open" : ""
+                          }`}
                         >
                           expand_more
                         </i>
                       </div>
                     </a>
                     <ul
-                      className={`mobile-dropdown ${openMenus.products ? "show" : ""
-                        }`}
+                      className={`mobile-dropdown ${
+                        openMenus.products ? "show" : ""
+                      }`}
                     >
                       {[
                         {
@@ -635,9 +645,10 @@ const Navbar = () => {
                         <li key={index}>
                           <Link
                             to={menu.path}
-                            className={`nav-link ms-4 ${isActive(menu.path) ? "active" : ""
-                              }`}
-                          // onClick={(e) => toggleDropdown(menu.title, e)}
+                            className={`nav-link ms-4 ${
+                              isActive(menu.path) ? "active" : ""
+                            }`}
+                            // onClick={(e) => toggleDropdown(menu.title, e)}
                           >
                             <div className="parent-icon">
                               <i className="material-icons-outlined">
@@ -685,7 +696,7 @@ const Navbar = () => {
               <li className="nav-item me-1 position-absolute end-0">
                 <Link to="/order" className="nav-link">
                   <div className="parent-icon">
-                    <i className="material-icons-outlined">apps</i>
+                    <i className="bi bi-arrow-repeat"></i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
                     {t("navbar.rent.title")}
