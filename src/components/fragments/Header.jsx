@@ -89,7 +89,7 @@ const Header = () => {
           data-bs-target="#offcanvasNavbar"
         >
           <a href="#" onClick={(e) => e.preventDefault()}>
-            <i className="material-icons-outlined">menu</i>
+            <i className="bi bi-list" style={{ fontSize: "25px" }}></i>
           </a>
         </div>
         <div className="d-flex justify-content-center align-items-center text-white py-3 rounded">
