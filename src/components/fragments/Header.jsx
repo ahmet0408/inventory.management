@@ -149,7 +149,7 @@ const Header = () => {
             </div>
           </li>
           <li className="nav-item d-md-flex">
-            <Link to="/orderdetail" className="nav-link position-relative m-0">
+            <Link to="/basket" className="nav-link position-relative m-0">
               <i className="bi bi-cart3" style={{ fontSize: "20px" }}></i>
               <span className="badge-notify">{getCartTotals().itemCount}</span>
             </Link>

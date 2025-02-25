@@ -250,7 +250,7 @@ const Navbar = () => {
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.data.title")}
                       </div>
-                      <i className="material-icons-outlined">expand_more</i>
+                      <i className="bi bi-chevron-down"></i>
                     </a>
                     <ul className="dropdown-menu">
                       {[
@@ -347,12 +347,10 @@ const Navbar = () => {
                       </div>
                       <div className="ms-auto dropy-icon">
                         <i
-                          className={`material-icons-outlined mobile-menu-icon ${
+                          className={`bi bi-chevron-down mobile-menu-icon ${
                             openMenus.data ? "open" : ""
                           }`}
-                        >
-                          expand_more
-                        </i>
+                        ></i>
                       </div>
                     </a>
                     <ul
@@ -458,7 +456,7 @@ const Navbar = () => {
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.products.title")}
                       </div>
-                      <i className="material-icons-outlined">expand_more</i>
+                      <i className="bi bi-chevron-down"></i>
                     </a>
                     <ul className="dropdown-menu">
                       {[
@@ -505,12 +503,10 @@ const Navbar = () => {
                       </div>
                       <div className="ms-auto dropy-icon">
                         <i
-                          className={`material-icons-outlined mobile-menu-icon ${
+                          className={`bi bi-chevron-down mobile-menu-icon ${
                             openMenus.products ? "open" : ""
                           }`}
-                        >
-                          expand_more
-                        </i>
+                        ></i>
                       </div>
                     </a>
                     <ul
@@ -572,7 +568,7 @@ const Navbar = () => {
               </li>
               {/* arenda */}
               <li className="nav-item me-1 rent end-0 bottom-0">
-                <Link to="/order" className="nav-link">
+                <Link to="/rent" className="nav-link">
                   <div className="parent-icon">
                     <i className="bi bi-arrow-repeat"></i>
                   </div>

@@ -4,7 +4,7 @@ import { api } from "../env";
 import { useEffect, useState } from "react";
 import BarcodeScannerModal from "./fragments/BarcodeScannerModal";
 
-const OrderDetail = () => {
+const Basket = () => {
   const { items, getCartTotals, clearCart, addItem } = useCart();
   const [productImages, setProductImages] = useState({});
   const [isScannerOpen, setIsScannerOpen] = useState(false);
@@ -311,17 +311,6 @@ const OrderDetail = () => {
 
             <div className="card">
               <div className="card-body">
-                <label className="form-label">Töleg prosesi</label>
-                <select className="form-select mb-3">
-                  <option value="cod">Nagt</option>
-                  <option value="card">Nagt däl</option>
-                </select>
-                <label className="form-label">Sargydyň ýagdaýy</label>
-                <select className="form-select mb-3">
-                  <option value="cod">Ugradyldy</option>
-                  <option value="card">Garaşylýar</option>
-                  <option value="paypal">Tabşyryldy</option>
-                </select>
                 <label className="form-label">Ugradylmaly senesi</label>
                 <input type="text" className="form-control mb-3 date-time" />
                 <label className="form-label">Getirilmeli senesi</label>
@@ -351,9 +340,9 @@ const OrderDetail = () => {
             </div>
           </div>
         </div>
-      </div>      
+      </div>
     </>
   );
 };
 
-export default OrderDetail;
+export default Basket;
