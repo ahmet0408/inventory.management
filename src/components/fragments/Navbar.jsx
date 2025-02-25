@@ -451,7 +451,7 @@ const Navbar = () => {
                       data-bs-toggle="dropdown"
                     >
                       <div className="parent-icon">
-                        <i class="bi bi-card-list"></i>
+                        <i className="bi bi-card-list"></i>
                       </div>
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.products.title")}
@@ -496,7 +496,7 @@ const Navbar = () => {
                       onClick={(e) => toggleDropdown("products", e)}
                     >
                       <div className="parent-icon">
-                        <i class="bi bi-card-list"></i>
+                        <i className="bi bi-card-list"></i>
                       </div>
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.products.title")}
