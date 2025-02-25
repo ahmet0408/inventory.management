@@ -119,7 +119,7 @@ const Login = () => {
           <div className="col-lg-6 d-lg-flex d-none">
             <div className="p-4 rounded-4 w-100 d-flex align-items-center justify-content-center">
               <img
-                src="assets/images/auth/login1.jpg"
+                src="assets/images/auth/login1.png"
                 className="img-fluid"
                 alt=""
               />
