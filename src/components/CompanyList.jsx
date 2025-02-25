@@ -289,7 +289,11 @@ const CompanyList = () => {
           </div>
           <div className="col-auto flex-grow-1"></div>
           <div className="col-auto">
-            <button onClick={handleAddCompany} className="btn btn-primary px-4">
+            <button
+              onClick={handleAddCompany}
+              className="btn btn-primary px-4"
+              style={{ background: "#023047" }}
+            >
               <i className="bi bi-plus-lg me-2"></i>Kompaniýa maglumatlary goş
             </button>
           </div>
@@ -314,6 +318,7 @@ const CompanyList = () => {
             <div className="col-12">
               <button
                 onClick={handleAddCompany}
+                style={{ background: "#023047" }}
                 className="btn btn-primary w-100"
               >
                 <i className="bi bi-plus-lg me-2"></i>

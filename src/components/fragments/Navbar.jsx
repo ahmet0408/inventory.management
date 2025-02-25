@@ -34,26 +34,16 @@ const Navbar = () => {
     event.preventDefault();
     event.stopPropagation();
 
-    // setOpenMenus((prev) => {
-    //   const newState = { ...prev };
-    //   if (menuName !== "data") {
-    //     newState.data = true;
-    //   }
-    //   if (menuName !== "products") {
-    //     newState.products = true;
-    //   }
-    //   newState[menuName] = !prev[menuName];
-    //   return newState;
-    // });
-
     setOpenMenus((prev) => ({
       ...prev,
       [menuName]: !prev[menuName],
       // Close other menus when opening a new one
-      ...(prev[menuName] ? {} : Object.keys(prev).reduce((acc, key) => {
-        if (key !== menuName) acc[key] = false;
-        return acc;
-      }, {}))
+      ...(prev[menuName]
+        ? {}
+        : Object.keys(prev).reduce((acc, key) => {
+            if (key !== menuName) acc[key] = false;
+            return acc;
+          }, {})),
     }));
   };
 
@@ -76,8 +66,9 @@ const Navbar = () => {
         {languages.map((lang) => (
           <button
             key={lang.code}
-            className={`btn btn-outline-secondary btn-sm ${currentLanguage === lang.code ? "active" : ""
-              }`}
+            className={`btn btn-outline-secondary btn-sm ${
+              currentLanguage === lang.code ? "active" : ""
+            }`}
             onClick={() => changeLanguage(lang.code)}
           >
             <img src={lang.flag} width="30" alt="" className="me-1" />
@@ -199,6 +190,12 @@ const Navbar = () => {
               display: block;
             }
           }
+
+          @media (min-width: 992px) {
+          .rent {
+           position: absolute !important;
+           }
+          }
         `}
       </style>
       <nav className="navbar py-1 navbar-expand-xl align-items-center">
@@ -220,10 +217,10 @@ const Navbar = () => {
             </div>
             <a
               href="#"
-              className="primaery-menu-close"
+              className="primary-menu-close"
               data-bs-dismiss="offcanvas"
             >
-              <i className="material-icons-outlined">close</i>
+              <i className="bi bi-x-lg" style={{ fontSize: "25px" }}></i>
             </a>
           </div>
           <div className="offcanvas-body p-0" style={{ position: "relative" }}>
@@ -231,33 +228,35 @@ const Navbar = () => {
               <li className="nav-item me-1">
                 <Link to="/" className="nav-link">
                   <div className="parent-icon">
-                    <i className="material-icons-outlined">home</i>
+                    <i className="bi bi-house"></i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
                     {t("navbar.home.title")}
                   </div>
                 </Link>
-              </li>              
+              </li>
               <li className="nav-item dropdown me-1">
                 {/* Desktop version */}
                 {!isMobile && (
                   <>
-                    <a href="#" className="nav-link m-0" data-bs-toggle="dropdown">
+                    <a
+                      href="#"
+                      className="nav-link m-0"
+                      data-bs-toggle="dropdown"
+                    >
                       <div className="parent-icon">
-                        <i className="material-icons-outlined">
-                          medical_services
-                        </i>
+                        <i className="bi bi-clipboard-data"></i>
                       </div>
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.data.title")}
                       </div>
-                      <i className="material-icons-outlined">expand_more</i>
+                      <i className="bi bi-chevron-down"></i>
                     </a>
                     <ul className="dropdown-menu">
                       {[
                         {
                           title: "navbar.data.company.title",
-                          icon: "widgets",
+                          icon: "bi bi-buildings",
                           path: "/companylist",
                           links: [
                             {
@@ -272,7 +271,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.department.list",
-                          icon: "shopping_bag",
+                          icon: "bi bi-intersect",
                           path: "/departmentlist",
                           links: [
                             {
@@ -287,7 +286,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.employee.list",
-                          icon: "free_breakfast",
+                          icon: "bi bi-person-lines-fill",
                           path: "/employeelist",
                           links: [
                             {
@@ -302,7 +301,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.customer.list",
-                          icon: "mail",
+                          icon: "bi bi-person-vcard",
                           path: "/customerlist",
                           links: [
                             {
@@ -319,30 +318,13 @@ const Navbar = () => {
                         <li key={index}>
                           <Link
                             to={menu.path}
-                            className={`dropdown-item ${isActive(menu.path) ? "active" : ""
-                              }`}
+                            className={`dropdown-item ${
+                              isActive(menu.path) ? "active" : ""
+                            }`}
                           >
-                            <i className="material-icons-outlined">
-                              {menu.icon}
-                            </i>
+                            <i className={menu.icon}></i>
                             {t(menu.title)}
                           </Link>
-                          {/* <ul className="dropdown-menu">
-                            {menu.links.map((link, i) => (
-                              <li key={i}>
-                                <Link
-                                  to={link.path}
-                                  className={`dropdown-item ${isActive(link.path) ? "active" : ""
-                                    }`}
-                                >
-                                  <i className="material-icons-outlined">
-                                    navigate_next
-                                  </i>
-                                  {t(link.title)}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul> */}
                         </li>
                       ))}
                     </ul>
@@ -358,30 +340,28 @@ const Navbar = () => {
                       onClick={(e) => toggleDropdown("data", e)}
                     >
                       <div className="parent-icon">
-                        <i className="material-icons-outlined">
-                          medical_services
-                        </i>
+                        <i className="bi bi-clipboard-data"></i>
                       </div>
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.data.title")}
                       </div>
                       <div className="ms-auto dropy-icon">
                         <i
-                          className={`material-icons-outlined mobile-menu-icon ${openMenus.data ? "open" : ""
-                            }`}
-                        >
-                          expand_more
-                        </i>
+                          className={`bi bi-chevron-down mobile-menu-icon ${
+                            openMenus.data ? "open" : ""
+                          }`}
+                        ></i>
                       </div>
                     </a>
                     <ul
-                      className={`mobile-dropdown ${openMenus.data ? "show" : ""
-                        }`}
+                      className={`mobile-dropdown ${
+                        openMenus.data ? "show" : ""
+                      }`}
                     >
                       {[
                         {
                           title: "navbar.data.company.title",
-                          icon: "widgets",
+                          icon: "bi bi-buildings",
                           path: "/companylist",
                           links: [
                             {
@@ -396,7 +376,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.department.list",
-                          icon: "shopping_bag",
+                          icon: "bi bi-intersect",
                           path: "/departmentlist",
                           links: [
                             {
@@ -411,7 +391,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.employee.list",
-                          icon: "free_breakfast",
+                          icon: "bi bi-person-lines-fill",
                           path: "/employeelist",
                           links: [
                             {
@@ -426,7 +406,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.data.customer.list",
-                          icon: "mail",
+                          icon: "bi bi-person-vcard",
                           path: "/customerlist",
                           links: [
                             {
@@ -443,46 +423,17 @@ const Navbar = () => {
                         <li key={index}>
                           <Link
                             to={menu.path}
-                            className={`nav-link ms-4 ${isActive(menu.path) ? "active" : ""
-                              }`}
-                          // onClick={(e) => toggleDropdown(menu.title, e)}
+                            className={`nav-link ms-4 ${
+                              isActive(menu.path) ? "active" : ""
+                            }`}
                           >
                             <div className="parent-icon">
-                              <i className="material-icons-outlined">
-                                {menu.icon}
-                              </i>
+                              <i className={menu.icon}></i>
                             </div>
                             <div className="menu-title d-flex align-items-center">
                               {t(menu.title)}
                             </div>
-                            {/* <div className="ms-auto dropy-icon">
-                              <i
-                                className={`material-icons-outlined mobile-menu-icon ${openMenus[menu.title] ? "open" : ""
-                                  }`}
-                              >
-                                expand_more
-                              </i>
-                            </div> */}
                           </Link>
-                          {/* <ul
-                            className={`mobile-dropdown submenu-mobile ${openMenus[menu.title] ? "show" : ""
-                              }`}
-                          >
-                            {menu.links.map((link, i) => (
-                              <li key={i} style={{ listStyleType: "none" }}>
-                                <Link
-                                  to={link.path}
-                                  className={`nav-link ${isActive(link.path) ? "active" : ""
-                                    }`}
-                                >
-                                  <i className="material-icons-outlined">
-                                    navigate_next
-                                  </i>
-                                  {t(link.title)}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul> */}
                         </li>
                       ))}
                     </ul>
@@ -494,77 +445,42 @@ const Navbar = () => {
                 {/* Desktop version */}
                 {!isMobile && (
                   <>
-                    <a href="#" className="nav-link m-0" data-bs-toggle="dropdown">
+                    <a
+                      href="#"
+                      className="nav-link m-0"
+                      data-bs-toggle="dropdown"
+                    >
                       <div className="parent-icon">
-                        <i className="material-icons-outlined">
-                          medical_services
-                        </i>
+                        <i class="bi bi-card-list"></i>
                       </div>
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.products.title")}
                       </div>
-                      <i className="material-icons-outlined">expand_more</i>
+                      <i className="bi bi-chevron-down"></i>
                     </a>
                     <ul className="dropdown-menu">
                       {[
                         {
-                          title: "navbar.products.category.title",
-                          icon: "pie_chart",
+                          title: "navbar.products.category.list",
+                          icon: "bi bi-tags",
                           path: "/categorylist",
-                          // links: [
-                          //   {
-                          //     path: "/categorylist",
-                          //     title: "navbar.products.category.list",
-                          //   },
-                          //   {
-                          //     path: "/addcategory",
-                          //     title: "navbar.products.category.add",
-                          //   },
-                          // ],
                         },
                         {
-                          title: "navbar.products.product.title",
-                          icon: "cases",
+                          title: "navbar.products.product.list",
+                          icon: "bi bi-list",
                           path: "/productlist",
-                          // links: [
-                          //   {
-                          //     path: "/productlist",
-                          //     title: "navbar.admin.product.list",
-                          //   },
-                          //   {
-                          //     path: "/addproduct",
-                          //     title: "navbar.admin.product.add",
-                          //   },
-                          // ],
                         },
                       ].map((menu, index) => (
                         <li key={index}>
                           <Link
                             to={menu.path}
-                            className={`dropdown-item ${isActive(menu.path) ? "active" : ""
-                              }`}
+                            className={`dropdown-item ${
+                              isActive(menu.path) ? "active" : ""
+                            }`}
                           >
-                            <i className="material-icons-outlined">
-                              {menu.icon}
-                            </i>
+                            <i className={menu.icon}></i>
                             {t(menu.title)}
                           </Link>
-                          {/* <ul className="dropdown-menu">
-                            {menu.links.map((link, i) => (
-                              <li key={i}>
-                                <Link
-                                  to={link.path}
-                                  className={`dropdown-item ${isActive(link.path) ? "active" : ""
-                                    }`}
-                                >
-                                  <i className="material-icons-outlined">
-                                    navigate_next
-                                  </i>
-                                  {t(link.title)}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul> */}
                         </li>
                       ))}
                     </ul>
@@ -580,30 +496,28 @@ const Navbar = () => {
                       onClick={(e) => toggleDropdown("products", e)}
                     >
                       <div className="parent-icon">
-                        <i className="material-icons-outlined">
-                          medical_services
-                        </i>
+                        <i class="bi bi-card-list"></i>
                       </div>
                       <div className="menu-title d-flex align-items-center">
                         {t("navbar.products.title")}
                       </div>
                       <div className="ms-auto dropy-icon">
                         <i
-                          className={`material-icons-outlined mobile-menu-icon ${openMenus.products ? "open" : ""
-                            }`}
-                        >
-                          expand_more
-                        </i>
+                          className={`bi bi-chevron-down mobile-menu-icon ${
+                            openMenus.products ? "open" : ""
+                          }`}
+                        ></i>
                       </div>
                     </a>
                     <ul
-                      className={`mobile-dropdown ${openMenus.products ? "show" : ""
-                        }`}
+                      className={`mobile-dropdown ${
+                        openMenus.products ? "show" : ""
+                      }`}
                     >
                       {[
                         {
                           title: "navbar.products.category.list",
-                          icon: "pie_chart",
+                          icon: "bi bi-tags",
                           path: "/categorylist",
                           links: [
                             {
@@ -618,7 +532,7 @@ const Navbar = () => {
                         },
                         {
                           title: "navbar.products.product.list",
-                          icon: "cases",
+                          icon: "bi bi-list",
                           path: "/productlist",
                           links: [
                             {
@@ -635,46 +549,17 @@ const Navbar = () => {
                         <li key={index}>
                           <Link
                             to={menu.path}
-                            className={`nav-link ms-4 ${isActive(menu.path) ? "active" : ""
-                              }`}
-                          // onClick={(e) => toggleDropdown(menu.title, e)}
+                            className={`nav-link ms-4 ${
+                              isActive(menu.path) ? "active" : ""
+                            }`}
                           >
                             <div className="parent-icon">
-                              <i className="material-icons-outlined">
-                                {menu.icon}
-                              </i>
+                              <i className={menu.icon}></i>
                             </div>
                             <div className="menu-title d-flex align-items-center">
                               {t(menu.title)}
                             </div>
-                            {/* <div className="ms-auto dropy-icon">
-                              <i
-                                className={`material-icons-outlined mobile-menu-icon ${openMenus[menu.title] ? "open" : ""
-                                  }`}
-                              >
-                                expand_more
-                              </i>
-                            </div> */}
                           </Link>
-                          {/* <ul
-                            className={`mobile-dropdown submenu-mobile ${openMenus[menu.title] ? "show" : ""
-                              }`}
-                          >
-                            {menu.links.map((link, i) => (
-                              <li key={i} style={{ listStyleType: "none" }}>
-                                <Link
-                                  to={link.path}
-                                  className={`nav-link ${isActive(link.path) ? "active" : ""
-                                    }`}
-                                >
-                                  <i className="material-icons-outlined">
-                                    navigate_next
-                                  </i>
-                                  {t(link.title)}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul> */}
                         </li>
                       ))}
                     </ul>
@@ -682,10 +567,10 @@ const Navbar = () => {
                 )}
               </li>
               {/* arenda */}
-              <li className="nav-item me-1 position-absolute end-0">
-                <Link to="/order" className="nav-link">
+              <li className="nav-item me-1 rent end-0 bottom-0">
+                <Link to="/rent" className="nav-link">
                   <div className="parent-icon">
-                    <i className="material-icons-outlined">apps</i>
+                    <i className="bi bi-arrow-repeat"></i>
                   </div>
                   <div className="menu-title d-flex align-items-center">
                     {t("navbar.rent.title")}

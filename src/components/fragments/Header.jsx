@@ -27,9 +27,9 @@ const Header = () => {
     const { currentLanguage, changeLanguage } = useLanguage();
 
     const languages = [
-      { code: "tk", name: "Türkmen", flag: "assets/images/county/01.png" },
-      { code: "ru", name: "Rus", flag: "assets/images/county/03.png" },
-      { code: "en", name: "Iňlis", flag: "assets/images/county/02.png" },
+      { code: "tk", name: "Türkmen", flag: "assets/images/county/01.svg" },
+      { code: "ru", name: "Rus", flag: "assets/images/county/03.svg" },
+      { code: "en", name: "Iňlis", flag: "assets/images/county/02.svg" },
     ];
 
     return (
@@ -89,7 +89,7 @@ const Header = () => {
           data-bs-target="#offcanvasNavbar"
         >
           <a href="#" onClick={(e) => e.preventDefault()}>
-            <i className="material-icons-outlined">menu</i>
+            <i className="bi bi-list" style={{ fontSize: "25px" }}></i>
           </a>
         </div>
         <div className="d-flex justify-content-center align-items-center text-white py-3 rounded">
@@ -108,7 +108,7 @@ const Header = () => {
               href="#"
               onClick={(e) => e.preventDefault()}
             >
-              <i className="material-icons-outlined">notifications</i>
+              <i className="bi bi-bell" style={{ fontSize: "20px" }}></i>
               <span className="badge-notify">0</span>
             </a>
             <div className="dropdown-menu dropdown-notify dropdown-menu-end shadow">
@@ -149,24 +149,28 @@ const Header = () => {
             </div>
           </li>
           <li className="nav-item d-md-flex">
-            <Link to="/orderdetail" className="nav-link position-relative m-0">
-              <i className="material-icons-outlined">shopping_cart</i>
+            <Link to="/basket" className="nav-link position-relative m-0">
+              <i className="bi bi-cart3" style={{ fontSize: "20px" }}></i>
               <span className="badge-notify">{getCartTotals().itemCount}</span>
             </Link>
           </li>
           <li className="nav-item dropdown">
             <a
               href="#"
-              className="dropdown-toggle dropdown-toggle-nocaret"
+              className="nav-link m-0 dropdown-toggle dropdown-toggle-nocaret"
               data-bs-toggle="dropdown"
             >
-              <img
+              <i
+                className="bi bi-person-circle"
+                style={{ fontSize: "20px" }}
+              ></i>
+              {/* <img
                 src="assets/images/avatars/01.jpg"
                 className="rounded-circle p-1 border"
                 width="45"
                 height="45"
                 alt={t("profile.avatar")}
-              />
+              /> */}
             </a>
             <div className="dropdown-menu dropdown-user dropdown-menu-end shadow">
               <a

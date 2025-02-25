@@ -209,6 +209,7 @@ const DepartmentList = () => {
             <button
               onClick={handleAddDepartment}
               className="btn btn-primary px-4"
+              style={{ background: "#023047" }}
             >
               <i className="bi bi-plus-lg me-2"></i>Bölüm goş
             </button>
@@ -234,6 +235,7 @@ const DepartmentList = () => {
 
             <div className="col-12">
               <button
+                style={{ background: "#023047" }}
                 className="btn btn-primary w-100 mb-2"
                 data-bs-toggle="modal"
                 data-bs-target="#filterModal"
@@ -241,6 +243,7 @@ const DepartmentList = () => {
                 <i className="bi bi-funnel me-2"></i>Filter
               </button>
               <button
+                style={{ background: "#023047" }}
                 onClick={handleAddDepartment}
                 className="btn btn-success w-100"
               >

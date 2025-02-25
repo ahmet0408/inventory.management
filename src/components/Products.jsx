@@ -346,7 +346,7 @@ const Products = () => {
   return (
     <>
       <Breadcrumb
-        items={[t("navbar.home.title"), t("navbar.admin.product.list")]}
+        items={[t("navbar.home.title"), t("navbar.products.product.list")]}
       />
       <div className="row">
         {/* Sidebar */}

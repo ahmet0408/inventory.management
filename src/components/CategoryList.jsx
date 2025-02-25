@@ -207,6 +207,7 @@ const CategoryList = () => {
             <button
               onClick={handleAddCategory}
               className="btn btn-primary px-4"
+              style={{ background: "#023047" }}
             >
               <i className="bi bi-plus-lg me-2"></i>Kategoriýa goş
             </button>
@@ -232,6 +233,7 @@ const CategoryList = () => {
             <div className="col-12">
               <button
                 onClick={handleAddCategory}
+                style={{ background: "#023047" }}
                 className="btn btn-primary w-100"
               >
                 <i className="bi bi-plus-lg me-2"></i>

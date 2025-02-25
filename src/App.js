@@ -13,9 +13,9 @@ import ProductList from "./components/ProductList";
 import Login from "./components/auth/Login";
 import Layout from "./components/fragments/Layout";
 import Products from "./components/Products";
-import OrderDetail from "./components/OrderDetail";
-import Order from "./components/Order";
 import CustomerList from "./components/CustomerList";
+import Rent from "./components/Rent";
+import Basket from "./components/Basket";
 
 function App() {
   return (
@@ -36,8 +36,8 @@ function App() {
           <Route path="/addproduct" element={<AddProduct />} />
           <Route path="/productlist" element={<ProductList />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/orderdetail" element={<OrderDetail />} />
-          <Route path="/order" element={<Order />} />
+          <Route path="/basket" element={<Basket />} />
+          <Route path="/rent" element={<Rent />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
