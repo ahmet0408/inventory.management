@@ -206,6 +206,7 @@ const Products = () => {
                 addItem(item);
               }}
               className="btn btn-primary btn-sm rounded-pill"
+              style={{ background: "#023047" }}
               disabled={isItemInCart(item.id)}
             >
               <i className="bi bi-cart-plus"></i>

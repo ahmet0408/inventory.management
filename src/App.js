@@ -16,6 +16,7 @@ import Products from "./components/Products";
 import CustomerList from "./components/CustomerList";
 import Rent from "./components/Rent";
 import Basket from "./components/Basket";
+import AddCustomer from "./components/AddCustomer";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/addcompany" element={<AddCompany />} />
           <Route path="/addcategory" element={<AddCategory />} />
           <Route path="/addemployee" element={<AddEmployee />} />
+          <Route path="/addcustomer" element={<AddCustomer />} />
           <Route path="/employeelist" element={<EmployeeList />} />
           <Route path="/customerlist" element={<CustomerList />} />
           <Route path="/departmentlist" element={<DepartmentList />} />
