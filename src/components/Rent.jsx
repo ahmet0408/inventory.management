@@ -7,11 +7,25 @@ const Rent = () => {
   const [rents, setRents] = useState([]);
   const [rental, setRental] = useState(null);
   const [rentDetailImages, setRentDetailImages] = useState({});
+  const [customerImages, setCustomerImages] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedRent, setSelectedRent] = useState(null);
+  const [selectedRentImages, setSelectedRentImages] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
+
+  // Helper function to convert RentStatus enum values to text
+  const getRentStatusText = (statusValue) => {
+    // Based on the C# RentStatus enum
+    const statusMap = {
+      0: "Tamamlandy",
+      1: "Arendada",
+      2: "Ýatyryldy",
+    };
+
+    return statusMap[statusValue] || "Unknown";
+  };
 
   // Offline detection
   useEffect(() => {
@@ -44,13 +58,15 @@ const Rent = () => {
           setError(error.message);
           setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   }, [isOffline]);
 
   // Fetch the rental with its details if rentId is available
   useEffect(() => {
     const fetchRental = async () => {
-      if (!rentId) return;
+      if (!rentId || isOffline) return;
 
       try {
         const response = await fetch(`${api}/rent/${rentId}`, {
@@ -65,12 +81,59 @@ const Rent = () => {
     };
 
     fetchRental();
-  }, [rentId]);
+  }, [rentId, isOffline]);
 
-  // Then fetch images for each rental detail item
+  // Fetch customer images for all rents
+  useEffect(() => {
+    const fetchCustomerImages = async () => {
+      if (!rents || rents.length === 0 || isOffline) return;
+
+      const imagePromises = rents.map(async (rent) => {
+        if (!rent.customerPicture) return null;
+
+        try {
+          const response = await fetch(`${api}/image/customer/${rent.customerPicture}`, {
+            credentials: "include",
+          });
+          if (!response.ok) throw new Error("Customer image fetch failed");
+
+          const blob = await response.blob();
+          const imageUrl = URL.createObjectURL(blob);
+
+          return {
+            customerId: rent.customerId,
+            imageUrl: imageUrl,
+          };
+        } catch (error) {
+          console.error(`Customer image fetch error for ${rent.customerId}:`, error);
+          return null;
+        }
+      });
+
+      const results = await Promise.allSettled(imagePromises);
+      const fetchedImages = results.reduce((acc, result) => {
+        if (result.status === "fulfilled" && result.value) {
+          acc[result.value.customerId] = result.value.imageUrl;
+        }
+        return acc;
+      }, {});
+
+      setCustomerImages(fetchedImages);
+    };
+
+    if (rents.length > 0) {
+      fetchCustomerImages();
+    }
+
+    return () => {
+      Object.values(customerImages).forEach(URL.revokeObjectURL);
+    };
+  }, [rents, isOffline]);
+
+  // Fetch images for each rental detail item
   useEffect(() => {
     const fetchImages = async () => {
-      if (!rental || !rental.rentDetails || rental.rentDetails.length === 0)
+      if (!rental || !rental.rentDetails || rental.rentDetails.length === 0 || isOffline)
         return;
 
       const imagePromises = rental.rentDetails.map(async (detail) => {
@@ -114,15 +177,74 @@ const Rent = () => {
     return () => {
       Object.values(rentDetailImages).forEach(URL.revokeObjectURL);
     };
-  }, [rental]);
+  }, [rental, isOffline]);
 
-  const handlePreviewClick = (rent) => {
+  // Helper function to get customer image URL
+  const getCustomerImageUrl = (rent) => {
+    if (customerImages[rent.customerId]) {
+      return customerImages[rent.customerId];
+    }
+    return "/assets/images/avatars/01.png"; // Default image
+  };
+
+  // Helper function to get product image URL
+  const getImageUrl = (productId) => {
+    if (selectedRentImages && selectedRentImages[productId]) {
+      return selectedRentImages[productId];
+    }
+    return "/assets/images/products/no-image.png"; // Default image
+  };
+
+  const handlePreviewClick = async (rent) => {
     setSelectedRent(rent);
+    
+    // Fetch images for the selected rent's details
+    if (!isOffline && rent.rentDetails && rent.rentDetails.length > 0) {
+      try {
+        const imagePromises = rent.rentDetails.map(async (detail) => {
+          if (!detail.image) return null;
+
+          try {
+            const response = await fetch(`${api}/image/haryt/${detail.image}`, {
+              credentials: "include",
+            });
+            if (!response.ok) throw new Error("Image fetch failed");
+
+            const blob = await response.blob();
+            const imageUrl = URL.createObjectURL(blob);
+
+            return {
+              productId: detail.productId,
+              imageUrl: imageUrl,
+            };
+          } catch (error) {
+            console.error(`Image fetch error for ${detail.productId}:`, error);
+            return null;
+          }
+        });
+
+        const results = await Promise.allSettled(imagePromises);
+        const fetchedImages = results.reduce((acc, result) => {
+          if (result.status === "fulfilled" && result.value) {
+            acc[result.value.productId] = result.value.imageUrl;
+          }
+          return acc;
+        }, {});
+
+        setSelectedRentImages(fetchedImages);
+      } catch (error) {
+        console.error("Error fetching images for selected rent:", error);
+      }
+    }
+    
     setShowModal(true);
   };
 
   const closeModal = () => {
     setShowModal(false);
+    // Clean up object URLs to prevent memory leaks
+    Object.values(selectedRentImages).forEach(URL.revokeObjectURL);
+    setSelectedRentImages({});
   };
 
   // Fixed date format function to convert to dd.mm.yyyy
@@ -135,9 +257,14 @@ const Rent = () => {
     return `${day}.${month}.${year}`;
   };
 
-  // Function to get image URL from rentDetailImages object
-  const getImageUrl = (productId) => {
-    return rentDetailImages[productId] || "assets/images/products/no-image.png";
+  // Calculate total price for a rent object
+  const calculateTotalPrice = (rent) => {
+    return rent.rentDetails
+      ? rent.rentDetails.reduce(
+          (sum, detail) => sum + detail.price * detail.quantity,
+          0
+        )
+      : 0;
   };
 
   return (
@@ -251,7 +378,12 @@ const Rent = () => {
 
       <div className="card mt-4">
         <div className="card-body">
-          {loading ? (
+          {isOffline ? (
+            <div className="alert alert-warning" role="alert">
+              <i className="bi bi-wifi-off me-2"></i>
+              Internet baglanşygy ýok. Offline režiminde işleýärsiňiz.
+            </div>
+          ) : loading ? (
             <div className="text-center p-5">
               <div className="spinner-border text-primary" role="status">
                 <span className="visually-hidden">Loading...</span>
@@ -260,6 +392,7 @@ const Rent = () => {
             </div>
           ) : error ? (
             <div className="alert alert-danger" role="alert">
+              <i className="bi bi-exclamation-triangle me-2"></i>
               {error}
             </div>
           ) : rents.length === 0 ? (
@@ -289,77 +422,74 @@ const Rent = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {rents.map((rent) => {
-                      // Calculate total price from rent details
-                      const totalPrice = rent.rentDetails
-                        ? rent.rentDetails.reduce(
-                            (sum, detail) =>
-                              sum + detail.price * detail.quantity,
-                            0
-                          )
-                        : 0;
-
-                      return (
-                        <tr key={rent.rentNumber}>
-                          <td>
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                            />
-                          </td>
-                          <td>
-                            <a href="#!">{`#${rent.rentNumber}`}</a>
-                          </td>
-                          <td>${totalPrice}</td>
-                          <td>
-                            <a
-                              className="d-flex align-items-center gap-3"
-                              href="#!"
-                            >
-                              <div className="customer-pic">
-                                <img
-                                  src="assets/images/avatars/01.png"
-                                  className="rounded-circle"
-                                  width="40"
-                                  height="40"
-                                  alt=""
-                                />
-                              </div>
-                              <p className="mb-0 customer-name fw-bold">
-                                {rent.customer}
-                              </p>
-                            </a>
-                          </td>
-                          <td>
-                            <span
-                              className={`lable-table ${
-                                rent.rentStatus === 0
-                                  ? "bg-success-subtle text-success border-success-subtle"
-                                  : "bg-warning-subtle text-warning border-warning-subtle"
-                              } rounded border font-text2 fw-bold`}
-                            >
-                              {getRentStatusText(rent.rentStatus)}
-                              {rent.rentStatus === 0 ? (
-                                <i className="bi bi-check2 ms-2"></i>
-                              ) : (
-                                <i className="bi bi-clock ms-2"></i>
-                              )}
-                            </span>
-                          </td>
-                          <td>{formatDate(rent.dateOfShipment)}</td>
-                          <td>{formatDate(rent.dateOfReturn)}</td>
-                          <td>{rent.responsibleEmployee}</td>
-                          <td>
-                            <button
-                              className="btn btn-sm btn-outline-primary"
-                              onClick={() => handlePreviewClick(rent)}
-                            >
-                              <i className="bi bi-eye m-1"></i>
-                            </button>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    {rents.map((rent) => (
+                      <tr key={rent.rentNumber}>
+                        <td>
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                          />
+                        </td>
+                        <td>
+                          <a href="#!">{`#${rent.rentNumber}`}</a>
+                        </td>
+                        <td>${calculateTotalPrice(rent)}</td>
+                        <td>
+                          <a
+                            className="d-flex align-items-center gap-3"
+                            href="#!"
+                          >
+                            <div className="customer-pic">
+                              <img
+                                src={getCustomerImageUrl(rent)}
+                                className="rounded-circle"
+                                width="40"
+                                height="40"
+                                alt={rent.customerName}
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = "/assets/images/avatars/01.png";
+                                }}
+                              />
+                            </div>
+                            <p className="mb-0 customer-name fw-bold">
+                              {rent.customerName}
+                            </p>
+                          </a>
+                        </td>
+                        <td>
+                          <span
+                            className={`lable-table ${
+                              rent.rentStatus === 0
+                                ? "bg-success-subtle text-success border-success-subtle"
+                                : rent.rentStatus === 1
+                                  ? "bg-warning-subtle text-warning border-warning-subtle"
+                                  : "bg-danger-subtle text-danger border-danger-subtle"
+                            } rounded border font-text2 fw-bold`}
+                          >
+                            {getRentStatusText(rent.rentStatus)}
+                            {rent.rentStatus === 0 ? (
+                              <i className="bi bi-check2 ms-2"></i>
+                            ) : rent.rentStatus === 1 ? (
+                              <i className="bi bi-clock ms-2"></i>
+                            ) : (
+                              <i className="bi bi-x-lg ms-2"></i>
+                            )}
+                          </span>
+                        </td>
+                        <td>{formatDate(rent.dateOfShipment)}</td>
+                        <td>{formatDate(rent.dateOfReturn)}</td>
+                        <td>{rent.responsibleEmployee}</td>
+                        <td>
+                          <button
+                            className="btn btn-sm btn-outline-primary"
+                            onClick={() => handlePreviewClick(rent)}
+                          >
+                            <i className="bi bi-eye m-1"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
@@ -389,9 +519,33 @@ const Rent = () => {
               <div className="modal-body">
                 <div className="row mb-4">
                   <div className="col-md-6">
-                    <p>
-                      <strong>Müşderi:</strong> {selectedRent.customer}
-                    </p>
+                    <div className="d-flex align-items-center mb-3">
+                      <div className="customer-pic me-3">
+                        <img
+                          src={getCustomerImageUrl(selectedRent)}
+                          className="rounded-circle"
+                          width="60"
+                          height="60"
+                          alt={selectedRent.customerName}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "/assets/images/avatars/01.png";
+                          }}
+                        />
+                      </div>
+                      <div>
+                        <p className="mb-0 fw-bold">{selectedRent.customerName}</p>
+                        <span className={`badge ${
+                          selectedRent.rentStatus === 0
+                            ? "bg-success"
+                            : selectedRent.rentStatus === 1
+                              ? "bg-warning"
+                              : "bg-danger"
+                        }`}>
+                          {getRentStatusText(selectedRent.rentStatus)}
+                        </span>
+                      </div>
+                    </div>
                     <p>
                       <strong>Jogapkär işgär:</strong>{" "}
                       {selectedRent.responsibleEmployee}
@@ -427,18 +581,22 @@ const Rent = () => {
                       {selectedRent.rentDetails &&
                         selectedRent.rentDetails.map((detail) => (
                           <tr key={detail.productId}>
-                            <td>
+                            <td className="text-center">
                               <img
                                 src={getImageUrl(detail.productId)}
-                                width="50"
-                                height="50"
+                                width="100"
+                                height="100"
                                 alt={detail.name}
                                 className="img-thumbnail"
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = "/assets/images/products/no-image.png";
+                                }}
                               />
                             </td>
-                            <td>{detail.name}</td>
-                            <td>{detail.barcode}</td>
-                            <td>{detail.description}</td>
+                            <td>{detail.name || "N/A"}</td>
+                            <td>{detail.barcode || "N/A"}</td>
+                            <td>{detail.description || "N/A"}</td>
                             <td>{detail.quantity}</td>
                             <td>${detail.price}</td>
                             <td>${detail.price * detail.quantity}</td>
@@ -452,14 +610,7 @@ const Rent = () => {
                         </td>
                         <td>
                           <strong>
-                            $
-                            {selectedRent.rentDetails
-                              ? selectedRent.rentDetails.reduce(
-                                  (sum, detail) =>
-                                    sum + detail.price * detail.quantity,
-                                  0
-                                )
-                              : 0}
+                            ${calculateTotalPrice(selectedRent)}
                           </strong>
                         </td>
                       </tr>
@@ -489,18 +640,6 @@ const Rent = () => {
       )}
     </>
   );
-};
-
-// Helper function to convert RentStatus enum values to text
-const getRentStatusText = (statusValue) => {
-  // Based on the C# RentStatus enum
-  const statusMap = {
-    0: "Tamamlandy",
-    1: "Arendada",
-    2: "Ýatyryldy",
-  };
-
-  return statusMap[statusValue] || "Unknown";
 };
 
 export default Rent;
