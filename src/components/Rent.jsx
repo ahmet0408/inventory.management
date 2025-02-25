@@ -14,6 +14,7 @@ const Rent = () => {
   const [selectedRentImages, setSelectedRentImages] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   // Helper function to convert RentStatus enum values to text
   const getRentStatusText = (statusValue) => {
@@ -26,6 +27,16 @@ const Rent = () => {
 
     return statusMap[statusValue] || "Unknown";
   };
+
+  // Window resize handler for responsive design
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Offline detection
   useEffect(() => {
@@ -197,7 +208,7 @@ const Rent = () => {
 
   const handlePreviewClick = async (rent) => {
     setSelectedRent(rent);
-    
+
     // Fetch images for the selected rent's details
     if (!isOffline && rent.rentDetails && rent.rentDetails.length > 0) {
       try {
@@ -236,7 +247,7 @@ const Rent = () => {
         console.error("Error fetching images for selected rent:", error);
       }
     }
-    
+
     setShowModal(true);
   };
 
@@ -261,10 +272,106 @@ const Rent = () => {
   const calculateTotalPrice = (rent) => {
     return rent.rentDetails
       ? rent.rentDetails.reduce(
-          (sum, detail) => sum + detail.price * detail.quantity,
-          0
-        )
+        (sum, detail) => sum + detail.price * detail.quantity,
+        0
+      )
       : 0;
+  };
+
+  // Render card view of rents for mobile devices
+  const renderMobileRentCards = () => {
+    return rents.map((rent) => (
+      <div key={rent.rentNumber} className="card mb-3">
+        <div className="card-body">
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h5 className="card-title mb-0">{`#${rent.rentNumber}`}</h5>
+            <span
+              className={`badge ${rent.rentStatus === 0
+                  ? "bg-success"
+                  : rent.rentStatus === 1
+                    ? "bg-warning"
+                    : "bg-danger"
+                }`}
+            >
+              {getRentStatusText(rent.rentStatus)}
+            </span>
+          </div>
+
+          <div className="d-flex align-items-center mb-3">
+            <img
+              src={getCustomerImageUrl(rent)}
+              className="rounded-circle me-2"
+              width="40"
+              height="40"
+              alt={rent.customerName}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/assets/images/avatars/01.png";
+              }}
+            />
+            <div>
+              <p className="mb-0 fw-bold">{rent.customerName}</p>
+              <small>{rent.responsibleEmployee}</small>
+            </div>
+          </div>
+
+          <div className="row mb-3">
+            <div className="col-6">
+              <small className="text-muted d-block">Gitmeli senesi</small>
+              <p className="mb-0">{formatDate(rent.dateOfShipment)}</p>
+            </div>
+            <div className="col-6">
+              <small className="text-muted d-block">Gelmeli senesi</small>
+              <p className="mb-0">{formatDate(rent.dateOfReturn)}</p>
+            </div>
+          </div>
+
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="fw-bold mb-0">Jemi: ${calculateTotalPrice(rent)}</p>
+            <button
+              className="btn btn-sm btn-primary"
+              style={{ background: "#023047" }}
+              onClick={() => handlePreviewClick(rent)}
+            >
+              <i className="bi bi-eye me-1"></i> Giňişleýin
+            </button>
+          </div>
+        </div>
+      </div>
+    ));
+  };
+
+  // Render mobile product cards for the modal
+  const renderMobileProductCards = () => {
+    return selectedRent.rentDetails && selectedRent.rentDetails.map((detail) => (
+      <div key={detail.productId} className="card mb-3">
+        <div className="card-body">
+          <div className="row">
+            <div className="col-4">
+              <img
+                src={getImageUrl(detail.productId)}
+                className="img-fluid rounded"
+                alt={detail.name}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/assets/images/products/no-image.png";
+                }}
+              />
+            </div>
+            <div className="col-8">
+              <h6 className="card-title">{detail.name || "N/A"}</h6>
+              <p className="card-text small mb-1">Barkod: {detail.barcode || "N/A"}</p>
+              <p className="card-text small mb-1">Giňişleýin: {detail.description || "N/A"}</p>
+              <div className="d-flex justify-content-between">
+                <p className="card-text mb-0">Mukdary: {detail.quantity}</p>
+                <p className="card-text mb-0">Baha: ${detail.price}</p>
+              </div>
+              <p className="card-text fw-bold text-end mt-2">Jemi: ${detail.price * detail.quantity}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    ));
   };
 
   return (
@@ -272,109 +379,65 @@ const Rent = () => {
       <div className="product-count d-flex align-items-center gap-3 gap-lg-4 mb-4 fw-medium flex-wrap font-text1"></div>
 
       <div className="row g-3">
-        <div className="col-12 col-md-auto">
-          <div className="position-relative">
-            <input
-              className="form-control px-5"
-              type="search"
-              placeholder="Gözle"
-            />
-            <span className="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">
-              search
-            </span>
-          </div>
-        </div>
-        <div className="col-12 col-md-auto flex-grow-1 overflow-auto">
-          <div className="btn-group position-static d-flex flex-wrap">
-            <div className="btn-group position-static mb-2 mb-md-0">
-              <button
-                type="button"
-                className="btn border btn-filter dropdown-toggle px-4"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Ýagdaýy
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Tamamlandy
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Arendada
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Ýatyryldy
-                  </a>
-                </li>
-              </ul>
+        <div className="col-12">
+          <div className="d-flex flex-wrap flex-md-nowrap gap-2 align-items-center">
+            {/* Gözleg inputy */}
+            <div className="position-relative">
+              <input className="form-control px-5" type="search" placeholder="Gözle" />
+              <span className="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">
+                search
+              </span>
             </div>
-            <div className="btn-group position-static mb-2 mb-md-0">
-              <button
-                type="button"
-                className="btn border btn-filter dropdown-toggle px-4"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Seneler
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Şu hepde
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Şu aý
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Geçen aý
-                  </a>
-                </li>
-              </ul>
+
+            {/* Filter Dropdowns */}
+            <div className="d-flex flex-wrap gap-2 flex-grow-1 overflow-auto">
+              <div className="dropdown">
+                <button className="btn border btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown" aria-expanded="false">
+                  Ýagdaýy
+                </button>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="#!">Tamamlandy</a></li>
+                  <li><a className="dropdown-item" href="#!">Arendada</a></li>
+                  <li><a className="dropdown-item" href="#!">Ýatyryldy</a></li>
+                </ul>
+              </div>
+
+              <div className="dropdown">
+                <button className="btn border btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown" aria-expanded="false">
+                  Seneler
+                </button>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="#!">Şu hepde</a></li>
+                  <li><a className="dropdown-item" href="#!">Şu aý</a></li>
+                  <li><a className="dropdown-item" href="#!">Geçen aý</a></li>
+                </ul>
+              </div>
+
+              <div className="dropdown">
+                <button className="btn border btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown" aria-expanded="false">
+                  Müşderiler
+                </button>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="#!">Myrat Myradow</a></li>
+                </ul>
+              </div>
             </div>
-            <div className="btn-group position-static mb-2 mb-md-0">
-              <button
-                type="button"
-                className="btn border btn-filter dropdown-toggle px-4"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Müşderiler
+
+            {/* Buttons */}
+            <div className="d-flex gap-2 justify-content-md-end">
+              <button className="btn btn-filter px-4">
+                <i className="bi bi-box-arrow-right me-2"></i>Export
               </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="#!">
-                    Myrat Myradow
-                  </a>
-                </li>
-              </ul>
+              <Link to="/products">
+                <button className="btn btn-primary px-4" style={{ background: "#023047" }}>
+                  <i className="bi bi-plus-lg me-2"></i>Täze Sargyt
+                </button>
+              </Link>
             </div>
-          </div>
-        </div>
-        <div className="col-12 col-md-auto">
-          <div className="d-flex align-items-center gap-2 justify-content-md-end">
-            <button className="btn btn-filter px-4">
-              <i className="bi bi-box-arrow-right me-2"></i>Export
-            </button>
-            <Link to="/products">
-              <button
-                className="btn btn-primary px-4"
-                style={{ background: "#023047" }}
-              >
-                <i className="bi bi-plus-lg me-2"></i>Täze Sargyt
-              </button>
-            </Link>
           </div>
         </div>
       </div>
+
 
       <div className="card mt-4">
         <div className="card-body">
@@ -402,9 +465,13 @@ const Rent = () => {
               </div>
               <p>Maglumat tapylmady</p>
             </div>
+          ) : isMobile ? (
+            // Mobile card view for rents
+            renderMobileRentCards()
           ) : (
+            // Desktop table view for rents
             <div className="customer-table">
-              <div className="table-responsive white-space-nowrap">
+              <div className="table-responsive">
                 <table className="table align-middle">
                   <thead className="table-light">
                     <tr>
@@ -459,13 +526,12 @@ const Rent = () => {
                         </td>
                         <td>
                           <span
-                            className={`lable-table ${
-                              rent.rentStatus === 0
+                            className={`lable-table ${rent.rentStatus === 0
                                 ? "bg-success-subtle text-success border-success-subtle"
                                 : rent.rentStatus === 1
                                   ? "bg-warning-subtle text-warning border-warning-subtle"
                                   : "bg-danger-subtle text-danger border-danger-subtle"
-                            } rounded border font-text2 fw-bold`}
+                              } rounded border font-text2 fw-bold`}
                           >
                             {getRentStatusText(rent.rentStatus)}
                             {rent.rentStatus === 0 ? (
@@ -498,7 +564,7 @@ const Rent = () => {
         </div>
       </div>
 
-      {/* Modal for RentDetailDTO */}
+      {/* Modal for RentDetailDTO with responsive design */}
       {showModal && selectedRent && (
         <div
           className="modal show"
@@ -535,13 +601,12 @@ const Rent = () => {
                       </div>
                       <div>
                         <p className="mb-0 fw-bold">{selectedRent.customerName}</p>
-                        <span className={`badge ${
-                          selectedRent.rentStatus === 0
+                        <span className={`badge ${selectedRent.rentStatus === 0
                             ? "bg-success"
                             : selectedRent.rentStatus === 1
                               ? "bg-warning"
                               : "bg-danger"
-                        }`}>
+                          }`}>
                           {getRentStatusText(selectedRent.rentStatus)}
                         </span>
                       </div>
@@ -564,59 +629,78 @@ const Rent = () => {
                 </div>
 
                 <h6 className="fw-bold mb-3">Harytlar</h6>
-                <div className="table-responsive">
-                  <table className="table table-bordered">
-                    <thead className="table-light">
-                      <tr>
-                        <th>Suraty</th>
-                        <th>Ady</th>
-                        <th>Barkody</th>
-                        <th>Giňişleýin</th>
-                        <th>Mukdary</th>
-                        <th>Baha</th>
-                        <th>Umumy</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {selectedRent.rentDetails &&
-                        selectedRent.rentDetails.map((detail) => (
-                          <tr key={detail.productId}>
-                            <td className="text-center">
-                              <img
-                                src={getImageUrl(detail.productId)}
-                                width="100"
-                                height="100"
-                                alt={detail.name}
-                                className="img-thumbnail"
-                                onError={(e) => {
-                                  e.target.onerror = null;
-                                  e.target.src = "/assets/images/products/no-image.png";
-                                }}
-                              />
-                            </td>
-                            <td>{detail.name || "N/A"}</td>
-                            <td>{detail.barcode || "N/A"}</td>
-                            <td>{detail.description || "N/A"}</td>
-                            <td>{detail.quantity}</td>
-                            <td>${detail.price}</td>
-                            <td>${detail.price * detail.quantity}</td>
-                          </tr>
-                        ))}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td colSpan="6" className="text-end">
-                          <strong>Umumy töleg:</strong>
-                        </td>
-                        <td>
-                          <strong>
-                            ${calculateTotalPrice(selectedRent)}
-                          </strong>
-                        </td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
+
+                {isMobile ? (
+                  // Mobile card view for products in modal
+                  renderMobileProductCards()
+                ) : (
+                  // Desktop table view for products in modal
+                  <div className="table-responsive">
+                    <table className="table table-bordered">
+                      <thead className="table-light">
+                        <tr>
+                          <th>Suraty</th>
+                          <th>Ady</th>
+                          <th>Barkody</th>
+                          <th>Giňişleýin</th>
+                          <th>Mukdary</th>
+                          <th>Baha</th>
+                          <th>Umumy</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {selectedRent.rentDetails &&
+                          selectedRent.rentDetails.map((detail) => (
+                            <tr key={detail.productId}>
+                              <td className="text-center">
+                                <img
+                                  src={getImageUrl(detail.productId)}
+                                  width="100"
+                                  height="100"
+                                  alt={detail.name}
+                                  className="img-thumbnail"
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = "/assets/images/products/no-image.png";
+                                  }}
+                                />
+                              </td>
+                              <td>{detail.name || "N/A"}</td>
+                              <td>{detail.barcode || "N/A"}</td>
+                              <td>{detail.description || "N/A"}</td>
+                              <td>{detail.quantity}</td>
+                              <td>${detail.price}</td>
+                              <td>${detail.price * detail.quantity}</td>
+                            </tr>
+                          ))}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colSpan="6" className="text-end">
+                            <strong>Umumy töleg:</strong>
+                          </td>
+                          <td>
+                            <strong>
+                              ${calculateTotalPrice(selectedRent)}
+                            </strong>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                )}
+
+                {/* Show total for mobile view */}
+                {isMobile && selectedRent.rentDetails && (
+                  <div className="card bg-light mt-3">
+                    <div className="card-body">
+                      <div className="d-flex justify-content-between align-items-center">
+                        <h6 className="mb-0">Umumy töleg:</h6>
+                        <h5 className="mb-0">${calculateTotalPrice(selectedRent)}</h5>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="modal-footer">
                 <button
