@@ -34,8 +34,8 @@ const Rent = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Offline detection
@@ -103,9 +103,12 @@ const Rent = () => {
         if (!rent.customerPicture) return null;
 
         try {
-          const response = await fetch(`${api}/image/customer/${rent.customerPicture}`, {
-            credentials: "include",
-          });
+          const response = await fetch(
+            `${api}/image/customer/${rent.customerPicture}`,
+            {
+              credentials: "include",
+            }
+          );
           if (!response.ok) throw new Error("Customer image fetch failed");
 
           const blob = await response.blob();
@@ -116,7 +119,10 @@ const Rent = () => {
             imageUrl: imageUrl,
           };
         } catch (error) {
-          console.error(`Customer image fetch error for ${rent.customerId}:`, error);
+          console.error(
+            `Customer image fetch error for ${rent.customerId}:`,
+            error
+          );
           return null;
         }
       });
@@ -144,7 +150,12 @@ const Rent = () => {
   // Fetch images for each rental detail item
   useEffect(() => {
     const fetchImages = async () => {
-      if (!rental || !rental.rentDetails || rental.rentDetails.length === 0 || isOffline)
+      if (
+        !rental ||
+        !rental.rentDetails ||
+        rental.rentDetails.length === 0 ||
+        isOffline
+      )
         return;
 
       const imagePromises = rental.rentDetails.map(async (detail) => {
@@ -272,9 +283,9 @@ const Rent = () => {
   const calculateTotalPrice = (rent) => {
     return rent.rentDetails
       ? rent.rentDetails.reduce(
-        (sum, detail) => sum + detail.price * detail.quantity,
-        0
-      )
+          (sum, detail) => sum + detail.price * detail.quantity,
+          0
+        )
       : 0;
   };
 
@@ -286,12 +297,13 @@ const Rent = () => {
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h5 className="card-title mb-0">{`#${rent.rentNumber}`}</h5>
             <span
-              className={`badge ${rent.rentStatus === 0
+              className={`badge ${
+                rent.rentStatus === 0
                   ? "bg-success"
                   : rent.rentStatus === 1
-                    ? "bg-warning"
-                    : "bg-danger"
-                }`}
+                  ? "bg-warning"
+                  : "bg-danger"
+              }`}
             >
               {getRentStatusText(rent.rentStatus)}
             </span>
@@ -343,35 +355,44 @@ const Rent = () => {
 
   // Render mobile product cards for the modal
   const renderMobileProductCards = () => {
-    return selectedRent.rentDetails && selectedRent.rentDetails.map((detail) => (
-      <div key={detail.productId} className="card mb-3">
-        <div className="card-body">
-          <div className="row">
-            <div className="col-4">
-              <img
-                src={getImageUrl(detail.productId)}
-                className="img-fluid rounded"
-                alt={detail.name}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "/assets/images/products/no-image.png";
-                }}
-              />
-            </div>
-            <div className="col-8">
-              <h6 className="card-title">{detail.name || "N/A"}</h6>
-              <p className="card-text small mb-1">Barkod: {detail.barcode || "N/A"}</p>
-              <p className="card-text small mb-1">Giňişleýin: {detail.description || "N/A"}</p>
-              <div className="d-flex justify-content-between">
-                <p className="card-text mb-0">Mukdary: {detail.quantity}</p>
-                <p className="card-text mb-0">Baha: ${detail.price}</p>
+    return (
+      selectedRent.rentDetails &&
+      selectedRent.rentDetails.map((detail) => (
+        <div key={detail.productId} className="card mb-3">
+          <div className="card-body">
+            <div className="row">
+              <div className="col-4">
+                <img
+                  src={getImageUrl(detail.productId)}
+                  className="img-fluid rounded"
+                  alt={detail.name}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/assets/images/products/no-image.png";
+                  }}
+                />
               </div>
-              <p className="card-text fw-bold text-end mt-2">Jemi: ${detail.price * detail.quantity}</p>
+              <div className="col-8">
+                <h6 className="card-title">{detail.name || "N/A"}</h6>
+                <p className="card-text small mb-1">
+                  Barkod: {detail.barcode || "N/A"}
+                </p>
+                <p className="card-text small mb-1">
+                  Giňişleýin: {detail.description || "N/A"}
+                </p>
+                <div className="d-flex justify-content-between">
+                  <p className="card-text mb-0">Mukdary: {detail.quantity}</p>
+                  <p className="card-text mb-0">Baha: ${detail.price}</p>
+                </div>
+                <p className="card-text fw-bold text-end mt-2">
+                  Jemi: ${detail.price * detail.quantity}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    ));
+      ))
+    );
   };
 
   return (
@@ -383,7 +404,11 @@ const Rent = () => {
           <div className="d-flex flex-wrap flex-md-nowrap gap-2 align-items-center">
             {/* Gözleg inputy */}
             <div className="position-relative">
-              <input className="form-control px-5" type="search" placeholder="Gözle" />
+              <input
+                className="form-control px-5"
+                type="search"
+                placeholder="Gözle"
+              />
               <span className="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">
                 search
               </span>
@@ -392,33 +417,73 @@ const Rent = () => {
             {/* Filter Dropdowns */}
             <div className="d-flex flex-wrap gap-2 flex-grow-1 overflow-auto">
               <div className="dropdown">
-                <button className="btn border btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown" aria-expanded="false">
+                <button
+                  className="btn border btn-filter dropdown-toggle px-4"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   Ýagdaýy
                 </button>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#!">Tamamlandy</a></li>
-                  <li><a className="dropdown-item" href="#!">Arendada</a></li>
-                  <li><a className="dropdown-item" href="#!">Ýatyryldy</a></li>
+                  <li>
+                    <a className="dropdown-item" href="#!">
+                      Tamamlandy
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#!">
+                      Arendada
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#!">
+                      Ýatyryldy
+                    </a>
+                  </li>
                 </ul>
               </div>
 
               <div className="dropdown">
-                <button className="btn border btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown" aria-expanded="false">
+                <button
+                  className="btn border btn-filter dropdown-toggle px-4"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   Seneler
                 </button>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#!">Şu hepde</a></li>
-                  <li><a className="dropdown-item" href="#!">Şu aý</a></li>
-                  <li><a className="dropdown-item" href="#!">Geçen aý</a></li>
+                  <li>
+                    <a className="dropdown-item" href="#!">
+                      Şu hepde
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#!">
+                      Şu aý
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#!">
+                      Geçen aý
+                    </a>
+                  </li>
                 </ul>
               </div>
 
               <div className="dropdown">
-                <button className="btn border btn-filter dropdown-toggle px-4" data-bs-toggle="dropdown" aria-expanded="false">
+                <button
+                  className="btn border btn-filter dropdown-toggle px-4"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   Müşderiler
                 </button>
                 <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#!">Myrat Myradow</a></li>
+                  <li>
+                    <a className="dropdown-item" href="#!">
+                      Myrat Myradow
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -429,7 +494,10 @@ const Rent = () => {
                 <i className="bi bi-box-arrow-right me-2"></i>Export
               </button>
               <Link to="/products">
-                <button className="btn btn-primary px-4" style={{ background: "#023047" }}>
+                <button
+                  className="btn btn-primary px-4"
+                  style={{ background: "#023047" }}
+                >
                   <i className="bi bi-plus-lg me-2"></i>Täze Sargyt
                 </button>
               </Link>
@@ -437,7 +505,6 @@ const Rent = () => {
           </div>
         </div>
       </div>
-
 
       <div className="card mt-4">
         <div className="card-body">
@@ -492,10 +559,7 @@ const Rent = () => {
                     {rents.map((rent) => (
                       <tr key={rent.rentNumber}>
                         <td>
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                          />
+                          <input className="form-check-input" type="checkbox" />
                         </td>
                         <td>
                           <a href="#!">{`#${rent.rentNumber}`}</a>
@@ -515,7 +579,8 @@ const Rent = () => {
                                 alt={rent.customerName}
                                 onError={(e) => {
                                   e.target.onerror = null;
-                                  e.target.src = "/assets/images/avatars/01.png";
+                                  e.target.src =
+                                    "/assets/images/avatars/01.png";
                                 }}
                               />
                             </div>
@@ -526,12 +591,13 @@ const Rent = () => {
                         </td>
                         <td>
                           <span
-                            className={`lable-table ${rent.rentStatus === 0
+                            className={`lable-table ${
+                              rent.rentStatus === 0
                                 ? "bg-success-subtle text-success border-success-subtle"
                                 : rent.rentStatus === 1
-                                  ? "bg-warning-subtle text-warning border-warning-subtle"
-                                  : "bg-danger-subtle text-danger border-danger-subtle"
-                              } rounded border font-text2 fw-bold`}
+                                ? "bg-warning-subtle text-warning border-warning-subtle"
+                                : "bg-danger-subtle text-danger border-danger-subtle"
+                            } rounded border font-text2 fw-bold`}
                           >
                             {getRentStatusText(rent.rentStatus)}
                             {rent.rentStatus === 0 ? (
@@ -546,12 +612,18 @@ const Rent = () => {
                         <td>{formatDate(rent.dateOfShipment)}</td>
                         <td>{formatDate(rent.dateOfReturn)}</td>
                         <td>{rent.responsibleEmployee}</td>
-                        <td>
+                        <td className="d-flex justify-content-around">
                           <button
                             className="btn btn-sm btn-outline-primary"
                             onClick={() => handlePreviewClick(rent)}
                           >
                             <i className="bi bi-eye m-1"></i>
+                          </button>
+                          <button
+                            className="btn btn-sm btn-outline-primary"
+                            onClick={() => handlePreviewClick(rent)}
+                          >
+                            <i className="bi bi-arrow-down-circle m-1"></i>
                           </button>
                         </td>
                       </tr>
@@ -600,13 +672,18 @@ const Rent = () => {
                         />
                       </div>
                       <div>
-                        <p className="mb-0 fw-bold">{selectedRent.customerName}</p>
-                        <span className={`badge ${selectedRent.rentStatus === 0
-                            ? "bg-success"
-                            : selectedRent.rentStatus === 1
+                        <p className="mb-0 fw-bold">
+                          {selectedRent.customerName}
+                        </p>
+                        <span
+                          className={`badge ${
+                            selectedRent.rentStatus === 0
+                              ? "bg-success"
+                              : selectedRent.rentStatus === 1
                               ? "bg-warning"
                               : "bg-danger"
-                          }`}>
+                          }`}
+                        >
                           {getRentStatusText(selectedRent.rentStatus)}
                         </span>
                       </div>
@@ -661,7 +738,8 @@ const Rent = () => {
                                   className="img-thumbnail"
                                   onError={(e) => {
                                     e.target.onerror = null;
-                                    e.target.src = "/assets/images/products/no-image.png";
+                                    e.target.src =
+                                      "/assets/images/products/no-image.png";
                                   }}
                                 />
                               </td>
@@ -696,7 +774,9 @@ const Rent = () => {
                     <div className="card-body">
                       <div className="d-flex justify-content-between align-items-center">
                         <h6 className="mb-0">Umumy töleg:</h6>
-                        <h5 className="mb-0">${calculateTotalPrice(selectedRent)}</h5>
+                        <h5 className="mb-0">
+                          ${calculateTotalPrice(selectedRent)}
+                        </h5>
                       </div>
                     </div>
                   </div>

@@ -221,8 +221,8 @@ const NestedCategories = ({
           }
 
           .nested-categories .list-group-item.active {
-            background-color: #0d6efd;
-            border-color: #0d6efd;
+            background-color: #023047;
+            border-color: #023047;
             color: white;
           }
 
