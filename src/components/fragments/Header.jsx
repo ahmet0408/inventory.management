@@ -10,8 +10,16 @@ const Header = () => {
   const { getCartTotals } = useCart();
   const [company, setCompany] = useState([]);
   const [error, setError] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { t } = useTranslation();
 
+    // Track window resize
+    useEffect(() => {
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    
   // Fetch companies
   useEffect(() => {
     fetch(`${api}/company`, { credentials: "include" })
@@ -67,7 +75,7 @@ const Header = () => {
   };
   return (
     <header className="top-header">
-      <nav className="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
+      <nav className="navbar navbar-expand align-items-center justify-content-between border-bottom">
         <div
           className="logo-header d-none d-xl-flex align-items-center gap-2"
           style={{ borderRight: "none", borderLeft: "none" }}
@@ -94,7 +102,7 @@ const Header = () => {
         </div>
         <div className="d-flex justify-content-center align-items-center text-white py-3 rounded">
           {company.length > 0 && (
-            <h5 className="fw-bold text-uppercase">{company[0].name}</h5>
+            <h5 className="fw-bold text-uppercase mb-0" style={{ fontSize: windowWidth < 768 ? '14px' : null }}>{company[0].name}</h5>
           )}
         </div>
         <ul className="navbar-nav gap-1 nav-right-links align-items-center">

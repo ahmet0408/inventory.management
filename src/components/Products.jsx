@@ -372,6 +372,7 @@ const Products = () => {
             <div className="d-flex gap-2 px-2">
               <button
                 className="btn btn-primary btn-sm"
+                style={{ background: "#023047" }}
                 onClick={() => setIsMobileMenuOpen(true)}
               >
                 <i className="bi bi-list"></i>
@@ -594,9 +595,11 @@ const Products = () => {
                           <button
                             onClick={() => {
                               addItem(selectedProduct);
+
                               // setSelectedProduct(null);
                             }}
                             className="btn btn-primary btn-lg flex-grow-1 rounded-pill"
+                            style={{ background: "#023047" }}
                             disabled={isItemInCart(selectedProduct.id)}
                           >
                             <i className="bi bi-cart-plus me-2"></i>
