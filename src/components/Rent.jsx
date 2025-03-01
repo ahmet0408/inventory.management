@@ -612,9 +612,9 @@ const Rent = () => {
                         <td>{formatDate(rent.dateOfShipment)}</td>
                         <td>{formatDate(rent.dateOfReturn)}</td>
                         <td>{rent.responsibleEmployee}</td>
-                        <td className="d-flex justify-content-around">
+                        <td>
                           <button
-                            className="btn btn-sm btn-outline-primary"
+                            className="btn btn-sm btn-outline-primary mx-1"
                             onClick={() => handlePreviewClick(rent)}
                           >
                             <i className="bi bi-eye m-1"></i>
