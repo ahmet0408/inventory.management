@@ -17,12 +17,14 @@ import CustomerList from "./components/CustomerList";
 import Rent from "./components/Rent";
 import Basket from "./components/Basket";
 import AddCustomer from "./components/AddCustomer";
+import Register from "./components/auth/Register";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
           <Route path="/adddepartment" element={<AddDepartment />} />

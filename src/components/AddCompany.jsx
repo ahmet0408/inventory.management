@@ -73,7 +73,7 @@ const AddCompany = () => {
                 <label htmlFor="desc" className="form-label">
                   Kompaniýa barada
                 </label>
-                <input
+                <textarea
                   type="text"
                   id="desc"
                   className="form-control"

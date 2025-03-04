@@ -545,7 +545,7 @@ const Rent = () => {
                       <th>
                         <input className="form-check-input" type="checkbox" />
                       </th>
-                      <th>#S/N</th>
+                      <th>#S/B</th>
                       <th>Jemi baha</th>
                       <th>Müşderi</th>
                       <th>Ýagdaýy</th>

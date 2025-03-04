@@ -312,9 +312,11 @@ const Basket = () => {
             <div className="card">
               <div className="card-body">
                 <label className="form-label">Ugradylmaly senesi</label>
-                <input type="text" className="form-control mb-3 date-time" />
+                <input type="date" className="form-control mb-3" />
                 <label className="form-label">Getirilmeli senesi</label>
-                <input type="text" className="form-control mb-3 date-time" />
+                <input type="date" className="form-control mb-3" />
+                <label className="form-label">Bellik</label>
+                <input type="text" className="form-control mb-3" />
                 <label className="form-label">Müşderi</label>
                 <select
                   className="form-select"

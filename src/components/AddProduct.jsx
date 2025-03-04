@@ -15,6 +15,8 @@ const AddProduct = () => {
     order: 0,
     amount: 0,
     barcode: "",
+    document: "",
+    duedate: "",
     price: 0,
     status: "",
     formImage: null,
@@ -211,6 +213,34 @@ const AddProduct = () => {
               <h5>Maglumat</h5>
               <hr className="mt-0" />
               <div className="row g-3">
+                <div className="col-12">
+                  <label htmlFor="Document" className="form-label">
+                    Resminamasy
+                  </label>
+                  <textarea
+                    type="text"
+                    id="Document"
+                    className="form-control"
+                    value={productData.document}
+                    onChange={(e) =>
+                      handleGeneralChange("document", e.target.value)
+                    }
+                  />
+                </div>
+                <div className="col-12">
+                  <label htmlFor="DueDate" className="form-label">
+                    Möhleti
+                  </label>
+                  <input
+                    type="date"
+                    id="DueDate"
+                    className="form-control"
+                    value={productData.duedate}
+                    onChange={(e) =>
+                      handleGeneralChange("duedate", e.target.value)
+                    }
+                  />
+                </div>
                 <div className="col-12">
                   <label htmlFor="Order" className="form-label">
                     Tertibi

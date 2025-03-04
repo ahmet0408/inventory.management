@@ -32,6 +32,23 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async ({ firstName, lastName, username, password }) => {
+    try {
+      const response = await fetch(`${api}/user/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ firstName, lastName, username, password }),
+      });
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const logout = async () => {
     try {
       await fetch(`${api}/user/logout`, {
@@ -52,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, login, logout }}>
+    <AuthContext.Provider value={{ token, user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
