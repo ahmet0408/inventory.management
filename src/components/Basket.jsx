@@ -110,25 +110,26 @@ const Basket = () => {
   }, [items]);
   return (
     <>
-      <Breadcrumb items={["Baş sahypa", "Sebet"]} />
-      <div className="card">
-        <div className="card-body">
-          <div className="d-flex flex-lg-row flex-column align-items-start align-items-lg-center justify-content-between gap-3">
-            <div className="flex-grow-1">
-              <h4 className="fw-bold">Sargyt #849</h4>
-              <p className="mb-0">
-                Müşderi ID : <a href="javascript:;">6589743</a>
-              </p>
-            </div>
-            <div className="overflow-auto">
-              <div className="btn-group position-static">
-                <div className="btn-group position-static">
+      <Breadcrumb items={["Baş sahypa", "Sebet"]} />     
+      <div className="row">
+        <div className="col-12 col-lg-8 d-flex">
+          <div className="card w-100">
+            <div className="card-body">
+              <div className="d-flex justify-content-between flex-wrap mb-2">
+              <h5 className="mb-3 fw-bold">
+                Sargyt harytlar
+                <span className="fw-light ms-2">
+                  ({getCartTotals().itemCount})
+                </span>
+              </h5>
+              <div>
                   <button
                     onClick={() => setIsScannerOpen(true)}
                     type="button"
                     className="btn btn-outline-primary"
+                    style={{marginRight: "5px"}}
                   >
-                    <i className="bi bi-upc-scan me-2"></i>
+                    <i className="bi bi-upc-scan me-1"></i>
                     Skaner
                   </button>
                   <BarcodeScannerModal
@@ -136,62 +137,15 @@ const Basket = () => {
                     onClose={() => setIsScannerOpen(false)}
                     onScan={handleScan}
                   />
-                </div>
-                <div className="btn-group position-static">
                   <button
                     onClick={clearCart}
                     type="button"
                     className="btn btn-outline-primary"
                   >
-                    <i className="bi bi-x-circle me-2"></i>Arassala
+                    <i className="bi bi-x-circle me-1"></i>Arassala
                   </button>
                 </div>
-                <div className="btn-group position-static">
-                  <button
-                    type="button"
-                    className="btn btn-outline-primary dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    More
-                  </button>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="javascript:;">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="javascript:;">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="javascript:;">
-                        Something else here
-                      </a>
-                    </li>
-                  </ul>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-12 col-lg-8 d-flex">
-          <div className="card w-100">
-            <div className="card-body">
-              <h5 className="mb-3 fw-bold">
-                Sargyt harytlar
-                <span className="fw-light ms-2">
-                  ({getCartTotals().itemCount})
-                </span>
-              </h5>
               {/* Desktop */}
               <div className="d-none d-lg-block product-table ">
                 <div className="table-responsive white-space-nowrap">
