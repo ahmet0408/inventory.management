@@ -92,23 +92,24 @@ const NestedCategories = ({
           }}
         >
           <div className="d-flex align-items-center flex-grow-1 gap-2">
-            <i className="material-icons-outlined">
-              {hasChildren
-                ? isExpanded
-                  ? "folder_open"
-                  : "folder"
-                : "description"}
-            </i>
+            <i
+              className={`bi ${
+                hasChildren
+                  ? isExpanded
+                    ? "bi-folder2-open"
+                    : "bi-folder"
+                  : "bi-file-earmark-text"
+              }`}
+            ></i>
+
             <span>{category.name}</span>
           </div>
           {hasChildren && (
             <i
-              className={`material-icons-outlined ms-2 chevron-icon ${
+              className={`bi bi-chevron-right ms-2 chevron-icon ${
                 isExpanded ? "rotated" : ""
               }`}
-            >
-              chevron_right
-            </i>
+            ></i>
           )}
         </div>
         {hasChildren && (
@@ -239,7 +240,7 @@ const NestedCategories = ({
               onClick={() => onCategorySelect(null)}
             >
               <div className="d-flex align-items-center gap-2">
-                <i className="material-icons-outlined">home</i>
+                <i className="bi bi-house"></i>
                 <span>Ähli harytlar</span>
               </div>
             </div>

@@ -13,13 +13,13 @@ const Header = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { t } = useTranslation();
 
-    // Track window resize
-    useEffect(() => {
-      const handleResize = () => setWindowWidth(window.innerWidth);
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
-    
+  // Track window resize
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Fetch companies
   useEffect(() => {
     fetch(`${api}/company`, { credentials: "include" })
@@ -102,7 +102,12 @@ const Header = () => {
         </div>
         <div className="d-flex justify-content-center align-items-center text-white py-3 rounded">
           {company.length > 0 && (
-            <h5 className="fw-bold text-uppercase mb-0" style={{ fontSize: windowWidth < 768 ? '14px' : null }}>{company[0].name}</h5>
+            <h5
+              className="fw-bold text-uppercase mb-0"
+              style={{ fontSize: windowWidth < 768 ? "14px" : null }}
+            >
+              {company[0].name}
+            </h5>
           )}
         </div>
         <ul className="navbar-nav gap-1 nav-right-links align-items-center">
@@ -206,7 +211,8 @@ const Header = () => {
                 href="#"
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="material-icons-outlined">person_outline</i>
+                <i className="bi bi-person"></i>
+
                 {t("profile.label")}
               </a>
               <hr className="dropdown-divider" />
@@ -214,7 +220,8 @@ const Header = () => {
                 className="dropdown-item d-flex align-items-center gap-2 py-2 cursor-pointer"
                 onClick={logout}
               >
-                <i className="material-icons-outlined">power_settings_new</i>
+                <i className="bi bi-power"></i>
+
                 {t("auth.logout")}
               </a>
             </div>
