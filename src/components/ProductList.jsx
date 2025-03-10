@@ -294,8 +294,8 @@ const ProductList = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <span className="material-icons-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">
-                search
+              <span className="position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">
+                <i className="bi bi-search"></i>
               </span>
             </div>
           </div>
